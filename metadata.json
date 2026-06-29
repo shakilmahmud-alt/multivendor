@@ -1,0 +1,6 @@
+{
+  "name": "Ecommatrix",
+  "description": "An ultra-polished, fully responsive, pixel-perfect clone of the advanced Multi-Vendor E-Commerce platform featuring a dense, high-conversion visual design system, complex nested categories, products showcases, interactive deals, brand carousel, reviews, and a Supabase-compatible multi-vendor SQL database schema explorer under a Developer Mode.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

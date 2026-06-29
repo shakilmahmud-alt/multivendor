@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: Tahoma, Verdana, sans-serif;
+  --animate-marquee: marquee 30s linear infinite;
+  --animate-marquee-slow: marquee 45s linear infinite;
+}
+
+@layer base {
+  html, body {
+    font-family: Tahoma, Verdana, sans-serif !important;
+  }
+}
+
+@keyframes marquee {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+.pause-on-hover:hover {
+  animation-play-state: paused;
+}
+
+
+/* Fix for Jodit Editor lists being hidden by Tailwind's CSS reset */
+.jodit-wysiwyg ul {
+  list-style-type: disc !important;
+  padding-left: 2rem !important;
+}
+
+.jodit-wysiwyg ol {
+  list-style-type: decimal !important;
+  padding-left: 2rem !important;
+}
+
+.jodit-wysiwyg li {
+  display: list-item !important;
+}
+
+/* Ensure rich text tables inside description boxes fit screen width and scroll when necessary */
+.prose table {
+  width: 100% !important;
+  max-width: 100% !important;
+  table-layout: auto !important;
+}
+
+@media (max-width: 768px) {
+  .prose table {
+    table-layout: fixed !important;
+    border-collapse: collapse !important;
+    width: 100% !important;
+  }
+  .prose table tr td,
+  .prose table tr th {
+    box-sizing: border-box !important;
+  }
+  .prose table tr td:first-child:not([colspan]),
+  .prose table tr th:first-child:not([colspan]) {
+    width: 30% !important;
+    max-width: 30% !important;
+    min-width: 80px !important;
+    padding: 8px 6px !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+  .prose table tr td:last-child:not([colspan]),
+  .prose table tr th:last-child:not([colspan]) {
+    width: 70% !important;
+    max-width: 70% !important;
+    padding: 8px 6px !important;
+    white-space: normal !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+.animate-slide-in-right {
+  animation: slideInRight 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
