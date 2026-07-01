@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect, useMemo } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import {
   Star,
   ShoppingCart,
@@ -25,7 +25,7 @@ import { supabase } from "../supabaseClient";
 interface ProductPageProps {
   product: Product;
   allProducts: Product[];
-  onAddToCart: (p: Product) => void;
+  onAddToCart: (p: Product, quantity?: number, selectedVariation?: any) => void;
   onAddWishlist: (p: Product) => void;
   onBackToHome: () => void;
   onSelectProduct: (p: Product) => void;
@@ -42,11 +42,33 @@ export default function ProductPage({
   wishlist,
 }: ProductPageProps) {
   const { addToast } = useToast();
+  const navigate = useNavigate();
   const [activeImage, setActiveImage] = useState(product.thumbnail);
   const [quantity, setQuantity] = useState(1);
-  const [activeTab, setActiveTab] = useState<"overview" | "reviews">(
+  const [activeTab, setActiveTab] = useState<"overview" | "reviews" | "video">(
     "overview",
   );
+
+  const spec = product.specifications || {};
+  const hasVariations = spec.has_variations && spec.variations && spec.variations.length > 0;
+
+  const [selectedVariantOptions, setSelectedVariantOptions] = useState<Record<string, string>>({});
+
+  const selectedVariation = useMemo(() => {
+    if (!hasVariations) return null;
+    return spec.variations.find((v: any) => {
+      return Object.entries(selectedVariantOptions).every(([key, val]) => v.attributes && v.attributes[key] === val);
+    }) || null;
+  }, [hasVariations, spec.variations, selectedVariantOptions]);
+
+  useEffect(() => {
+    if (selectedVariation?.image) {
+      setActiveImage(selectedVariation.image);
+    } else {
+      setActiveImage(product.thumbnail);
+    }
+  }, [selectedVariation, product.thumbnail]);
+
 
   const [reviews, setReviews] = useState<any[]>([]);
   const [ordersCount, setOrdersCount] = useState(0);
@@ -99,6 +121,18 @@ export default function ProductPage({
 
   useEffect(() => {
     setActiveImage(product.thumbnail);
+
+    if (hasVariations && spec.selected_attributes && spec.attribute_values) {
+      const initSel: Record<string, string> = {};
+      spec.selected_attributes.forEach((attr: string) => {
+        if (spec.attribute_values[attr] && spec.attribute_values[attr].length > 0) {
+          initSel[attr] = spec.attribute_values[attr][0];
+        }
+      });
+      setSelectedVariantOptions(initSel);
+    } else {
+      setSelectedVariantOptions({});
+    }
 
     const fetchStats = async () => {
       // Fetch reviews
@@ -343,14 +377,11 @@ export default function ProductPage({
   const handleIncrement = () => setQuantity((prev) => prev + 1);
   const handleDecrement = () => setQuantity((prev) => Math.max(1, prev - 1));
 
-  const handleBuyNow = () => {
-    for (let i = 0; i < quantity; i++) {
-      onAddToCart(product);
-    }
-    addToast(
-      `Redirecting to Checkout with ${quantity} units of "${product.title}"`,
-      "success",
-    );
+  const handleBuyNow = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    onAddToCart(product, quantity, selectedVariation);
+    navigate("/checkout");
   };
 
   const images = product.galleryImages || [product.thumbnail];
@@ -537,13 +568,77 @@ export default function ProductPage({
             <div className="text-[12px] text-slate-700 font-bold">
               Product Code:{" "}
               <span className="font-normal">
-                {product.productCode || "103606"}
+                {selectedVariation ? selectedVariation.sku : (product.productCode || "103606")}
               </span>
             </div>
 
+            {/* Variations */}
+            {hasVariations && spec.selected_attributes && spec.attribute_values && (
+              <div className="mt-4 space-y-4">
+                {spec.selected_attributes.map((attr: string) => {
+                  const values = spec.attribute_values[attr] || [];
+                  if (values.length === 0) return null;
+                  const isColor = attr.toLowerCase() === 'color';
+                  
+                  return (
+                    <div key={attr} className="flex flex-col gap-2">
+                      <span className="text-sm font-bold text-slate-700">{attr}</span>
+                      <div className="flex flex-wrap gap-2">
+                        {values.map((val: string) => {
+                          const isSelected = selectedVariantOptions[attr] === val;
+                          let displayVal = val;
+                          let colors: string[] = [];
+                          if (isColor && val.includes(' - ')) {
+                             const parts = val.split(' - ');
+                             displayVal = parts[0];
+                             if (parts[1] && parts[1].includes('#')) {
+                               colors = parts[1].split(',');
+                             }
+                          }
+                          let imgUrl = "";
+                          const lowerVal = displayVal.toLowerCase();
+                          if (lowerVal === 'thumbnail') {
+                            imgUrl = product.thumbnail;
+                          } else if (lowerVal.startsWith('additional image ')) {
+                            const idx = parseInt(lowerVal.replace('additional image ', '')) - 1;
+                            if (!isNaN(idx) && product.galleryImages && product.galleryImages[idx]) {
+                              imgUrl = product.galleryImages[idx];
+                            }
+                          }
+
+                          return (
+                            <button
+                              key={val}
+                              onClick={() => setSelectedVariantOptions(prev => ({ ...prev, [attr]: val }))}
+                              className={`border text-xs font-medium rounded transition flex items-center justify-center cursor-pointer overflow-hidden ${isSelected ? 'border-[#ff6a00] text-[#ff6a00] bg-orange-50 ring-1 ring-[#ff6a00]' : 'border-slate-200 text-slate-600 hover:border-slate-300 bg-white'} ${imgUrl ? 'p-0.5' : 'px-3 py-1.5 gap-2'}`}
+                              title={displayVal}
+                            >
+                              {imgUrl ? (
+                                <img src={imgUrl} alt={displayVal} className="w-12 h-12 object-cover rounded-sm" />
+                              ) : (
+                                <>
+                                  {isColor && colors.length > 0 && (
+                                    <span 
+                                      className="w-3.5 h-3.5 rounded-full inline-block border border-slate-200 shrink-0" 
+                                      style={{ background: colors.length > 1 ? `linear-gradient(135deg, ${colors[0]} 50%, ${colors[1]} 50%)` : colors[0] }}
+                                    />
+                                  )}
+                                  {displayVal}
+                                </>
+                              )}
+                            </button>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            )}
+
             {/* Short Description */}
             {product.shortDescription && (
-              <div className="mt-2 mb-2">
+              <div className="mt-4 mb-2">
                 <h3 className="text-[15px] font-bold text-slate-800 mb-2">
                   Key Features
                 </h3>
@@ -555,11 +650,11 @@ export default function ProductPage({
             )}
 
             {/* Price Container */}
-            <div className="flex items-baseline gap-2 mt-2">
+            <div className="flex items-baseline gap-2 mt-4">
               <span className="text-2xl font-bold text-[#ff6a00]">
-                ৳{product.price.toLocaleString()}.00
+                ৳{(selectedVariation ? selectedVariation.price : product.price).toLocaleString()}.00
               </span>
-              {product.oldPrice && (
+              {product.oldPrice && !selectedVariation && (
                 <span className="text-sm text-slate-400 line-through font-medium">
                   ৳{product.oldPrice.toLocaleString()}.00
                 </span>
@@ -643,6 +738,7 @@ export default function ProductPage({
             {/* CTAs */}
             <div className="flex items-center gap-2 mt-4">
               <button
+                type="button"
                 onClick={handleBuyNow}
                 className="bg-[#ff6a00] hover:bg-orange-600 text-white font-bold h-10 px-6 rounded shadow-sm cursor-pointer min-w-[120px] transition flex items-center justify-center text-[13px]"
               >
@@ -650,9 +746,7 @@ export default function ProductPage({
               </button>
               <button
                 onClick={() => {
-                  for (let i = 0; i < quantity; i++) {
-                    onAddToCart(product);
-                  }
+                  onAddToCart(product, quantity, selectedVariation);
                   addToast(
                     `Added ${quantity} units of "${product.title}" to your shopping cart.`,
                     "success",
@@ -695,6 +789,18 @@ export default function ProductPage({
             >
               Overview
             </button>
+            {product.video_link && (
+              <button
+                onClick={() => setActiveTab("video")}
+                className={`px-6 py-2 text-[12px] font-bold rounded-full transition cursor-pointer ${
+                  activeTab === "video"
+                    ? "bg-[#ff6a00] text-white"
+                    : "bg-white text-slate-700 border border-slate-200 hover:border-[#ff6a00] hover:text-[#ff6a00]"
+                }`}
+              >
+                Product Video
+              </button>
+            )}
             <button
               onClick={() => setActiveTab("reviews")}
               className={`px-6 py-2 text-[12px] font-bold rounded-full transition cursor-pointer ${
@@ -710,61 +816,6 @@ export default function ProductPage({
           {/* Overview content */}
           {activeTab === "overview" && (
             <div className="bg-white flex flex-col gap-6 text-[12px]">
-              {/* Specification Table */}
-              {(() => {
-                const validSpecs = product.specifications
-                  ? Object.entries(product.specifications).filter(
-                      ([k, v]) =>
-                        ![
-                          "seller_id",
-                          "shop_name",
-                          "request_status",
-                          "changes",
-                          "deny_reason",
-                          "added_by_admin",
-                        ].includes(k) &&
-                        typeof v === "object" &&
-                        v !== null &&
-                        !Array.isArray(v),
-                    )
-                  : [];
-
-                if (validSpecs.length === 0) return null;
-
-                return (
-                  <div>
-                    <h3 className="text-lg md:text-xl font-bold text-slate-800 mb-3">
-                      Specification
-                    </h3>
-                    <div className="border border-slate-200 rounded overflow-hidden">
-                      {validSpecs.map(([sectionTitle, keyValues]) => (
-                        <div key={sectionTitle}>
-                          <div className="bg-[#ff6a00] text-white px-4 py-2 font-bold text-[13px]">
-                            {sectionTitle}
-                          </div>
-                          <div className="divide-y divide-slate-100 bg-white">
-                            {Object.entries(
-                              keyValues as Record<string, string>,
-                            ).map(([key, val]) => (
-                              <div
-                                key={key}
-                                className="grid grid-cols-1 md:grid-cols-4 items-center border-b border-slate-200 last:border-b-0"
-                              >
-                                <div className="p-3 text-slate-600 md:col-span-1 h-full flex items-center border-r border-slate-100 bg-slate-50">
-                                  {key}
-                                </div>
-                                <div className="p-3 text-slate-700 md:col-span-3 bg-white">
-                                  {val as React.ReactNode}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                );
-              })()}
 
               {/* Description */}
               <div>
@@ -786,6 +837,46 @@ export default function ProductPage({
               </div>
             </div>
           )}
+
+          {/* Video content */}
+          {activeTab === "video" && product.video_link && (
+            <div className="bg-white flex flex-col gap-6 text-[12px]">
+              <div>
+                <h3 className="text-lg md:text-xl font-bold text-slate-800 mb-3">
+                  Product Video
+                </h3>
+                <div className="aspect-video w-full max-w-3xl rounded-lg overflow-hidden border border-slate-200 bg-slate-50 relative flex items-center justify-center">
+                   {product.video_link.includes('youtube.com') || product.video_link.includes('youtu.be') || product.video_link.includes('vimeo.com') ? (
+                    <iframe
+                      src={product.video_link.includes('watch?v=') ? product.video_link.replace('watch?v=', 'embed/') : product.video_link}
+                      className="w-full h-full"
+                      frameBorder="0"
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                      allowFullScreen
+                    ></iframe>
+                  ) : product.video_link.match(/\.(mp4|webm|ogg)$/i) ? (
+                    <video controls className="w-full h-full">
+                      <source src={product.video_link} />
+                      Your browser does not support the video tag.
+                    </video>
+                  ) : (
+                    <div className="text-center p-6">
+                      <p className="text-slate-600 mb-4 text-base">Click the button below to view the product video.</p>
+                      <a 
+                        href={product.video_link.startsWith('http') ? product.video_link : `https://${product.video_link}`} 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 bg-[#ff6a00] hover:bg-orange-600 text-white font-bold py-3 px-8 rounded shadow-sm transition-colors text-sm"
+                      >
+                        Watch Video
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
 
           {activeTab === "reviews" && (
             <div className="bg-white rounded border border-slate-200/60 p-6">
@@ -827,7 +918,7 @@ export default function ProductPage({
                   <button
                     type="submit"
                     disabled={isSubmittingReview}
-                    className="bg-slate-900 hover:bg-slate-800 text-white px-6 py-2.5 rounded-lg text-[13px] font-bold transition disabled:opacity-50"
+                    className="bg-[#ff6a00] hover:bg-orange-600 text-white px-6 py-2.5 rounded-lg text-[13px] font-bold transition disabled:opacity-50"
                   >
                     {isSubmittingReview ? "Submitting..." : "Submit Review"}
                   </button>

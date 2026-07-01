@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
-import { Product } from '../types';
+import { Product, CartItem } from '../types';
 import { ChevronRight, ChevronLeft, Minus, Plus, Trash2, CheckCircle, ShieldCheck, Truck, ShieldAlert } from 'lucide-react';
 import { useToast } from '../components/ToastContext';
-
-interface CartItem {
-  product: Product;
-  quantity: number;
-}
 
 interface CheckoutProps {
   cart: CartItem[];
@@ -141,15 +136,17 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
   }, [user?.id]);
 
   const subtotal = cart.reduce((acc, item) => {
-    const originalPrice = (item.product.oldPrice && item.product.oldPrice > item.product.price) 
-      ? item.product.oldPrice 
-      : item.product.price;
+    const itemPrice = item.selectedVariation?.price || item.product.price;
+    const itemOldPrice = item.selectedVariation ? itemPrice : (item.product.oldPrice || item.product.price);
+    const originalPrice = itemOldPrice > itemPrice ? itemOldPrice : itemPrice;
     return acc + (originalPrice * item.quantity);
   }, 0);
 
   const discount = cart.reduce((acc, item) => {
-    if (item.product.oldPrice && item.product.oldPrice > item.product.price) {
-      return acc + ((item.product.oldPrice - item.product.price) * item.quantity);
+    const itemPrice = item.selectedVariation?.price || item.product.price;
+    const itemOldPrice = item.selectedVariation ? itemPrice : (item.product.oldPrice || item.product.price);
+    if (itemOldPrice > itemPrice) {
+      return acc + ((itemOldPrice - itemPrice) * item.quantity);
     }
     return acc;
   }, 0);
@@ -250,9 +247,10 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
       const items = cart.map(c => ({
         id: c.product.id,
         name: c.product.title,
-        price: c.product.price,
+        price: c.selectedVariation?.price || c.product.price,
         quantity: c.quantity,
-        image: c.product.thumbnail
+        image: c.selectedVariation?.image || c.product.thumbnail,
+        variation: c.selectedVariation || null
       }));
       
       const storeId = cart[0]?.product?.storeId || '';
@@ -319,14 +317,6 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
 
   return (
     <div className="bg-slate-50 min-h-screen pb-20">
-      {/* Header specific to Checkout */}
-      <div className="bg-white border-b border-slate-200">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center gap-2">
-          <Link to="/" className="flex items-center transition">
-            <img src="https://ik.imagekit.io/eg7u6xcn0u/HolidayMart-logo-wide.png" alt="HolidayMart" className="h-8" />
-          </Link>
-        </div>
-      </div>
 
       <div className="max-w-7xl mx-auto px-4 py-8">
         <h1 className="text-2xl font-bold text-slate-800 mb-6">
@@ -381,35 +371,52 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                     ) : (
                       <div className="divide-y divide-slate-100">
                         {cart.map((item) => (
-                          <div key={item.product.id} className="grid grid-cols-12 gap-4 p-4 items-center">
+                          <div key={item.cartItemId} className="grid grid-cols-12 gap-4 p-4 items-center">
                             <div className="col-span-6 flex gap-3 items-center">
-                              <img src={item.product.thumbnail} alt={item.product.title} className="w-16 h-16 object-cover rounded border border-slate-200" />
+                              <img src={item.selectedVariation?.image || item.product.thumbnail} alt={item.product.title} className="w-16 h-16 object-cover rounded border border-slate-200" />
                               <div>
-                                <p className="text-sm font-semibold text-slate-800 line-clamp-2">{item.product.title}</p>
+                                <p className="text-sm font-semibold text-slate-800 line-clamp-2" title={item.product.title}>{item.product.title}</p>
+                                {item.selectedVariation?.attributes && (
+                                  <div className="flex flex-wrap gap-1 mt-1">
+                                    {Object.entries(item.selectedVariation.attributes).map(([k, v]) => {
+                                      let displayVal = String(v);
+                                      if (k.toLowerCase() === 'color' && displayVal.includes(' - ')) {
+                                        displayVal = displayVal.split(' - ')[0];
+                                      }
+                                      return (
+                                        <span key={k} className="text-xs text-slate-500 bg-slate-100 px-1.5 py-0.5 rounded border border-slate-200">
+                                          {displayVal}
+                                        </span>
+                                      );
+                                    })}
+                                  </div>
+                                )}
                                 <p className="text-xs text-slate-500 mt-1">Shipping cost: ৳0.00</p>
                               </div>
                             </div>
                             <div className="col-span-2 text-center text-sm font-medium text-slate-700">
-                              ৳{item.product.price.toFixed(2)}
+                              ৳{(item.selectedVariation?.price || item.product.price).toFixed(2)}
                             </div>
                             <div className="col-span-2 flex justify-center">
                               <div className="flex items-center gap-2 bg-slate-100 px-2 py-1 rounded">
                                 <button onClick={() => {
                                   if (item.quantity > 1) {
-                                    setCart(prev => prev.map(p => p.product.id === item.product.id ? { ...p, quantity: p.quantity - 1 } : p));
+                                    setCart(prev => prev.map(p => p.cartItemId === item.cartItemId ? { ...p, quantity: p.quantity - 1 } : p));
                                   }
                                 }} className="text-slate-500 hover:text-orange-500">
                                   <Minus className="w-3 h-3" />
                                 </button>
                                 <span className="text-sm font-bold w-6 text-center">{item.quantity}</span>
-                                <button onClick={() => onAddToCart(item.product)} className="text-slate-500 hover:text-orange-500">
+                                <button onClick={() => {
+                                  setCart(prev => prev.map(p => p.cartItemId === item.cartItemId ? { ...p, quantity: p.quantity + 1 } : p));
+                                }} className="text-slate-500 hover:text-orange-500">
                                   <Plus className="w-3 h-3" />
                                 </button>
                               </div>
                             </div>
                             <div className="col-span-2 flex items-center justify-between">
-                              <span className="text-sm font-bold text-orange-500">৳{(item.product.price * item.quantity).toFixed(2)}</span>
-                              <button onClick={() => onRemoveFromCart(item.product.id)} className="text-red-500 hover:text-red-600 transition">
+                              <span className="text-sm font-bold text-orange-500">৳{((item.selectedVariation?.price || item.product.price) * item.quantity).toFixed(2)}</span>
+                              <button onClick={() => onRemoveFromCart(item.cartItemId)} className="text-red-500 hover:text-red-600 transition">
                                 <Trash2 className="w-4 h-4" />
                               </button>
                             </div>

@@ -13,14 +13,7 @@ export default function ProductPageWrapper({ onAddToCart, onAddWishlist, onSelec
   useEffect(() => {
     window.scrollTo(0, 0);
     
-    if (allProducts && allProducts.length > 0) {
-      const existingProduct = allProducts.find((p: any) => p.slug === slug);
-      if (existingProduct) {
-        setProduct(existingProduct);
-        setLoading(false);
-        return;
-      }
-    }
+
 
     const fetchProduct = async () => {
       try {
@@ -105,7 +98,10 @@ export default function ProductPageWrapper({ onAddToCart, onAddWishlist, onSelec
           rating: 0,
           reviewCount: 0,
           thumbnail: data.thumbnail_url,
-          galleryImages: data.thumbnail_url ? [data.thumbnail_url] : [],
+          galleryImages: [
+            ...(data.thumbnail_url ? [data.thumbnail_url] : []),
+            ...(Array.isArray(data.additional_images) ? data.additional_images : [])
+          ],
           category: catName,
           subCategory: subCatName,
           subSubCategory: subSubCatName,
@@ -120,7 +116,8 @@ export default function ProductPageWrapper({ onAddToCart, onAddWishlist, onSelec
           specifications: data.attributes || {},
           description: data.desc_en,
           slug: data.slug,
-          category_id: data.category_id
+          category_id: data.category_id,
+          video_link: data.video_link
         };
         
         setProduct(transformedProduct);

@@ -7,6 +7,24 @@ import { uploadToCpanel } from '../../utils/mediaUpload';
 import { getColorStyle } from '../../utils/color';
 import JoditEditor from 'jodit-react';
 
+const editorConfig = {
+  height: 300,
+  allowResizeY: true,
+};
+
+// Rich Text Editor Component moved outside to prevent re-mounting
+const Editor = React.memo(({ value, onChange }: any) => {
+  return (
+    <div className="border border-slate-200 rounded-md overflow-hidden bg-white">
+      <JoditEditor
+        value={value}
+        config={editorConfig}
+        onBlur={newContent => onChange(newContent)}
+      />
+    </div>
+  );
+});
+
 export default function AddInHouseProduct() {
   const { id } = useParams<{ id: string }>();
   const isEditMode = !!id;
@@ -55,7 +73,7 @@ export default function AddInHouseProduct() {
 
   // Media
   const [thumbnailUrl, setThumbnailUrl] = useState('');
-  const [additionalImageUrl, setAdditionalImageUrl] = useState('');
+  const [additionalImages, setAdditionalImages] = useState<string[]>([]);
   const [videoLink, setVideoLink] = useState('');
   const [metaTitle, setMetaTitle] = useState('');
   const [metaDescription, setMetaDescription] = useState('');
@@ -105,7 +123,7 @@ export default function AddInHouseProduct() {
        const newVars = combos.map(combo => {
           const comboName = Object.values(combo).join('-');
           const existing = variations.find(v => v.name === comboName);
-          return existing || { name: comboName, attributes: combo, price: parseFloat(unitPrice) || 0, stock: 0, sku: `${sku}-${comboName}` };
+          return existing || { name: comboName, attributes: combo, price: parseFloat(unitPrice) || 0, stock: 0, sku: `${sku}-${comboName}`, image: '' };
        });
        setVariations(newVars);
     }
@@ -236,7 +254,7 @@ export default function AddInHouseProduct() {
           if (attrs.variations) setVariations(attrs.variations);
         }
         setThumbnailUrl(data.thumbnail_url || '');
-        setAdditionalImageUrl(data.additional_images?.[0] || '');
+        setAdditionalImages(data.additional_images || []);
         setVideoLink(data.video_link || '');
         setMetaTitle(data.meta_title || '');
         setMetaDescription(data.meta_description || '');
@@ -309,7 +327,7 @@ export default function AddInHouseProduct() {
       shipping_cost: parseFloat(shippingCost) || 0,
       shipping_multiply: shippingMultiply,
       thumbnail_url: thumbnailUrl,
-      additional_images: additionalImageUrl ? [additionalImageUrl] : [],
+      additional_images: additionalImages,
       video_link: videoLink,
       meta_title: metaTitle,
       meta_description: metaDescription,
@@ -392,39 +410,46 @@ export default function AddInHouseProduct() {
   };
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>, type: 'thumb' | 'add' | 'meta') => {
-    const file = e.target.files?.[0];
-    if (file) {
+    const files = Array.from(e.target.files || []);
+    if (files.length > 0) {
       if (type === 'thumb' || type === 'add') {
-        if (file.size > 200 * 1024) {
-          showToast('Image size must be less than 200KB', 'error');
-          return;
-        }
-        
-        const validDimension = await new Promise((resolve) => {
-          const img = new Image();
-          img.onload = () => {
-            if (img.width !== 800 || img.height !== 800) {
-              resolve(false);
-            } else {
-              resolve(true);
-            }
-          };
-          img.onerror = () => resolve(false);
-          img.src = URL.createObjectURL(file);
-        });
+        for (const file of files) {
+          if (file.size > 200 * 1024) {
+            showToast('Image size must be less than 200KB', 'error');
+            return;
+          }
+          
+          const validDimension = await new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => {
+              if (img.width !== 800 || img.height !== 800) {
+                resolve(false);
+              } else {
+                resolve(true);
+              }
+            };
+            img.onerror = () => resolve(false);
+            img.src = URL.createObjectURL(file);
+          });
 
-        if (!validDimension) {
-          showToast('Image dimensions must be exactly 800x800 pixels', 'error');
-          return;
+          if (!validDimension) {
+            showToast('Image dimensions must be exactly 800x800 pixels', 'error');
+            return;
+          }
         }
       }
 
       setUploadingState(prev => ({ ...prev, [type]: true }));
       try {
-        const url = await uploadToCpanel(file, 'products');
-        if (type === 'thumb') setThumbnailUrl(url);
-        if (type === 'add') setAdditionalImageUrl(url);
-        showToast('Image uploaded successfully!');
+        if (type === 'add') {
+          const uploadedUrls = await Promise.all(files.map(file => uploadToCpanel(file, 'products')));
+          setAdditionalImages(prev => [...prev, ...uploadedUrls]);
+          showToast('Images uploaded successfully!');
+        } else {
+          const url = await uploadToCpanel(files[0], 'products');
+          if (type === 'thumb') setThumbnailUrl(url);
+          showToast('Image uploaded successfully!');
+        }
       } catch (err) {
         showToast('Failed to upload image', 'error');
       } finally {
@@ -453,22 +478,6 @@ export default function AddInHouseProduct() {
     } finally {
       setIsAddingBrand(false);
     }
-  };
-
-  // Rich Text Editor Component
-  const Editor = ({ value, onChange }: any) => {
-    return (
-      <div className="border border-slate-200 rounded-md overflow-hidden bg-white">
-        <JoditEditor
-          value={value}
-          config={{
-            height: 300,
-            allowResizeY: true
-          }}
-          onChange={newContent => onChange(newContent)}
-        />
-      </div>
-    );
   };
 
   return (
@@ -740,7 +749,8 @@ export default function AddInHouseProduct() {
                       <th className="px-4 py-3 border-b border-r border-slate-200">Variant</th>
                       <th className="px-4 py-3 border-b border-r border-slate-200">Price (৳)</th>
                       <th className="px-4 py-3 border-b border-r border-slate-200">SKU</th>
-                      <th className="px-4 py-3 border-b border-slate-200">Stock Qty</th>
+                      <th className="px-4 py-3 border-b border-r border-slate-200">Stock Qty</th>
+                      <th className="px-4 py-3 border-b border-slate-200">Image</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -761,12 +771,36 @@ export default function AddInHouseProduct() {
                              setVariations(newVars);
                           }} className="w-32 px-2 py-1 border border-slate-200 rounded" />
                         </td>
-                        <td className="px-4 py-3">
+                        <td className="px-4 py-3 border-r border-slate-200">
                           <input type="number" value={v.stock} onChange={(e) => {
                              const newVars = [...variations];
                              newVars[idx].stock = parseInt(e.target.value) || 0;
                              setVariations(newVars);
                           }} className="w-24 px-2 py-1 border border-slate-200 rounded" />
+                        </td>
+                        <td className="px-4 py-3 min-w-[200px]">
+                          <div className="flex flex-wrap gap-2 items-center">
+                            {[thumbnailUrl, ...additionalImages].filter(Boolean).map((imgUrl) => (
+                              <button
+                                key={imgUrl}
+                                type="button"
+                                onClick={() => {
+                                  const newVars = [...variations];
+                                  // toggle if same image is clicked, or select new
+                                  newVars[idx].image = newVars[idx].image === imgUrl ? '' : imgUrl;
+                                  setVariations(newVars);
+                                }}
+                                className={`w-8 h-8 rounded border p-0.5 cursor-pointer hover:border-blue-500 transition-all ${
+                                  v.image === imgUrl ? 'border-blue-600 ring-2 ring-blue-600' : 'border-slate-200 opacity-60 hover:opacity-100'
+                                }`}
+                              >
+                                <img src={imgUrl} alt="variant" className="w-full h-full object-cover rounded-sm" />
+                              </button>
+                            ))}
+                            {[thumbnailUrl, ...additionalImages].filter(Boolean).length === 0 && (
+                              <span className="text-xs text-slate-400 italic">Upload images first</span>
+                            )}
+                          </div>
                         </td>
                       </tr>
                     ))}
@@ -801,19 +835,33 @@ export default function AddInHouseProduct() {
           <div className="bg-white rounded-md shadow-sm border border-slate-200 p-6">
             <div className="flex items-center gap-2 mb-6">
               <UploadCloud className="w-4 h-4 text-slate-500" />
-              <h2 className="text-base font-semibold text-slate-700">Upload Additional Image <span className="text-cyan-500 text-xs">Ratio 1:1 (800x800); Max Size: 200kb</span></h2>
+              <h2 className="text-base font-semibold text-slate-700">Upload Additional Image <span className="text-cyan-500 text-xs">Ratio 1:1 (800x800); Max Size: 200kb each</span></h2>
             </div>
-            <div className="border-2 border-dashed border-slate-200 rounded-lg p-8 flex flex-col items-center justify-center text-center">
+            <div className="border-2 border-dashed border-slate-200 rounded-lg p-6 flex flex-col items-center justify-center text-center">
+              
+              <div className="flex flex-wrap gap-4 justify-center mb-4 w-full">
+                {additionalImages.map((imgUrl, idx) => (
+                  <div key={idx} className="relative w-24 h-24 border border-slate-200 rounded-md overflow-hidden group">
+                    <img src={imgUrl} alt="Additional" className="w-full h-full object-cover" />
+                    <button 
+                      type="button"
+                      onClick={() => setAdditionalImages(additionalImages.filter((_, i) => i !== idx))}
+                      className="absolute top-1 right-1 bg-red-500 text-white rounded-full p-1 opacity-0 group-hover:opacity-100 transition-opacity shadow-sm cursor-pointer"
+                    >
+                      <X className="w-3 h-3" />
+                    </button>
+                  </div>
+                ))}
+              </div>
+
               {uploadingState.add ? (
-                <div className="text-slate-400 text-sm animate-pulse mb-4 h-32 flex items-center">Uploading...</div>
-              ) : additionalImageUrl ? (
-                <img src={additionalImageUrl} alt="Additional" className="h-32 object-cover mb-4 rounded" />
+                <div className="text-slate-400 text-sm animate-pulse mb-4 h-10 flex items-center">Uploading...</div>
               ) : (
                 <UploadCloud className="w-10 h-10 text-slate-300 mb-4" />
               )}
               <label className={`px-4 py-2 bg-slate-100 text-slate-600 text-sm font-medium rounded cursor-pointer hover:bg-slate-200 ${uploadingState.add ? 'opacity-50 pointer-events-none' : ''}`}>
-                Upload Image
-                <input type="file" className="hidden" accept="image/*" onChange={(e) => handleImageUpload(e, 'add')} disabled={uploadingState.add} />
+                Upload Images
+                <input type="file" className="hidden" accept="image/*" multiple onChange={(e) => handleImageUpload(e, 'add')} disabled={uploadingState.add} />
               </label>
             </div>
           </div>
@@ -826,8 +874,8 @@ export default function AddInHouseProduct() {
             <h2 className="text-base font-semibold text-slate-700">Product video</h2>
           </div>
           <div>
-            <label className="block text-sm text-slate-600 mb-2">Youtube Video Link</label>
-            <input type="text" value={videoLink} onChange={(e) => setVideoLink(e.target.value)} placeholder="Ex: https://www.youtube.com/embed/..." className="w-full px-4 py-2 border border-slate-200 rounded-md text-sm" />
+            <label className="block text-sm text-slate-600 mb-2">Product video link</label>
+            <input type="text" value={videoLink} onChange={(e) => setVideoLink(e.target.value)} placeholder="Ex: https://..." className="w-full px-4 py-2 border border-slate-200 rounded-md text-sm" />
           </div>
         </div>
 

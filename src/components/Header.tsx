@@ -5,13 +5,13 @@ import {
   LogIn, ExternalLink, X, ShieldAlert,
   LayoutDashboard, LogOut, Settings, ChevronRight
 } from "lucide-react";
-import { Product } from "../types";
+import { Product, CartItem } from "../types";
 import { supabase } from "../supabaseClient";
 import { useToast } from "./ToastContext";
 import { generateSlug } from "../utils/slugs";
 
 interface HeaderProps {
-  cart: { product: Product; quantity: number }[];
+  cart: CartItem[];
   wishlist: Product[];
   onSearch: (query: string) => void;
   onSelectCategory: (categoryName: string, preventNav?: boolean) => void;
@@ -111,7 +111,7 @@ export default function Header({
     }
   }, [searchTerm, allProducts]);
 
-  const cartTotal = cart.reduce((acc, item) => acc + (item.product.price * item.quantity), 0);
+  const cartTotal = cart.reduce((acc, item) => acc + ((item.selectedVariation?.price || item.product.price) * item.quantity), 0);
   const cartQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
@@ -267,13 +267,30 @@ export default function Header({
                       <div>
                         <div className="max-h-52 overflow-y-auto space-y-2.5 mb-3 scrollbar-thin">
                           {cart.map(item => (
-                            <div key={item.product.id} className="flex gap-2 items-center justify-between text-xs">
-                              <img src={item.product.thumbnail} alt={item.product.title} className="w-8 h-8 object-cover rounded border border-slate-250" />
+                            <div key={item.cartItemId} className="flex gap-2 items-start justify-between text-xs border-b border-slate-50 pb-2 last:border-0 last:pb-0">
+                              <img src={item.selectedVariation?.image || item.product.thumbnail} alt={item.product.title} className="w-8 h-8 object-cover rounded border border-slate-200 shrink-0" />
                               <div className="flex-1 min-w-0">
-                                <p className="font-semibold text-slate-800 truncate">{item.product.title}</p>
-                                <p className="text-[10px] text-slate-455">৳{item.product.price.toLocaleString()} x {item.quantity}</p>
+                                <p className="font-semibold text-slate-800 truncate" title={item.product.title}>{item.product.title}</p>
+                                {item.selectedVariation?.attributes && (
+                                  <div className="flex flex-wrap gap-1 mt-0.5">
+                                    {Object.entries(item.selectedVariation.attributes).map(([k, v]) => {
+                                      let displayVal = String(v);
+                                      if (k.toLowerCase() === 'color' && displayVal.includes(' - ')) {
+                                        displayVal = displayVal.split(' - ')[0];
+                                      }
+                                      return (
+                                        <span key={k} className="text-[9px] text-slate-500 bg-slate-100 px-1 py-0.5 rounded leading-none border border-slate-200">
+                                          {displayVal}
+                                        </span>
+                                      );
+                                    })}
+                                  </div>
+                                )}
+                                <p className="text-[10px] text-slate-455 mt-0.5 font-medium">
+                                  ৳{(item.selectedVariation?.price || item.product.price).toLocaleString()} <span className="text-slate-400">x {item.quantity}</span>
+                                </p>
                               </div>
-                              <button onClick={() => onRemoveFromCart(item.product.id)} className="text-red-500 hover:text-red-700 font-bold p-1 rounded hover:bg-slate-50">✕</button>
+                              <button onClick={() => onRemoveFromCart(item.cartItemId)} className="text-red-500 hover:text-red-700 font-bold p-1 rounded hover:bg-slate-50 shrink-0 mt-0.5">✕</button>
                             </div>
                           ))}
                         </div>
@@ -524,18 +541,33 @@ export default function Header({
                     <div>
                       <div className="max-h-52 overflow-y-auto space-y-2.5 mb-3 scrollbar-thin">
                         {cart.map(item => (
-                          <div key={item.product.id} className="flex gap-2 items-center justify-between text-xs">
+                          <div key={item.cartItemId} className="flex gap-2 items-center justify-between text-xs border-b border-slate-50 pb-2 last:border-0 last:pb-0">
                             <img 
-                              src={item.product.thumbnail} 
+                              src={item.selectedVariation?.image || item.product.thumbnail} 
                               alt={item.product.title} 
-                              className="w-8 h-8 object-cover rounded border border-slate-250"
+                              className="w-8 h-8 object-cover rounded border border-slate-250 shrink-0"
                             />
                             <div className="flex-1 min-w-0">
-                              <p className="font-semibold text-slate-800 truncate">{item.product.title}</p>
-                              <p className="text-[10px] text-slate-455">৳{item.product.price.toLocaleString()} x {item.quantity}</p>
+                              <p className="font-semibold text-slate-800 truncate" title={item.product.title}>{item.product.title}</p>
+                              {item.selectedVariation?.attributes && (
+                                <div className="flex flex-wrap gap-1 mt-0.5">
+                                  {Object.entries(item.selectedVariation.attributes).map(([k, v]) => {
+                                    let displayVal = String(v);
+                                    if (k.toLowerCase() === 'color' && displayVal.includes(' - ')) {
+                                      displayVal = displayVal.split(' - ')[0];
+                                    }
+                                    return (
+                                      <span key={k} className="text-[9px] text-slate-500 bg-slate-100 px-1 py-0.5 rounded leading-none border border-slate-200">
+                                        {displayVal}
+                                      </span>
+                                    );
+                                  })}
+                                </div>
+                              )}
+                              <p className="text-[10px] text-slate-455 mt-0.5">৳{(item.selectedVariation?.price || item.product.price).toLocaleString()} x {item.quantity}</p>
                             </div>
                             <button 
-                              onClick={() => onRemoveFromCart(item.product.id)}
+                              onClick={() => onRemoveFromCart(item.cartItemId)}
                               className="text-red-500 hover:text-red-700 font-bold p-1 rounded hover:bg-slate-50"
                             >
                               ✕

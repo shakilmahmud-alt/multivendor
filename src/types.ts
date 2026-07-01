@@ -20,6 +20,7 @@ export interface Product {
   specifications?: Record<string, Record<string, string>>;
   description?: string;
   galleryImages?: string[];
+  video_link?: string;
   brand?: string;
   productCode?: string;
   slug?: string;
@@ -51,3 +52,11 @@ export interface Category {
   icon: string;
   subcategories?: string[];
 }
+
+export interface CartItem {
+  cartItemId: string;
+  product: Product;
+  quantity: number;
+  selectedVariation?: any;
+}
+

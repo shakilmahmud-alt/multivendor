@@ -69,7 +69,7 @@ import { VIDEO_GAMES_AND_REELS, BLOG_POSTS } from "./data";
 import RefundPolicy from "./pages/RefundPolicy";
 import ReturnPolicy from "./pages/ReturnPolicy";
 import CancellationPolicy from "./pages/CancellationPolicy";
-import { Product } from "./types";
+import { Product, CartItem } from "./types";
 import {
   Star,
   ShoppingCart,
@@ -101,7 +101,7 @@ import {
 
 function StoreFront() {
   const navigate = useNavigate();
-  const [cart, setCart] = useState<{ product: Product; quantity: number }[]>(
+  const [cart, setCart] = useState<CartItem[]>(
     [],
   );
   const [wishlist, setWishlist] = useState<Product[]>(() => {
@@ -314,18 +314,20 @@ function StoreFront() {
     }
   };
 
-  // Add items state
-  const handleAddToCart = (product: Product, quantity = 1) => {
+  const handleAddToCart = (product: Product, quantity = 1, selectedVariation: any = null) => {
     setCart((prevCart) => {
-      const existing = prevCart.find((item) => item.product.id === product.id);
+      const existing = prevCart.find(
+        (item) => item.product.id === product.id && JSON.stringify(item.selectedVariation) === JSON.stringify(selectedVariation)
+      );
       if (existing) {
         return prevCart.map((item) =>
-          item.product.id === product.id
+          item.product.id === product.id && JSON.stringify(item.selectedVariation) === JSON.stringify(selectedVariation)
             ? { ...item, quantity: item.quantity + quantity }
             : item,
         );
       }
-      return [...prevCart, { product, quantity }];
+      const cartItemId = `${product.id}-${Date.now()}`;
+      return [...prevCart, { cartItemId, product, quantity, selectedVariation }];
     });
   };
 
@@ -369,8 +371,8 @@ function StoreFront() {
     }
   };
 
-  const handleRemoveFromCart = (id: string) => {
-    setCart((prevCart) => prevCart.filter((item) => item.product.id !== id));
+  const handleRemoveFromCart = (cartItemId: string) => {
+    setCart((prevCart) => prevCart.filter((item) => item.cartItemId !== cartItemId));
   };
 
   const handleClearCart = () => {

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams, Link } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
-import { Edit, Trash2, Image as ImageIcon } from 'lucide-react';
+import { Edit, Trash2, Image as ImageIcon, X } from 'lucide-react';
 import { uploadToCpanel } from '../../utils/mediaUpload';
 import { useToast } from '../ToastContext';
 import { generateSlug } from '../../utils/slugs';
@@ -272,7 +272,17 @@ export default function SubSubCategorySetup() {
                 {isUploading ? (
                   <div className="text-slate-400 text-sm animate-pulse">Uploading...</div>
                 ) : imagePreview ? (
-                  <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                  <div className="relative w-full h-full group">
+                    <img src={imagePreview} alt="Preview" className="w-full h-full object-cover" />
+                    <button
+                      type="button"
+                      onClick={() => setImagePreview(null)}
+                      className="absolute top-1 right-1 bg-white rounded-full p-1 shadow-md hover:bg-red-50 text-slate-400 hover:text-red-500 transition-colors"
+                      title="Remove image"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
                 ) : (
                   <ImageIcon className="w-12 h-12 text-slate-300" />
                 )}

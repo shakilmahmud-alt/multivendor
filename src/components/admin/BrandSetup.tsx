@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
-import { Tag, Image as ImageIcon } from 'lucide-react';
+import { Tag, Image as ImageIcon, X } from 'lucide-react';
 import { useToast } from '../ToastContext';
 import { uploadToCpanel } from '../../utils/mediaUpload';
 
@@ -155,7 +155,17 @@ export default function BrandSetup() {
                   {isUploading ? (
                     <div className="text-slate-400 text-sm animate-pulse">Uploading...</div>
                   ) : logoUrl ? (
+                  <div className="relative w-full h-full group">
                     <img src={logoUrl} alt="Brand preview" className="w-full h-full object-cover" />
+                    <button
+                      type="button"
+                      onClick={() => setLogoUrl('')}
+                      className="absolute top-1 right-1 bg-white rounded-full p-1 shadow-md hover:bg-red-50 text-slate-400 hover:text-red-500 transition-colors"
+                      title="Remove image"
+                    >
+                      <X className="w-4 h-4" />
+                    </button>
+                  </div>
                   ) : (
                     <ImageIcon className="w-12 h-12 text-slate-300" />
                   )}
