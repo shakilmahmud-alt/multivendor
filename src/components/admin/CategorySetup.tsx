@@ -159,21 +159,7 @@ export default function CategorySetup() {
                 />
               </div>
 
-              <div>
-                <label className="block text-xs font-medium text-slate-700 mb-1">
-                  Priority <span className="text-slate-400">ⓘ</span>
-                </label>
-                <select 
-                  className="w-full border border-slate-300 rounded p-2 text-[13px] text-slate-700 outline-none focus:border-blue-500"
-                  value={priority}
-                  onChange={(e) => setPriority(e.target.value)}
-                >
-                  <option value="">Set Priority</option>
-                  {[...Array(10)].map((_, i) => (
-                    <option key={i+1} value={i+1}>{i+1}</option>
-                  ))}
-                </select>
-              </div>
+
 
               <div>
                 <label className="block text-xs font-medium text-slate-700 mb-1">
@@ -253,7 +239,7 @@ export default function CategorySetup() {
                 <th className="p-4 w-16">ID</th>
                 <th className="p-4 text-center">Category Image</th>
                 <th className="p-4">Name</th>
-                <th className="p-4 text-center">Priority</th>
+
                 <th className="p-4 text-center">Home Category Status</th>
                 <th className="p-4 text-center">Action</th>
               </tr>
@@ -266,7 +252,7 @@ export default function CategorySetup() {
                     <img src={cat.image_url} alt={cat.name} className="w-10 h-10 object-cover mx-auto rounded border border-slate-200" />
                   </td>
                   <td className="p-4 font-medium text-slate-800">{cat.name}</td>
-                  <td className="p-4 text-center text-slate-600">{cat.priority}</td>
+
                   <td className="p-4 text-center">
                     <button 
                       onClick={() => toggleHomeStatus(cat.id, cat.is_home_category)}

@@ -382,9 +382,8 @@ export default function SellerProducts() {
               <tr>
                 <th className="px-4 py-3 whitespace-nowrap">SL</th>
                 <th className="px-4 py-3 whitespace-nowrap">Product Name</th>
-                <th className="px-4 py-3 whitespace-nowrap text-center">Product Type</th>
+                <th className="px-4 py-3 whitespace-nowrap text-center">Category</th>
                 <th className="px-4 py-3 whitespace-nowrap text-center">Selling Price</th>
-                <th className="px-4 py-3 whitespace-nowrap text-center">Show As Featured</th>
                 <th className="px-4 py-3 whitespace-nowrap text-center">Store</th>
                 <th className="px-4 py-3 whitespace-nowrap text-center">Active Status</th>
                 <th className="px-4 py-3 whitespace-nowrap text-center">Action</th>
@@ -393,7 +392,7 @@ export default function SellerProducts() {
             <tbody>
               {products.length === 0 ? (
                 <tr>
-                  <td colSpan={8} className="px-4 py-16 text-center text-slate-400">
+                  <td colSpan={7} className="px-4 py-16 text-center text-slate-400">
                     <div className="flex flex-col items-center justify-center">
                       <div className="mb-4">
                         <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" className="text-slate-300">
@@ -424,16 +423,14 @@ export default function SellerProducts() {
                         </span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-center">{product.product_type || 'Physical'}</td>
-                    <td className="px-4 py-3 text-center">৳{parseFloat(product.unit_price || 0).toFixed(2)}</td>
-                    <td className="px-4 py-3 text-center">
-                      <div 
-                        className={`w-9 h-5 rounded-full relative inline-block cursor-pointer transition-colors ${product.is_featured ? 'bg-blue-600' : 'bg-slate-200'}`}
-                        onClick={() => handleToggleFeatured(product.id, product.is_featured)}
-                      >
-                        <div className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-all ${product.is_featured ? 'left-[18px]' : 'left-0.5'}`}></div>
-                      </div>
+                    <td className="px-4 py-3 text-center text-xs text-slate-600">
+                      {[
+                        categories.find((c: any) => c.id === product.category_id)?.name,
+                        subCategories.find((c: any) => c.id === product.sub_category_id)?.name,
+                        subSubCategories.find((c: any) => c.id === product.sub_sub_category_id)?.name
+                      ].filter(Boolean).join(' => ') || 'Uncategorized'}
                     </td>
+                    <td className="px-4 py-3 text-center">৳{parseFloat(product.unit_price || 0).toFixed(2)}</td>
                     <td className="px-4 py-3 text-center">
                       <span className="bg-blue-50 text-blue-600 px-2 py-1 rounded text-xs font-medium max-w-[100px] truncate block mx-auto" title={product.shop_name || 'Unknown Store'}>
                         {product.shop_name || 'Unknown Store'}

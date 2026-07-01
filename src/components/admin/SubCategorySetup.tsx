@@ -183,21 +183,7 @@ export default function SubCategorySetup() {
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-                <div>
-                  <label className="block text-xs font-medium text-slate-700 mb-1">
-                    Priority <span className="text-slate-400">ⓘ</span>
-                  </label>
-                  <select 
-                    className="w-full border border-slate-300 rounded p-2 text-[13px] text-slate-700 outline-none focus:border-blue-500 bg-white"
-                    value={priority}
-                    onChange={(e) => setPriority(e.target.value)}
-                  >
-                    <option value="">Set Priority</option>
-                    {[...Array(10)].map((_, i) => (
-                      <option key={i+1} value={i+1}>{i+1}</option>
-                    ))}
-                  </select>
-                </div>
+  
               </div>
 
               <div>
@@ -279,7 +265,7 @@ export default function SubCategorySetup() {
                 <th className="p-4 text-center">Sub Category Image</th>
                 <th className="p-4">Name</th>
                 <th className="p-4">Category Name</th>
-                <th className="p-4 text-center">Priority</th>
+
                 <th className="p-4 text-center">Action</th>
               </tr>
             </thead>
@@ -292,7 +278,7 @@ export default function SubCategorySetup() {
                   </td>
                   <td className="p-4 font-medium text-slate-800">{sub.name}</td>
                   <td className="p-4 text-slate-600">{sub.categories?.name}</td>
-                  <td className="p-4 text-center text-slate-600">{sub.priority}</td>
+
                   <td className="p-4 text-center">
                     <div className="flex items-center justify-center gap-2">
                       <Link to={`/admin/sub-categories/edit/${sub.id}`} className="w-7 h-7 flex items-center justify-center text-teal-500 border border-teal-200 rounded hover:bg-teal-50 transition">

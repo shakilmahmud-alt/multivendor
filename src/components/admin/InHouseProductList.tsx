@@ -286,9 +286,8 @@ export default function InHouseProductList() {
               <tr>
                 <th className="px-4 py-3 font-semibold">SL</th>
                 <th className="px-4 py-3 font-semibold">Product Name</th>
-                <th className="px-4 py-3 font-semibold text-center">Product Type</th>
+                <th className="px-4 py-3 font-semibold text-center">Category</th>
                 <th className="px-4 py-3 font-semibold text-right">Selling Price</th>
-                <th className="px-4 py-3 font-semibold text-center">Show As Featured</th>
                 <th className="px-4 py-3 font-semibold text-center">Active Status</th>
                 <th className="px-4 py-3 font-semibold text-center">Action</th>
               </tr>
@@ -296,11 +295,11 @@ export default function InHouseProductList() {
             <tbody className="divide-y divide-slate-100">
               {loading ? (
                 <tr>
-                  <td colSpan={7} className="px-4 py-8 text-center text-slate-500">Loading...</td>
+                  <td colSpan={6} className="px-4 py-8 text-center text-slate-500">Loading...</td>
                 </tr>
               ) : filteredProducts.length === 0 ? (
                 <tr>
-                  <td colSpan={7} className="px-4 py-8 text-center text-slate-500">No products found.</td>
+                  <td colSpan={6} className="px-4 py-8 text-center text-slate-500">No products found.</td>
                 </tr>
               ) : (
                 filteredProducts.map((product, index) => (
@@ -320,21 +319,15 @@ export default function InHouseProductList() {
                         </span>
                       </div>
                     </td>
-                    <td className="px-4 py-3 text-center">
-                      <span className="bg-slate-100 text-slate-600 px-2 py-1 rounded text-xs">
-                        {product.product_type}
-                      </span>
+                    <td className="px-4 py-3 text-center text-xs text-slate-600">
+                      {[
+                        categoriesList.find(c => c.id === product.category_id)?.name,
+                        subCategoriesList.find(c => c.id === product.sub_category_id)?.name,
+                        subSubCategoriesList.find(c => c.id === product.sub_sub_category_id)?.name
+                      ].filter(Boolean).join(' => ') || 'Uncategorized'}
                     </td>
                     <td className="px-4 py-3 text-right font-medium text-slate-700">
                       {formatCurrency(product.unit_price)}
-                    </td>
-                    <td className="px-4 py-3 text-center">
-                      <div 
-                        className={`w-10 h-5 rounded-full relative cursor-pointer mx-auto ${product.is_featured ? 'bg-blue-500' : 'bg-slate-300'}`}
-                        onClick={() => handleToggleFeatured(product.id, product.is_featured)}
-                      >
-                        <div className={`w-4 h-4 bg-white rounded-full absolute top-0.5 transition-all ${product.is_featured ? 'left-5' : 'left-0.5'}`}></div>
-                      </div>
                     </td>
                     <td className="px-4 py-3 text-center">
                       <div 
