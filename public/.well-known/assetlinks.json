@@ -1,0 +1,8 @@
+[{
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.holidaymartbd.twa",
+        "sha256_cert_fingerprints": ["17:CD:AB:F1:FC:B1:E2:C4:BA:D7:40:A7:E6:64:6C:87:51:A2:DD:D3:53:F8:12:79:DC:EA:67:E9:FE:FD:D7:3D"]
+      }
+    }]
