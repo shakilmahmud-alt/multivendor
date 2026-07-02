@@ -129,6 +129,7 @@ function StoreFront() {
   const [dbSubSubCategories, setDbSubSubCategories] = useState<any[]>([]);
   const [dbBanners, setDbBanners] = useState<any[]>([]);
   const [dbSellers, setDbSellers] = useState<any[]>([]);
+  const [dbBrands, setDbBrands] = useState<any[]>([]);
   const [dbHomeLayouts, setDbHomeLayouts] = useState<any[]>([]);
   const [showPopupBanner, setShowPopupBanner] = useState(false);
 
@@ -150,7 +151,7 @@ function StoreFront() {
             supabase.from("reviews").select("product_id, rating"),
             supabase.from("flash_deals").select("*").eq("status", "active"),
             supabase.from("flash_deal_products").select("*").eq("status", "submitted"),
-            supabase.from("brands").select("id, name"),
+            supabase.from("brands").select("id, name, logo_url"),
             supabase.from("home_layouts").select("*").eq("is_active", true).order("priority", { ascending: true })
           ]);
 
@@ -171,6 +172,7 @@ function StoreFront() {
         setDbSubSubCategories(subSubCatsData);
         setDbBanners(bannersData);
         setDbSellers(sellersData.filter((s: any) => s.status === "Active"));
+        setDbBrands(brandsData);
         setDbHomeLayouts(layoutsData);
 
         // Show popup banner after 2-3 seconds if available
@@ -721,6 +723,47 @@ function StoreFront() {
                     if (layout.section_type === 'vendors') {
                       return (
                         <React.Fragment key={layout.id}>
+                          {/* TOP BRANDS */}
+                          {dbBrands.length > 0 && (
+                            <div className="bg-white border border-slate-200 rounded p-4 shadow-xs text-center w-full mb-6">
+                              <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-200">
+                                <h3 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400 flex items-center gap-1.5 font-sans">
+                                  <BadgeInfo className="w-3.5 h-3.5 text-orange-500" />
+                                  Top Brands
+                                </h3>
+                                <span className="text-[9px] text-slate-400 font-mono font-sans">{dbBrands.length} Brands</span>
+                              </div>
+                              <div className="relative overflow-hidden w-full group/slider rounded">
+                                <div className="flex gap-4 items-center justify-start py-1 px-1 w-max animate-marquee hover:[animation-play-state:paused]">
+                                  {[...dbBrands, ...dbBrands].map((brand, idx) => (
+                                    <div 
+                                      key={`${brand.id || ''}_${idx}`}
+                                      onClick={() => {
+                                        navigate(`/store?brand=${encodeURIComponent(brand.name)}`);
+                                      }}
+                                      className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
+                                    >
+                                      {brand.logo_url ? (
+                                        <img 
+                                          src={brand.logo_url} 
+                                          alt={brand.name} 
+                                          className="h-10 w-10 rounded-full object-cover mb-2 border border-slate-100 group-hover:scale-105 transition-transform" 
+                                        />
+                                      ) : (
+                                        <div className="h-10 w-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs mb-2">
+                                          {brand.name?.slice(0, 2).toUpperCase()}
+                                        </div>
+                                      )}
+                                      <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-orange-500 transition-colors w-full font-sans">
+                                        {brand.name}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          )}
+                          
                           {dbSellers.length > 0 && (
                             <div id="vendors-sec" className="bg-white border border-slate-200 rounded p-4 shadow-xs text-center w-full">
                               <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-200">
@@ -799,6 +842,47 @@ function StoreFront() {
                       onSelectProduct={(p: Product) => navigate(`/product/${p.slug}`)}
                     />
                     <RenderSectionBanners categoryName="Component" />
+
+                    {/* TOP BRANDS */}
+                    {dbBrands.length > 0 && (
+                      <div className="bg-white border border-slate-200 rounded p-4 shadow-xs text-center w-full mb-6">
+                        <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-200">
+                          <h3 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400 flex items-center gap-1.5 font-sans">
+                            <BadgeInfo className="w-3.5 h-3.5 text-orange-500" />
+                            Top Brands
+                          </h3>
+                          <span className="text-[9px] text-slate-400 font-mono font-sans">{dbBrands.length} Brands</span>
+                        </div>
+                        <div className="relative overflow-hidden w-full group/slider rounded">
+                          <div className="flex gap-4 items-center justify-start py-1 px-1 w-max animate-marquee hover:[animation-play-state:paused]">
+                            {[...dbBrands, ...dbBrands].map((brand, idx) => (
+                              <div 
+                                key={`${brand.id || ''}_${idx}`}
+                                onClick={() => {
+                                  navigate(`/store?brand=${encodeURIComponent(brand.name)}`);
+                                }}
+                                className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
+                              >
+                                {brand.logo_url ? (
+                                  <img 
+                                    src={brand.logo_url} 
+                                    alt={brand.name} 
+                                    className="h-10 w-10 rounded-full object-cover mb-2 border border-slate-100 group-hover:scale-105 transition-transform" 
+                                  />
+                                ) : (
+                                  <div className="h-10 w-10 rounded-full bg-slate-100 text-slate-600 flex items-center justify-center font-bold text-xs mb-2">
+                                    {brand.name?.slice(0, 2).toUpperCase()}
+                                  </div>
+                                )}
+                                <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-orange-500 transition-colors w-full font-sans">
+                                  {brand.name}
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    )}
 
                     {dbSellers.length > 0 && (
                       <div id="vendors-sec" className="bg-white border border-slate-200 rounded p-4 shadow-xs text-center">
