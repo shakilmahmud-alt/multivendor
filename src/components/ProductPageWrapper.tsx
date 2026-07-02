@@ -94,7 +94,7 @@ export default function ProductPageWrapper({ onAddToCart, onAddWishlist, onSelec
           id: data.id,
           title: data.name_en,
           price: actualPrice,
-          oldPrice: unitPrice,
+          oldPrice: actualPrice < unitPrice ? unitPrice : undefined,
           rating: 0,
           reviewCount: 0,
           thumbnail: data.thumbnail_url,

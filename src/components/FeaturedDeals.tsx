@@ -11,9 +11,10 @@ interface FeaturedDealsProps {
   onSelectProduct?: (p: Product) => void;
   onQuickView?: (product: Product) => void;
   wishlist?: Product[];
+  layoutConfig?: any;
 }
 
-export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, onSelectProduct, onQuickView, wishlist }: FeaturedDealsProps) {
+export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, onSelectProduct, onQuickView, wishlist, layoutConfig }: FeaturedDealsProps) {
   const navigate = useNavigate();
   const [dbBrands, setDbBrands] = useState<any[]>([]);
 
@@ -64,8 +65,44 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
     fetchFlashProducts();
   }, []);
 
-  // Filter products that belong to the active flash deal only
-  const flashProducts = products.filter(p => flashProductIds.includes(String(p.id)));
+  // Filter products based on layoutConfig or default to flash deal
+  let displayProducts = products;
+
+  if (layoutConfig) {
+    if (layoutConfig.target_type === 'category' && layoutConfig.target_category) {
+      const targetCatId = layoutConfig.target_category;
+      displayProducts = products.filter(p => {
+        if (targetCatId.startsWith('subsub_')) {
+          return String(p.sub_sub_category_id) === targetCatId.replace('subsub_', '');
+        } else if (targetCatId.startsWith('sub_')) {
+          return String(p.sub_category_id) === targetCatId.replace('sub_', '');
+        } else if (targetCatId.startsWith('cat_')) {
+          return String(p.category_id) === targetCatId.replace('cat_', '');
+        } else {
+          return String(p.category_id) === String(targetCatId);
+        }
+      });
+    } else if (layoutConfig.target_type === 'product_type' && layoutConfig.target_product_type) {
+      if (layoutConfig.target_product_type === 'featured') {
+        displayProducts = products.filter(p => p.isFeatured);
+      } else if (layoutConfig.target_product_type === 'on_sale') {
+        displayProducts = products.filter(p => Number(p.discount_price || 0) > 0);
+      } else if (layoutConfig.target_product_type === 'new') {
+        // Assume last 30 days or just a subset, we'll just slice for now
+        displayProducts = products.slice(0, 10); 
+      } else {
+        // 'all' or fallback
+        displayProducts = products.slice(0, 10);
+      }
+    } else {
+      displayProducts = products.slice(0, 10);
+    }
+  } else {
+    displayProducts = products.filter(p => flashProductIds.includes(String(p.id)));
+  }
+
+  const title = layoutConfig?.title || "Flash Deals";
+  const bannerImage = layoutConfig?.banner_image || "https://ik.imagekit.io/eg7u6xcn0u/Black-Friday.png";
 
   // Dynamic status feedback
   const [copiedSku, setCopiedSku] = useState<string | null>(null);
@@ -80,7 +117,7 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
         <div className="flex justify-between items-center mb-4 px-1">
           <div className="flex items-center gap-2">
             <span className="w-1.5 h-5 bg-orange-500 rounded-full"></span>
-            <h3 className="text-sm font-black uppercase tracking-wider text-slate-800">Flash Deals</h3>
+            <h3 className="text-sm font-black uppercase tracking-wider text-slate-800">{title}</h3>
           </div>
           <Link to="/flash-deals" className="text-[11px] text-orange-600 hover:text-orange-700 font-bold flex items-center gap-0.5 transition cursor-pointer">
             View All <ChevronRight className="w-3.5 h-3.5" />
@@ -93,8 +130,8 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
             <div className="hidden md:block w-full md:w-[260px] shrink-0">
               <div className="relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 h-full min-h-[160px] md:min-h-[340px] border border-slate-200 bg-white">
                 <img 
-                  src="https://ik.imagekit.io/eg7u6xcn0u/Black-Friday.png" 
-                  alt="Black Friday Flash Deal" 
+                  src={bannerImage} 
+                  alt={title} 
                   className="w-full h-full object-cover hover:scale-102 transition duration-500"
                 />
               </div>
@@ -104,8 +141,8 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
             <div className="flex-1 overflow-hidden min-w-0 flex items-center bg-white border border-slate-200 rounded-2xl p-4 shadow-sm">
               <div className="relative overflow-hidden w-full group/slider rounded-xl">
                 <div className="flex gap-4.5 w-max animate-marquee pause-on-hover px-1 py-1">
-                  {flashProducts.length > 0 ? (
-                    [...flashProducts, ...flashProducts].map((p, idx) => (
+                  {displayProducts.length > 0 ? (
+                    [...displayProducts, ...displayProducts].map((p, idx) => (
                       <div 
                         key={`${p.id}-${idx}`} 
                         className="w-[180px] sm:w-[220px] flex-shrink-0 whitespace-normal group bg-white flex flex-col justify-between relative cursor-pointer"

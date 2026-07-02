@@ -21,6 +21,8 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
   const [dbSubSubCategories, setDbSubSubCategories] = useState<any[]>([]);
   const [dbBanners, setDbBanners] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const animations = ["animate-fade-in", "animate-slide-up", "animate-slide-left", "animate-zoom-in", "animate-blur-in"];
+  const [animClass, setAnimClass] = useState("animate-fade-in");
 
   // Swipe state
   const [touchStart, setTouchStart] = useState<number | null>(null);
@@ -109,6 +111,13 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
     setCurrentSlide((prev) => (prev + 1) % CAROUSEL_SLIDES.length);
   };
 
+  useEffect(() => {
+    if (CAROUSEL_SLIDES.length > 0) {
+      const randomAnim = animations[Math.floor(Math.random() * animations.length)];
+      setAnimClass(randomAnim);
+    }
+  }, [currentSlide]);
+
   const badgeItems = [
     {
       icon: <Truck className="w-4 h-4" />,
@@ -169,9 +178,9 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
             className="w-full relative rounded overflow-hidden aspect-[1278/398] bg-slate-900 border border-slate-200 flex flex-col justify-between group cursor-pointer"
           >
             {/* Slide Renderer */}
-            <div className={`absolute inset-0 bg-gradient-to-r ${CAROUSEL_SLIDES[currentSlide].color} opacity-40 mix-blend-multiply z-0`} />
-            
-            <div className="absolute inset-0 z-0">
+            <div key={currentSlide} className={`absolute inset-0 z-0 ${animClass}`}>
+              <div className={`absolute inset-0 bg-gradient-to-r ${CAROUSEL_SLIDES[currentSlide].color} opacity-40 mix-blend-multiply z-0`} />
+              
               <img 
                 src={CAROUSEL_SLIDES[currentSlide].image} 
                 alt="Highlight Banner" 

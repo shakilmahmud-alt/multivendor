@@ -40,6 +40,7 @@ import GrossProfitReport from "./components/admin/GrossProfitReport";
 import CustomerList from './components/admin/CustomerList';
 import CustomerReviews from "./components/admin/CustomerReviews";
 import Settings from "./components/admin/Settings";
+import HomeLayoutSetup from "./components/admin/HomeLayoutSetup";
 import Messages from "./components/admin/Messages";
 import SupportTickets from "./components/admin/SupportTickets";
 import Login from "./pages/Login";
@@ -128,12 +129,13 @@ function StoreFront() {
   const [dbSubSubCategories, setDbSubSubCategories] = useState<any[]>([]);
   const [dbBanners, setDbBanners] = useState<any[]>([]);
   const [dbSellers, setDbSellers] = useState<any[]>([]);
+  const [dbHomeLayouts, setDbHomeLayouts] = useState<any[]>([]);
   const [showPopupBanner, setShowPopupBanner] = useState(false);
 
   useEffect(() => {
     const fetchProductsAndSellers = async () => {
       try {
-        const [prodRes, sellerRes, catRes, subCatRes, subSubCatRes, bannersRes, reviewsRes, flashDealsRes, flashDealProductsRes, brandsRes] =
+        const [prodRes, sellerRes, catRes, subCatRes, subSubCatRes, bannersRes, reviewsRes, flashDealsRes, flashDealProductsRes, brandsRes, layoutsRes] =
           await Promise.all([
             supabase
               .from("in_house_products")
@@ -148,7 +150,8 @@ function StoreFront() {
             supabase.from("reviews").select("product_id, rating"),
             supabase.from("flash_deals").select("*").eq("status", "active"),
             supabase.from("flash_deal_products").select("*").eq("status", "submitted"),
-            supabase.from("brands").select("id, name")
+            supabase.from("brands").select("id, name"),
+            supabase.from("home_layouts").select("*").eq("is_active", true).order("priority", { ascending: true })
           ]);
 
         const productsData = prodRes.data || [];
@@ -161,12 +164,14 @@ function StoreFront() {
         const flashDealsData = flashDealsRes.data || [];
         const flashDealProductsData = flashDealProductsRes.data || [];
         const brandsData = brandsRes.data || [];
+        const layoutsData = layoutsRes.data || [];
 
         setDbCategories(catsData);
         setDbSubCategories(subCatsData);
         setDbSubSubCategories(subSubCatsData);
         setDbBanners(bannersData);
         setDbSellers(sellersData.filter((s: any) => s.status === "Active"));
+        setDbHomeLayouts(layoutsData);
 
         // Show popup banner after 2-3 seconds if available
         const popupBanner = bannersData.find((b: any) => b.banner_type === "Popup Banner");
@@ -586,16 +591,6 @@ function StoreFront() {
                 products={activeProductList}
               />
 
-              {/* 3. DYNAMIC FLASH PROMOS & HURRY UP COUNTDOWNS */}
-              <FeaturedDeals
-                products={activeProductList}
-                onAddToCart={handleAddToCart}
-                onAddWishlist={handleAddWishlist}
-                onSelectProduct={(p: Product) => navigate(`/product/${p.slug}`)}
-                onQuickView={setQuickViewProduct}
-                wishlist={wishlist}
-              />
-
               {/* MAIN SCREEN MULTI-GRID WRAPPER */}
               <main className="max-w-7xl mx-auto px-4 py-8 flex-1 w-full space-y-12">
                 {/* Dynamic Category Filter Alert Bar */}
@@ -611,7 +606,7 @@ function StoreFront() {
                     </div>
                     <button
                       onClick={() => {
-                        setActiveCategory("");
+                        handleSelectCategory("");
                       }}
                       className="bg-orange-500 hover:bg-orange-600 text-slate-950 font-bold px-4 py-1.5 rounded-lg text-xs transition"
                     >
@@ -620,96 +615,235 @@ function StoreFront() {
                   </div>
                 )}
 
+                {/* DYNAMIC HOMEPAGE BLOCKS FROM ADMIN PANEL */}
+                {dbHomeLayouts && dbHomeLayouts.length > 0 ? (
+                  dbHomeLayouts.map((layout) => {
+                    if (layout.section_type === 'flash_deals') {
+                      return (
+                        <FeaturedDeals
+                          key={layout.id}
+                          products={activeProductList}
+                          onAddToCart={handleAddToCart}
+                          onAddWishlist={handleAddWishlist}
+                          onSelectProduct={(p: Product) => navigate(`/product/${p.slug}`)}
+                          onQuickView={setQuickViewProduct}
+                          wishlist={wishlist}
+                          layoutConfig={layout.settings}
+                        />
+                      );
+                    }
+                    if (layout.section_type === 'category_slider') {
+                      const targetCatId = layout.settings?.target_category || '';
+                      
+                      const catProducts = targetCatId
+                        ? activeProductList.filter((p) => {
+                            if (targetCatId.startsWith('subsub_')) {
+                              return String(p.sub_sub_category_id) === targetCatId.replace('subsub_', '');
+                            } else if (targetCatId.startsWith('sub_')) {
+                              return String(p.sub_category_id) === targetCatId.replace('sub_', '');
+                            } else if (targetCatId.startsWith('cat_')) {
+                              return String(p.category_id) === targetCatId.replace('cat_', '');
+                            } else {
+                              // Fallback for older data
+                              return String(p.category_id) === String(targetCatId);
+                            }
+                          })
+                        : activeProductList;
+                        
+                      let targetCategoryName = layout.settings?.title || "";
+                      let targetCategorySlug = "";
+                      
+                      if (targetCatId.startsWith('subsub_')) {
+                        const id = targetCatId.replace('subsub_', '');
+                        const match = dbSubSubCategories.find(c => String(c.id) === id);
+                        if (match) {
+                          targetCategoryName = match.name || targetCategoryName;
+                          const subSubSlug = match.slug || generateSlug(match.name);
+                          
+                          const subMatch = dbSubCategories.find(c => String(c.id) === String(match.sub_category_id));
+                          let subSlug = '';
+                          let catSlug = '';
+                          
+                          if (subMatch) {
+                            subSlug = subMatch.slug || generateSlug(subMatch.name);
+                            const catMatch = dbCategories.find(c => String(c.id) === String(subMatch.category_id));
+                            if (catMatch) {
+                              catSlug = catMatch.slug || generateSlug(catMatch.name);
+                            }
+                          }
+                          
+                          targetCategorySlug = [catSlug, subSlug, subSubSlug].filter(Boolean).join('/');
+                        }
+                      } else if (targetCatId.startsWith('sub_')) {
+                        const id = targetCatId.replace('sub_', '');
+                        const match = dbSubCategories.find(c => String(c.id) === id);
+                        if (match) {
+                          targetCategoryName = match.name || targetCategoryName;
+                          const subSlug = match.slug || generateSlug(match.name);
+                          
+                          let catSlug = '';
+                          const catMatch = dbCategories.find(c => String(c.id) === String(match.category_id));
+                          if (catMatch) {
+                            catSlug = catMatch.slug || generateSlug(catMatch.name);
+                          }
+                          
+                          targetCategorySlug = [catSlug, subSlug].filter(Boolean).join('/');
+                        }
+                      } else if (targetCatId.startsWith('cat_')) {
+                        const id = targetCatId.replace('cat_', '');
+                        const match = dbCategories.find(c => String(c.id) === id);
+                        if (match) {
+                          targetCategoryName = match.name || targetCategoryName;
+                          targetCategorySlug = match.slug || generateSlug(match.name);
+                        }
+                      } else if (targetCatId) {
+                        const match = dbCategories.find(c => String(c.id) === String(targetCatId));
+                        if (match) {
+                          targetCategoryName = match.name || targetCategoryName;
+                          targetCategorySlug = match.slug || generateSlug(match.name);
+                        }
+                      }
 
-
-                {/* DESKTOP CATEGORY SLIDER */}
-                <CategorySlider
-                  title="Desktop"
-                  categorySlug="desktop"
-                  indicatorColor="bg-emerald-500"
-                  products={activeProductList.filter(
-                    (p) => p.category?.toLowerCase() === "desktop",
-                  )}
-                  onSelectProduct={(p: Product) =>
-                    navigate(`/product/${p.slug}`)
-                  }
-                />
-
-                <RenderSectionBanners categoryName="Desktop" />
-
-                {/* LAPTOP CATEGORY SLIDER */}
-                <CategorySlider
-                  title="Laptop"
-                  categorySlug="laptop"
-                  indicatorColor="bg-indigo-600"
-                  products={activeProductList.filter(
-                    (p) => p.category?.toLowerCase() === "laptop",
-                  )}
-                  onSelectProduct={(p: Product) =>
-                    navigate(`/product/${p.slug}`)
-                  }
-                />
-
-                <RenderSectionBanners categoryName="Laptop" />
-
-                {/* COMPONENT CATEGORY SLIDER */}
-                <CategorySlider
-                  title="Component"
-                  categorySlug="component"
-                  indicatorColor="bg-rose-500"
-                  products={activeProductList.filter(
-                    (p) => p.category?.toLowerCase() === "component",
-                  )}
-                  onSelectProduct={(p: Product) =>
-                    navigate(`/product/${p.slug}`)
-                  }
-                />
-
-                <RenderSectionBanners categoryName="Component" />
-
-                {/* VENDORS / SHOP PARTNERS ROW */}
-                {dbSellers.length > 0 && (
-                  <div id="vendors-sec" className="bg-white border border-slate-200 rounded p-4 shadow-xs text-center">
-                    <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-200">
-                      <h3 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400 flex items-center gap-1.5 font-sans">
-                        <Store className="w-3.5 h-3.5 text-orange-500" />
-                        Verified Shop Partners (Vendors)
-                      </h3>
-                      <span className="text-[9px] text-slate-400 font-mono font-sans">{dbSellers.length} Active Stores</span>
-                    </div>
-
-                    <div className="relative overflow-hidden w-full group/slider rounded">
-                      <div className="flex gap-4 items-center justify-start overflow-x-auto scroll-smooth py-1 px-1 custom-scrollbar">
-                        {dbSellers.map((seller, idx) => (
-                          <div 
-                            key={seller.id || idx}
-                            onClick={() => {
-                              const slug = seller.shop_name
-                                ? seller.shop_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
-                                : seller.id;
-                              navigate(`/store/${slug}`);
-                            }}
-                            className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
-                          >
-                            {seller.shop_logo_url ? (
-                              <img 
-                                src={seller.shop_logo_url} 
-                                alt={seller.shop_name} 
-                                className="h-10 w-10 rounded-full object-cover mb-2 border border-slate-100 group-hover:scale-105 transition-transform" 
-                              />
-                            ) : (
-                              <div className="h-10 w-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs mb-2">
-                                {seller.shop_name?.slice(0, 2).toUpperCase() || "SH"}
+                      return (
+                        <React.Fragment key={layout.id}>
+                          <CategorySlider
+                            title={layout.settings?.title || "Category"}
+                            categorySlug={targetCategorySlug}
+                            indicatorColor="bg-blue-500"
+                            products={catProducts}
+                            onSelectProduct={(p: Product) => navigate(`/product/${p.slug}`)}
+                            layoutConfig={layout.settings}
+                          />
+                          <RenderSectionBanners categoryName={targetCategoryName} />
+                        </React.Fragment>
+                      );
+                    }
+                    if (layout.section_type === 'vendors') {
+                      return (
+                        <React.Fragment key={layout.id}>
+                          {dbSellers.length > 0 && (
+                            <div id="vendors-sec" className="bg-white border border-slate-200 rounded p-4 shadow-xs text-center w-full">
+                              <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-200">
+                                <h3 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400 flex items-center gap-1.5 font-sans">
+                                  <Store className="w-3.5 h-3.5 text-orange-500" />
+                                  Verified Shop Partners (Vendors)
+                                </h3>
+                                <span className="text-[9px] text-slate-400 font-mono font-sans">{dbSellers.length} Active Stores</span>
                               </div>
-                            )}
-                            <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-orange-500 transition-colors w-full font-sans">
-                              {seller.shop_name}
+
+                              <div className="relative overflow-hidden w-full group/slider rounded">
+                                <div className="flex gap-4 items-center justify-start overflow-x-auto scroll-smooth py-1 px-1 custom-scrollbar">
+                                  {dbSellers.map((seller, idx) => (
+                                    <div 
+                                      key={seller.id || idx}
+                                      onClick={() => {
+                                        const slug = seller.shop_name
+                                          ? seller.shop_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
+                                          : seller.id;
+                                        navigate(`/store/${slug}`);
+                                      }}
+                                      className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
+                                    >
+                                      {seller.shop_logo_url ? (
+                                        <img 
+                                          src={seller.shop_logo_url} 
+                                          alt={seller.shop_name} 
+                                          className="h-10 w-10 rounded-full object-cover mb-2 border border-slate-100 group-hover:scale-105 transition-transform" 
+                                        />
+                                      ) : (
+                                        <div className="h-10 w-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs mb-2">
+                                          {seller.shop_name?.slice(0, 2).toUpperCase() || "SH"}
+                                        </div>
+                                      )}
+                                      <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-orange-500 transition-colors w-full font-sans">
+                                        {seller.shop_name}
+                                      </div>
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
                             </div>
+                          )}
+                        </React.Fragment>
+                      );
+                    }
+                    return null;
+                  })
+                ) : (
+                  <React.Fragment>
+                    {/* Fallback Static Sections if Table Missing or Empty */}
+
+                    <CategorySlider
+                      title="Desktop"
+                      categorySlug="desktop"
+                      indicatorColor="bg-emerald-500"
+                      products={activeProductList.filter((p) => p.category?.toLowerCase() === "desktop")}
+                      onSelectProduct={(p: Product) => navigate(`/product/${p.slug}`)}
+                    />
+                    <RenderSectionBanners categoryName="Desktop" />
+
+                    <CategorySlider
+                      title="Laptop"
+                      categorySlug="laptop"
+                      indicatorColor="bg-indigo-600"
+                      products={activeProductList.filter((p) => p.category?.toLowerCase() === "laptop")}
+                      onSelectProduct={(p: Product) => navigate(`/product/${p.slug}`)}
+                    />
+                    <RenderSectionBanners categoryName="Laptop" />
+
+                    <CategorySlider
+                      title="Component"
+                      categorySlug="component"
+                      indicatorColor="bg-rose-500"
+                      products={activeProductList.filter((p) => p.category?.toLowerCase() === "component")}
+                      onSelectProduct={(p: Product) => navigate(`/product/${p.slug}`)}
+                    />
+                    <RenderSectionBanners categoryName="Component" />
+
+                    {dbSellers.length > 0 && (
+                      <div id="vendors-sec" className="bg-white border border-slate-200 rounded p-4 shadow-xs text-center">
+                        <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-200">
+                          <h3 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400 flex items-center gap-1.5 font-sans">
+                            <Store className="w-3.5 h-3.5 text-orange-500" />
+                            Verified Shop Partners (Vendors)
+                          </h3>
+                          <span className="text-[9px] text-slate-400 font-mono font-sans">{dbSellers.length} Active Stores</span>
+                        </div>
+
+                        <div className="relative overflow-hidden w-full group/slider rounded">
+                          <div className="flex gap-4 items-center justify-start overflow-x-auto scroll-smooth py-1 px-1 custom-scrollbar">
+                            {dbSellers.map((seller, idx) => (
+                              <div 
+                                key={seller.id || idx}
+                                onClick={() => {
+                                  const slug = seller.shop_name
+                                    ? seller.shop_name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '')
+                                    : seller.id;
+                                  navigate(`/store/${slug}`);
+                                }}
+                                className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
+                              >
+                                {seller.shop_logo_url ? (
+                                  <img 
+                                    src={seller.shop_logo_url} 
+                                    alt={seller.shop_name} 
+                                    className="h-10 w-10 rounded-full object-cover mb-2 border border-slate-100 group-hover:scale-105 transition-transform" 
+                                  />
+                                ) : (
+                                  <div className="h-10 w-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs mb-2">
+                                    {seller.shop_name?.slice(0, 2).toUpperCase() || "SH"}
+                                  </div>
+                                )}
+                                <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-orange-500 transition-colors w-full font-sans">
+                                  {seller.shop_name}
+                                </div>
+                              </div>
+                            ))}
                           </div>
-                        ))}
+                        </div>
                       </div>
-                    </div>
-                  </div>
+                    )}
+                  </React.Fragment>
                 )}
 
 
@@ -1434,6 +1568,7 @@ export default function App() {
             <Route path="flash-deals" element={<FlashDealSetup />} />
             <Route path="flash-deals/details/:id" element={<AdminFlashDealDetails />} />
             <Route path="shipping-methods" element={<ShippingMethodList />} />
+            <Route path="home-layout" element={<HomeLayoutSetup />} />
           </Route>
 
           {/* Seller routes */}

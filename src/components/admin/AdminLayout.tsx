@@ -787,6 +787,11 @@ export default function AdminLayout() {
           {/* Settings available for both admin and seller */}
           <NavSection title="SYSTEM SETTINGS" />
           {user?.role === 'admin' && (
+            <Link to="/admin/home-layout">
+              <NavItem icon={LayoutDashboard} text="Home Layout" />
+            </Link>
+          )}
+          {user?.role === 'admin' && (
             <Link to="/admin/shipping-methods">
               <NavItem icon={Truck} text="Shipping Method" />
             </Link>

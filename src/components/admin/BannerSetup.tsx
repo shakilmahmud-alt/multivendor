@@ -23,6 +23,8 @@ export default function BannerSetup() {
   const [resourceId, setResourceId] = useState('');
   const [placementCategoryId, setPlacementCategoryId] = useState('');
   const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [subCategories, setSubCategories] = useState<any[]>([]);
+  const [subSubCategories, setSubSubCategories] = useState<any[]>([]);
 
   useEffect(() => {
     fetchBanners();
@@ -40,8 +42,35 @@ export default function BannerSetup() {
   };
 
   const fetchCategories = async () => {
-    const { data } = await supabase.from('categories').select('id, name').order('priority', { ascending: true });
-    if (data) setCategories(data);
+    const [catRes, subRes, subSubRes] = await Promise.all([
+      supabase.from('categories').select('id, name').order('priority', { ascending: true }),
+      supabase.from('sub_categories').select('*').order('name'),
+      supabase.from('sub_sub_categories').select('*').order('name')
+    ]);
+    if (catRes.data) setCategories(catRes.data);
+    if (subRes.data) setSubCategories(subRes.data);
+    if (subSubRes.data) setSubSubCategories(subSubRes.data);
+  };
+
+  const renderCategoryOptions = (valueType: 'id' | 'name' = 'name') => {
+    let options: JSX.Element[] = [];
+    categories.forEach(cat => {
+      const val = valueType === 'id' ? String(cat.id) : cat.name;
+      options.push(<option key={`cat_${cat.id}`} value={val}>{cat.name}</option>);
+      
+      const subs = subCategories.filter(s => String(s.category_id) === String(cat.id));
+      subs.forEach(sub => {
+        const valSub = valueType === 'id' ? String(sub.id) : sub.name;
+        options.push(<option key={`sub_${sub.id}`} value={valSub}>-- {sub.name}</option>);
+        
+        const subSubs = subSubCategories.filter(ss => String(ss.sub_category_id) === String(sub.id));
+        subSubs.forEach(ss => {
+          const valSubSub = valueType === 'id' ? String(ss.id) : ss.name;
+          options.push(<option key={`subsub_${ss.id}`} value={valSubSub}>---- {ss.name}</option>);
+        });
+      });
+    });
+    return options;
   };
 
   const fetchProducts = async () => {
@@ -196,9 +225,7 @@ export default function BannerSetup() {
                         className="w-full border border-slate-300 rounded p-2 text-[13px] outline-none focus:border-blue-500"
                       >
                         <option value="">Select a Category Block</option>
-                        {categories.map(c => (
-                          <option key={c.id} value={c.name}>{c.name}</option>
-                        ))}
+                        {renderCategoryOptions('name')}
                       </select>
                     </div>
                   )}
@@ -242,9 +269,7 @@ export default function BannerSetup() {
                             <option key={p.id} value={p.id}>{p.title}</option>
                           ))
                         ) : (
-                          categories.map(c => (
-                            <option key={c.id} value={c.id}>{c.name}</option>
-                          ))
+                          renderCategoryOptions('id')
                         )}
                       </select>
                     </div>
