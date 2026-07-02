@@ -1,8 +1,8 @@
 [{
-  "relation": ["delegate_permission/common.handle_all_urls"],
-  "target": {
-    "namespace": "android_app",
-    "package_name": "com.holidaymartbd.twa",
-    "sha256_cert_fingerprints": ["35:67:D9:B6:5D:96:42:CD:13:85:B1:79:04:0A:BF:FB:D2:06:3F:AE:91:21:B8:45:50:21:8D:1F:1D:6D:AC:11"]
-  }
-}]
+      "relation": ["delegate_permission/common.handle_all_urls"],
+      "target": {
+        "namespace": "android_app",
+        "package_name": "com.holidaymartbd.twa",
+        "sha256_cert_fingerprints": ["01:52:66:4B:C0:36:E9:94:A7:7B:DD:61:68:1E:B0:3C:7D:24:46:1E:17:10:F2:3B:8F:DA:B5:7D:58:B8:84:AB"]
+      }
+    }]
