@@ -739,7 +739,7 @@ function StoreFront() {
                                     <div 
                                       key={`${brand.id || ''}_${idx}`}
                                       onClick={() => {
-                                        navigate(`/store?brand=${encodeURIComponent(brand.name)}`);
+                                        navigate(`/brand/${encodeURIComponent(brand.name)}`);
                                       }}
                                       className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
                                     >
@@ -859,7 +859,7 @@ function StoreFront() {
                               <div 
                                 key={`${brand.id || ''}_${idx}`}
                                 onClick={() => {
-                                  navigate(`/store?brand=${encodeURIComponent(brand.name)}`);
+                                  navigate(`/brand/${encodeURIComponent(brand.name)}`);
                                 }}
                                 className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
                               >
