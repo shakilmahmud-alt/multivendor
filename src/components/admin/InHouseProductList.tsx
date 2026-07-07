@@ -185,7 +185,7 @@ export default function InHouseProductList() {
   return (
     <div className="w-full">
       <div className="flex items-center gap-2 mb-6">
-        <Box className="w-6 h-6 text-orange-500" />
+        <Box className="w-6 h-6 text-brand-500" />
         <h1 className="text-xl font-bold text-slate-800">
           {user?.role === 'seller' ? 'Product List' : 'In House Product List'}
         </h1>

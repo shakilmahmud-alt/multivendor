@@ -327,21 +327,21 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
         {currentStep > 1 && (
           <div className="flex items-center gap-4 mb-8 max-w-md">
             <div className={`flex flex-col items-center flex-1`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${currentStep >= 1 ? 'bg-orange-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${currentStep >= 1 ? 'bg-brand-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
                 1
               </div>
               <span className="text-xs font-semibold mt-1 text-slate-700">Cart</span>
             </div>
-            <div className="h-[2px] bg-orange-500 flex-1 -mt-4"></div>
+            <div className="h-[2px] bg-brand-500 flex-1 -mt-4"></div>
             <div className={`flex flex-col items-center flex-1`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${currentStep >= 2 ? 'bg-orange-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${currentStep >= 2 ? 'bg-brand-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
                 2
               </div>
               <span className="text-xs font-semibold mt-1 text-slate-700">Shipping</span>
             </div>
-            <div className={`h-[2px] flex-1 -mt-4 ${currentStep >= 3 ? 'bg-orange-500' : 'bg-slate-200'}`}></div>
+            <div className={`h-[2px] flex-1 -mt-4 ${currentStep >= 3 ? 'bg-brand-500' : 'bg-slate-200'}`}></div>
             <div className={`flex flex-col items-center flex-1`}>
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${currentStep >= 3 ? 'bg-orange-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-xs ${currentStep >= 3 ? 'bg-brand-500 text-white' : 'bg-slate-200 text-slate-500'}`}>
                 3
               </div>
               <span className="text-xs font-semibold mt-1 text-slate-700">Payment</span>
@@ -403,19 +403,19 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                                   if (item.quantity > 1) {
                                     setCart(prev => prev.map(p => p.cartItemId === item.cartItemId ? { ...p, quantity: p.quantity - 1 } : p));
                                   }
-                                }} className="text-slate-500 hover:text-orange-500">
+                                }} className="text-slate-500 hover:text-brand-500">
                                   <Minus className="w-3 h-3" />
                                 </button>
                                 <span className="text-sm font-bold w-6 text-center">{item.quantity}</span>
                                 <button onClick={() => {
                                   setCart(prev => prev.map(p => p.cartItemId === item.cartItemId ? { ...p, quantity: p.quantity + 1 } : p));
-                                }} className="text-slate-500 hover:text-orange-500">
+                                }} className="text-slate-500 hover:text-brand-500">
                                   <Plus className="w-3 h-3" />
                                 </button>
                               </div>
                             </div>
                             <div className="col-span-2 flex items-center justify-between">
-                              <span className="text-sm font-bold text-orange-500">৳{((item.selectedVariation?.price || item.product.price) * item.quantity).toFixed(2)}</span>
+                              <span className="text-sm font-bold text-brand-500">৳{((item.selectedVariation?.price || item.product.price) * item.quantity).toFixed(2)}</span>
                               <button onClick={() => onRemoveFromCart(item.cartItemId)} className="text-red-500 hover:text-red-600 transition">
                                 <Trash2 className="w-4 h-4" />
                               </button>
@@ -428,7 +428,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                 </div>
                 <div className="p-4 border-t border-slate-200">
                   <label className="text-sm font-medium text-slate-700 mb-2 block">Order Note (Optional)</label>
-                  <textarea className="w-full border border-slate-300 rounded p-3 text-sm focus:ring-1 focus:ring-orange-500 focus:border-orange-500 outline-none" rows={3}></textarea>
+                  <textarea className="w-full border border-slate-300 rounded p-3 text-sm focus:ring-1 focus:ring-brand-500 focus:border-brand-500 outline-none" rows={3}></textarea>
                 </div>
               </div>
             )}
@@ -460,9 +460,9 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                               longitude: addr.longitude || 0
                             });
                           }}
-                          className="px-4 py-2 border border-slate-200 rounded-md text-sm font-medium hover:border-orange-500 hover:bg-orange-50 transition flex items-center gap-2"
+                          className="px-4 py-2 border border-slate-200 rounded-md text-sm font-medium hover:border-brand-500 hover:bg-brand-50 transition flex items-center gap-2"
                         >
-                          <span className="font-bold text-orange-600">{addr.address_type}</span> - {addr.city}
+                          <span className="font-bold text-brand-600">{addr.address_type}</span> - {addr.city}
                         </button>
                       ))}
                     </div>
@@ -472,59 +472,75 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                 <div className="grid grid-cols-2 gap-4">
                   <div className="col-span-2">
                     <label className="text-xs font-semibold text-slate-600 mb-1 block">Address type</label>
-                    <select 
-                      className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-orange-500 outline-none"
-                      value={shippingInfo.addressType}
-                      onChange={(e) => setShippingInfo({...shippingInfo, addressType: e.target.value})}
-                    >
-                      <option value="Home">Home</option>
-                      <option value="Office">Office</option>
-                    </select>
+                    <div className="flex gap-3">
+                      <button
+                        type="button"
+                        onClick={() => setShippingInfo({...shippingInfo, addressType: "Home"})}
+                        className={`flex-1 py-2.5 rounded-md border text-sm font-medium transition duration-200 ${
+                          shippingInfo.addressType === "Home" 
+                            ? "bg-brand-500 border-brand-500 text-white shadow-sm" 
+                            : "bg-white border-slate-300 text-slate-600 hover:border-brand-500 hover:text-brand-500"
+                        }`}
+                      >
+                        Home
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setShippingInfo({...shippingInfo, addressType: "Office"})}
+                        className={`flex-1 py-2.5 rounded-md border text-sm font-medium transition duration-200 ${
+                          shippingInfo.addressType === "Office" 
+                            ? "bg-brand-500 border-brand-500 text-white shadow-sm" 
+                            : "bg-white border-slate-300 text-slate-600 hover:border-brand-500 hover:text-brand-500"
+                        }`}
+                      >
+                        Office
+                      </button>
+                    </div>
                   </div>
                   
                   <div>
                     <label className="text-xs font-semibold text-slate-600 mb-1 block">Name *</label>
-                    <input type="text" className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-orange-500 outline-none"
+                    <input type="text" className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-brand-500 outline-none"
                       value={shippingInfo.name} onChange={(e) => setShippingInfo({...shippingInfo, name: e.target.value})}
                     />
                   </div>
                   <div>
                     <label className="text-xs font-semibold text-slate-600 mb-1 block">Phone number *</label>
-                    <input type="tel" className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-orange-500 outline-none"
+                    <input type="tel" className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-brand-500 outline-none"
                       value={shippingInfo.phone} onChange={(e) => setShippingInfo({...shippingInfo, phone: e.target.value})}
                     />
                   </div>
                   
                   <div className="col-span-2">
                     <label className="text-xs font-semibold text-slate-600 mb-1 block">Email *</label>
-                    <input type="email" className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-orange-500 outline-none"
+                    <input type="email" className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-brand-500 outline-none"
                       value={shippingInfo.email} onChange={(e) => setShippingInfo({...shippingInfo, email: e.target.value})}
                     />
                   </div>
                   
                   <div className="col-span-2">
                     <label className="text-xs font-semibold text-slate-600 mb-1 block">Address *</label>
-                    <textarea className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-orange-500 outline-none" rows={3}
+                    <textarea className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-brand-500 outline-none" rows={3}
                       value={shippingInfo.address} onChange={(e) => setShippingInfo({...shippingInfo, address: e.target.value})}
                     ></textarea>
                   </div>
                   
                   <div>
                     <label className="text-xs font-semibold text-slate-600 mb-1 block">City *</label>
-                    <input type="text" className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-orange-500 outline-none"
+                    <input type="text" className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-brand-500 outline-none"
                       value={shippingInfo.city} onChange={(e) => setShippingInfo({...shippingInfo, city: e.target.value})}
                     />
                   </div>
                   <div>
                     <label className="text-xs font-semibold text-slate-600 mb-1 block">Zip code *</label>
-                    <input type="text" className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-orange-500 outline-none"
+                    <input type="text" className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-brand-500 outline-none"
                       value={shippingInfo.zipCode} onChange={(e) => setShippingInfo({...shippingInfo, zipCode: e.target.value})}
                     />
                   </div>
                   
                   <div className="col-span-2">
                     <label className="text-xs font-semibold text-slate-600 mb-1 block">Country *</label>
-                    <select className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-orange-500 outline-none"
+                    <select className="w-full border border-slate-300 rounded-md p-2.5 text-sm focus:ring-1 focus:ring-brand-500 outline-none"
                       value={shippingInfo.country} onChange={(e) => setShippingInfo({...shippingInfo, country: e.target.value})}
                     >
                       <option value="Bangladesh">Bangladesh</option>
@@ -538,11 +554,11 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                     <h4 className="text-sm font-bold text-slate-800 mb-4">Choose Shipping Method</h4>
                     <div className="space-y-3">
                       {shippingMethods.map(method => (
-                        <label key={method.id} className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition ${selectedShippingMethod?.id === method.id ? 'border-orange-500 bg-orange-50/50 shadow-sm' : 'border-slate-200 hover:border-orange-200 hover:bg-slate-50'}`}>
+                        <label key={method.id} className={`flex items-center gap-3 p-4 border rounded-lg cursor-pointer transition ${selectedShippingMethod?.id === method.id ? 'border-brand-500 bg-brand-50/50 shadow-sm' : 'border-slate-200 hover:border-brand-200 hover:bg-slate-50'}`}>
                           <input 
                             type="radio" 
                             name="shipping_method" 
-                            className="w-4 h-4 text-orange-500 focus:ring-orange-500 border-slate-300" 
+                            className="w-4 h-4 text-brand-500 focus:ring-brand-500 border-slate-300" 
                             checked={selectedShippingMethod?.id === method.id}
                             onChange={() => setSelectedShippingMethod(method)}
                           />
@@ -574,14 +590,14 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                     <h3 className="text-lg font-bold text-slate-800">Payment method</h3>
                     <p className="text-xs text-slate-500 mt-1">Select A Payment Method To Proceed</p>
                   </div>
-                  <button onClick={() => setCurrentStep(2)} className="text-orange-500 text-sm font-semibold hover:underline flex items-center gap-1">
+                  <button onClick={() => setCurrentStep(2)} className="text-brand-500 text-sm font-semibold hover:underline flex items-center gap-1">
                     <ChevronLeft className="w-4 h-4" /> Go back
                   </button>
                 </div>
 
                 <div className="space-y-6">
-                  <label className="flex items-center gap-3 p-4 border border-slate-200 rounded-lg cursor-pointer hover:border-orange-500 transition">
-                    <input type="radio" name="payment" className="w-4 h-4 text-orange-500 focus:ring-orange-500" 
+                  <label className="flex items-center gap-3 p-4 border border-slate-200 rounded-lg cursor-pointer hover:border-brand-500 transition">
+                    <input type="radio" name="payment" className="w-4 h-4 text-brand-500 focus:ring-brand-500" 
                       checked={paymentMethod === 'cod'} onChange={() => setPaymentMethod('cod')}
                     />
                     <span className="text-sm font-bold text-slate-700 flex items-center gap-2">
@@ -589,13 +605,13 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                     </span>
                   </label>
 
-                  <div className={`border rounded-lg p-4 transition ${paymentMethod === 'offline' ? 'border-orange-500' : 'border-slate-200 hover:border-orange-500'}`}>
+                  <div className={`border rounded-lg p-4 transition ${paymentMethod === 'offline' ? 'border-brand-500' : 'border-slate-200 hover:border-brand-500'}`}>
                     <label className="flex items-center gap-3 cursor-pointer">
-                      <input type="radio" name="payment" className="w-4 h-4 text-orange-500 focus:ring-orange-500" 
+                      <input type="radio" name="payment" className="w-4 h-4 text-brand-500 focus:ring-brand-500" 
                         checked={paymentMethod === 'offline'} onChange={() => setPaymentMethod('offline')}
                       />
                       <span className="text-sm font-bold text-slate-700 flex-1">Pay Offline</span>
-                      <ShieldAlert className="w-4 h-4 text-orange-500" />
+                      <ShieldAlert className="w-4 h-4 text-brand-500" />
                     </label>
                     
                     {paymentMethod === 'offline' && (
@@ -603,7 +619,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                         <button onClick={() => handleOfflinePaymentClick('Bkash')} className="px-4 py-3 border border-slate-200 rounded-md text-sm font-bold text-slate-700 hover:border-pink-500 hover:text-pink-600 transition flex justify-center items-center">
                           Bkash
                         </button>
-                        <button onClick={() => handleOfflinePaymentClick('Nagad')} className="px-4 py-3 border border-slate-200 rounded-md text-sm font-bold text-slate-700 hover:border-orange-500 hover:text-orange-600 transition flex justify-center items-center">
+                        <button onClick={() => handleOfflinePaymentClick('Nagad')} className="px-4 py-3 border border-slate-200 rounded-md text-sm font-bold text-slate-700 hover:border-brand-500 hover:text-brand-600 transition flex justify-center items-center">
                           Nagad
                         </button>
                         <button onClick={() => handleOfflinePaymentClick('Upay')} className="px-4 py-3 border border-slate-200 rounded-md text-sm font-bold text-slate-700 hover:border-blue-500 hover:text-blue-600 transition flex justify-center items-center">
@@ -625,7 +641,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
           <div className="lg:col-span-1">
             <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-6 sticky top-24">
               {discount > 0 && (
-                <div className="flex items-center justify-center gap-2 text-orange-500 font-bold text-sm mb-6 pb-4 border-b border-slate-100">
+                <div className="flex items-center justify-center gap-2 text-brand-500 font-bold text-sm mb-6 pb-4 border-b border-slate-100">
                   🎉 You have Saved ৳{discount.toFixed(2)}!
                 </div>
               )}
@@ -666,7 +682,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                   </div>
                 )}
                 {useLoyaltyPoints && loyaltyDiscountAmount > 0 && (
-                  <div className="flex justify-between items-center text-orange-600 bg-orange-50 p-2 rounded -mx-2 mt-2">
+                  <div className="flex justify-between items-center text-brand-600 bg-brand-50 p-2 rounded -mx-2 mt-2">
                     <span className="font-semibold text-xs">Loyalty Points Used ({loyaltyDiscountAmount})</span>
                     <span className="font-bold">- ৳{loyaltyDiscountAmount.toFixed(2)}</span>
                   </div>
@@ -677,7 +693,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                 <div className="mb-6 bg-slate-50 border border-slate-200 rounded p-4 text-sm">
                   <div className="flex justify-between items-center mb-2">
                     <span className="font-bold text-slate-800">Use Loyalty Points</span>
-                    <span className="text-orange-500 font-bold">{loyaltyBalance} Points</span>
+                    <span className="text-brand-500 font-bold">{loyaltyBalance} Points</span>
                   </div>
                   <p className="text-xs text-slate-500 mb-3">You can use up to {maxLoyaltyDiscount} points on this order.</p>
                   <label className="flex items-center gap-2 cursor-pointer">
@@ -685,14 +701,14 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                       type="checkbox" 
                       checked={useLoyaltyPoints}
                       onChange={(e) => setUseLoyaltyPoints(e.target.checked)}
-                      className="rounded text-orange-500 focus:ring-orange-500"
+                      className="rounded text-brand-500 focus:ring-brand-500"
                     />
                     <span className="font-semibold text-slate-700">Apply {maxLoyaltyDiscount} Points (৳{maxLoyaltyDiscount.toFixed(2)} off)</span>
                   </label>
                 </div>
               )}
 
-              <div className="flex justify-between text-base font-black text-orange-500 mb-8">
+              <div className="flex justify-between text-base font-black text-brand-500 mb-8">
                 <span>Total</span>
                 <span>৳{total.toFixed(2)}</span>
               </div>
@@ -719,14 +735,14 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
               {currentStep < 3 ? (
                 <button 
                   onClick={() => setCurrentStep(prev => (prev + 1) as 2 | 3)}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-md transition shadow-md"
+                  className="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 rounded-md transition shadow-md"
                 >
                   Proceed to Next
                 </button>
               ) : (
                 <button 
                   onClick={handlePlaceOrder}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 rounded-md transition shadow-md"
+                  className="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 rounded-md transition shadow-md"
                 >
                   Complete Order
                 </button>
@@ -737,7 +753,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                   if (currentStep > 1) setCurrentStep(prev => (prev - 1) as 1 | 2);
                   else navigate('/');
                 }}
-                className="w-full mt-3 text-orange-500 font-bold text-sm py-2 hover:bg-orange-50 rounded transition flex items-center justify-center gap-1"
+                className="w-full mt-3 text-brand-500 font-bold text-sm py-2 hover:bg-brand-50 rounded transition flex items-center justify-center gap-1"
               >
                 <ChevronLeft className="w-4 h-4" /> {currentStep === 1 ? 'Continue Shopping' : 'Continue Shopping'}
               </button>
@@ -767,7 +783,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
               </p>
 
               <select 
-                className="w-full border border-slate-300 rounded-md p-3 text-sm font-medium focus:ring-1 focus:ring-orange-500 outline-none mb-6 text-slate-700 bg-white"
+                className="w-full border border-slate-300 rounded-md p-3 text-sm font-medium focus:ring-1 focus:ring-brand-500 outline-none mb-6 text-slate-700 bg-white"
                 value={offlineMethod}
                 onChange={(e) => setOfflineMethod(e.target.value)}
               >
@@ -795,7 +811,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                   </label>
                   <input 
                     type="text" 
-                    className="w-full border border-slate-300 rounded-md p-3 text-sm focus:ring-1 focus:ring-orange-500 outline-none"
+                    className="w-full border border-slate-300 rounded-md p-3 text-sm focus:ring-1 focus:ring-brand-500 outline-none"
                     placeholder="TRX3434"
                     value={transactionId}
                     onChange={(e) => setTransactionId(e.target.value)}
@@ -805,7 +821,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                 <div>
                   <label className="text-xs font-semibold text-slate-600 mb-1 block">Payment note</label>
                   <textarea 
-                    className="w-full border border-slate-300 rounded-md p-3 text-sm focus:ring-1 focus:ring-orange-500 outline-none" 
+                    className="w-full border border-slate-300 rounded-md p-3 text-sm focus:ring-1 focus:ring-brand-500 outline-none" 
                     rows={3}
                     placeholder="Insert note"
                     value={paymentNote}
@@ -818,7 +834,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
             <div className="p-4 bg-slate-50 border-t border-slate-100 flex justify-end gap-3">
               <button 
                 onClick={() => setShowOfflinePopup(false)}
-                className="px-6 py-2 bg-orange-500 text-white font-bold rounded hover:bg-orange-600 transition"
+                className="px-6 py-2 bg-brand-500 text-white font-bold rounded hover:bg-brand-600 transition"
               >
                 Close
               </button>
@@ -831,7 +847,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
                   setShowOfflinePopup(false);
                   handlePlaceOrder();
                 }}
-                className="px-6 py-2 bg-orange-500 text-white font-bold rounded hover:bg-orange-600 transition"
+                className="px-6 py-2 bg-brand-500 text-white font-bold rounded hover:bg-brand-600 transition"
               >
                 Submit
               </button>

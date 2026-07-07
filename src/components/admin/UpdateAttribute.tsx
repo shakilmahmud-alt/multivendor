@@ -94,7 +94,7 @@ export default function UpdateAttribute() {
   return (
     <div className="w-full">
       <div className="flex items-center gap-2 mb-6">
-        <Box className="w-5 h-5 text-orange-500" />
+        <Box className="w-5 h-5 text-brand-500" />
         <h1 className="text-lg font-bold text-slate-800">Update attribute</h1>
       </div>
 

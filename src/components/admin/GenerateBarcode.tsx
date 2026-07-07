@@ -70,7 +70,7 @@ export default function GenerateBarcode() {
   return (
     <div className="w-full">
       <div className="flex items-center gap-2 mb-6 print:hidden">
-        <Box className="w-6 h-6 text-orange-500" />
+        <Box className="w-6 h-6 text-brand-500" />
         <h1 className="text-xl font-bold text-slate-800">Generate Barcode</h1>
       </div>
 

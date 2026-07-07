@@ -407,7 +407,7 @@ export default function SellerDetails() {
                       <h4 className="text-lg font-bold text-slate-800">৳{walletStats.totalCommissionGiven.toFixed(2)}</h4>
                       <p className="text-xs text-slate-500 mt-1">Total Commission Given</p>
                     </div>
-                    <div className="w-10 h-10 rounded-full bg-orange-50 flex items-center justify-center text-orange-500">
+                    <div className="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-brand-500">
                       <FileText className="w-5 h-5" />
                     </div>
                   </div>

@@ -70,7 +70,7 @@ export default function CategorySlider({
         </div>
         
         <div className="text-left px-1">
-          <h4 className="text-[13px] font-bold text-slate-800 line-clamp-2 leading-snug group-hover:text-orange-500 transition-colors">
+          <h4 className="text-[13px] font-bold text-slate-800 line-clamp-2 leading-snug group-hover:text-brand-500 transition-colors">
             {p.title}
           </h4>
           
@@ -104,7 +104,7 @@ export default function CategorySlider({
           </div>
           <button 
             onClick={() => navigate(`/${categorySlug}`)}
-            className="text-[12px] text-orange-500 hover:text-orange-600 font-bold flex items-center gap-0.5 transition cursor-pointer"
+            className="text-[12px] text-brand-500 hover:text-brand-600 font-bold flex items-center gap-0.5 transition cursor-pointer"
           >
             View All <ChevronRight className="w-3.5 h-3.5" />
           </button>
@@ -115,13 +115,13 @@ export default function CategorySlider({
           <div className="relative w-full group/slider rounded">
             <button 
               onClick={() => scroll('left')}
-              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-orange-500 hover:text-white text-slate-800 shadow-md w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all cursor-pointer"
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-brand-500 hover:text-white text-slate-800 shadow-md w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all cursor-pointer"
             >
               <ChevronLeft className="w-5 h-5" />
             </button>
             <button 
               onClick={() => scroll('right')}
-              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-orange-500 hover:text-white text-slate-800 shadow-md w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all cursor-pointer"
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 bg-white/90 hover:bg-brand-500 hover:text-white text-slate-800 shadow-md w-8 h-8 rounded-full flex items-center justify-center opacity-0 group-hover/slider:opacity-100 transition-all cursor-pointer"
             >
               <ChevronRight className="w-5 h-5" />
             </button>
@@ -167,7 +167,7 @@ export default function CategorySlider({
               {layoutConfig.banner_image ? (
                  <img src={layoutConfig.banner_image} alt={title} className="w-full h-full object-cover" />
               ) : (
-                 <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-orange-400 to-rose-500">
+                 <div className="w-full h-full flex flex-col items-center justify-center text-center p-6 bg-gradient-to-br from-brand-400 to-rose-500">
                    <h3 className="text-white text-2xl font-black mb-2">{title}</h3>
                    <p className="text-white/80 text-sm">Best deals on {title.toLowerCase()}</p>
                  </div>

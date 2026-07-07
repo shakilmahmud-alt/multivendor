@@ -138,7 +138,7 @@ export default function SellerCouponSetup() {
                     </span>
                   </td>
                   <td className="py-4 px-4">
-                    <div className={`font-bold text-xs ${getApprovalStatus(c) === 'Approved' ? 'text-green-500' : getApprovalStatus(c) === 'Rejected' ? 'text-red-500' : 'text-orange-500'}`}>
+                    <div className={`font-bold text-xs ${getApprovalStatus(c) === 'Approved' ? 'text-green-500' : getApprovalStatus(c) === 'Rejected' ? 'text-red-500' : 'text-brand-500'}`}>
                       {getApprovalStatus(c)}
                     </div>
                   </td>

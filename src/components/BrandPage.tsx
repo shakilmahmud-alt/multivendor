@@ -77,9 +77,9 @@ export default function BrandPage({ allProducts, onAddToCart, onAddWishlist, onS
       {/* Breadcrumbs */}
       <div className="bg-white border-b border-slate-200 py-3 px-6 shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs font-semibold text-slate-500">
-          <Link to="/" className="hover:text-orange-500 transition cursor-pointer">Home</Link>
+          <Link to="/" className="hover:text-brand-500 transition cursor-pointer">Home</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-orange-500">{decodedBrandName}</span>
+          <span className="text-brand-500">{decodedBrandName}</span>
         </div>
       </div>
 
@@ -98,7 +98,7 @@ export default function BrandPage({ allProducts, onAddToCart, onAddWishlist, onS
                     type="number" 
                     value={minPrice} 
                     onChange={e => setMinPrice(Number(e.target.value))}
-                    className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-orange-500"
+                    className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-brand-500"
                     placeholder="Min"
                   />
                   <span className="text-slate-400">-</span>
@@ -106,7 +106,7 @@ export default function BrandPage({ allProducts, onAddToCart, onAddWishlist, onS
                     type="number" 
                     value={maxPrice} 
                     onChange={e => setMaxPrice(Number(e.target.value))}
-                    className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-orange-500"
+                    className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-brand-500"
                     placeholder="Max"
                   />
                 </div>
@@ -118,7 +118,7 @@ export default function BrandPage({ allProducts, onAddToCart, onAddWishlist, onS
                   step="1000"
                   value={maxPrice}
                   onChange={e => setMaxPrice(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                  className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-500"
                 />
               </div>
             </div>
@@ -138,7 +138,7 @@ export default function BrandPage({ allProducts, onAddToCart, onAddWishlist, onS
                 <select 
                   value={sortOrder} 
                   onChange={e => setSortOrder(e.target.value)}
-                  className="px-3 py-1.5 border border-slate-300 rounded text-sm font-semibold text-slate-700 outline-none focus:border-orange-500 bg-white"
+                  className="px-3 py-1.5 border border-slate-300 rounded text-sm font-semibold text-slate-700 outline-none focus:border-brand-500 bg-white"
                 >
                   <option value="default">Default</option>
                   <option value="price_asc">Price (Low {'>'} High)</option>

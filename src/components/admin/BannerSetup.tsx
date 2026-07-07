@@ -185,7 +185,7 @@ export default function BannerSetup() {
   return (
     <div className="space-y-6 font-sans">
       <div className="flex items-center gap-2 mb-6 text-[#1e293b]">
-        <ImageIcon className="w-5 h-5 text-orange-500" />
+        <ImageIcon className="w-5 h-5 text-brand-500" />
         <h1 className="text-lg font-bold text-slate-800">Banner Setup (Default)</h1>
       </div>
 

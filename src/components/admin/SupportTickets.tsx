@@ -115,7 +115,7 @@ export default function SupportTickets() {
     <div className="p-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-          <LifeBuoy className="w-6 h-6 text-orange-500" />
+          <LifeBuoy className="w-6 h-6 text-brand-500" />
           Support Tickets
         </h2>
       </div>
@@ -162,7 +162,7 @@ export default function SupportTickets() {
                     <td className="py-3 px-4">
                       <span className={`px-2 py-1 rounded text-xs font-bold ${
                         ticket.priority === 'Urgent' ? 'bg-red-100 text-red-600' : 
-                        ticket.priority === 'High' ? 'bg-orange-100 text-orange-600' :
+                        ticket.priority === 'High' ? 'bg-brand-100 text-brand-600' :
                         ticket.priority === 'Medium' ? 'bg-blue-100 text-blue-600' :
                         'bg-slate-100 text-slate-600'
                       }`}>
@@ -252,14 +252,14 @@ export default function SupportTickets() {
               {selectedTicket.reply ? (
                 <div className="mt-6">
                   <h4 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Conversation History</h4>
-                  <p className="text-sm text-slate-800 p-4 bg-orange-50 rounded border border-orange-100 whitespace-pre-wrap font-medium">
+                  <p className="text-sm text-slate-800 p-4 bg-brand-50 rounded border border-brand-100 whitespace-pre-wrap font-medium">
                     {selectedTicket.reply}
                   </p>
                 </div>
               ) : selectedTicket.status === 'Closed' ? (
                 <div className="mt-6">
                   <h4 className="text-[11px] font-bold text-slate-400 uppercase tracking-wider mb-2">Conversation History</h4>
-                  <p className="text-sm text-slate-800 p-4 bg-orange-50 rounded border border-orange-100 whitespace-pre-wrap font-medium">
+                  <p className="text-sm text-slate-800 p-4 bg-brand-50 rounded border border-brand-100 whitespace-pre-wrap font-medium">
                     No reply was sent.
                   </p>
                 </div>
@@ -295,7 +295,7 @@ export default function SupportTickets() {
                   </button>
                   <button 
                     onClick={handleReply}
-                    className="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white rounded text-sm font-bold transition"
+                    className="px-6 py-2 bg-brand-500 hover:bg-brand-600 text-white rounded text-sm font-bold transition"
                   >
                     Send
                   </button>

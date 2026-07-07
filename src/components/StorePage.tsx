@@ -365,7 +365,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
             </div>
             <div className="flex-1 text-center sm:text-left">
               <h1 className="text-xl sm:text-2xl font-bold text-slate-800">{seller.shop_name}</h1>
-              <p className="text-xs font-bold text-[#ff6a00] mt-1 tracking-wide">
+              <p className="text-xs font-bold text-brand-500 mt-1 tracking-wide">
                 0 Reviews <span className="text-slate-300 mx-1">|</span> {storeProducts.length} Products
               </p>
               <div className="flex items-center justify-center sm:justify-start gap-1 mt-2 text-slate-300">
@@ -376,7 +376,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
             <div className="shrink-0 w-full sm:w-auto mt-4 sm:mt-0">
               <button 
                 onClick={handleChatClick} 
-                className="w-full sm:w-auto bg-[#ff6a00] hover:bg-orange-600 text-white px-5 py-2.5 rounded text-sm font-bold flex items-center justify-center gap-2 transition shadow-sm"
+                className="w-full sm:w-auto bg-brand-500 hover:bg-brand-600 text-white px-5 py-2.5 rounded text-sm font-bold flex items-center justify-center gap-2 transition shadow-sm"
               >
                 <MessageSquare className="w-4 h-4" /> Chat With Vendor
               </button>
@@ -395,7 +395,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
               onClick={openMobileFilters}
               className="w-full lg:hidden bg-white border border-slate-200 text-slate-700 py-2.5 px-4 rounded flex items-center justify-center gap-2 font-bold text-xs shadow-xs hover:bg-slate-50 transition cursor-pointer"
             >
-              <Filter className="w-4 h-4 text-orange-500" />
+              <Filter className="w-4 h-4 text-brand-500" />
               Show Filters
             </button>
 
@@ -412,9 +412,9 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                       type="checkbox" 
                       checked={selectedCategories.includes(cat)}
                       onChange={() => handleCategoryToggle(cat)}
-                      className="w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-500 cursor-pointer"
+                      className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500 cursor-pointer"
                     />
-                    <span className="text-sm font-semibold text-slate-600 group-hover:text-orange-500 transition">{cat}</span>
+                    <span className="text-sm font-semibold text-slate-600 group-hover:text-brand-500 transition">{cat}</span>
                     <span className="text-xs text-slate-400 ml-auto font-medium">({storeProducts.filter(p => p.category === cat).length})</span>
                   </label>
                 ))}
@@ -433,7 +433,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                     type="number" 
                     value={minPrice} 
                     onChange={e => setMinPrice(Number(e.target.value))}
-                    className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-orange-500"
+                    className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-brand-500"
                     placeholder="Min"
                   />
                   <span className="text-slate-400">-</span>
@@ -441,7 +441,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                     type="number" 
                     value={maxPrice} 
                     onChange={e => setMaxPrice(Number(e.target.value))}
-                    className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-orange-500"
+                    className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-brand-500"
                     placeholder="Max"
                   />
                 </div>
@@ -453,7 +453,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                   step="1000"
                   value={maxPrice}
                   onChange={e => setMaxPrice(Number(e.target.value))}
-                  className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                  className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-500"
                 />
               </div>
             </div>
@@ -469,9 +469,9 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                         type="checkbox" 
                         checked={selectedBrands.includes(brand)}
                         onChange={() => handleBrandToggle(brand)}
-                        className="w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-500 cursor-pointer"
+                        className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500 cursor-pointer"
                       />
-                      <span className="text-sm font-semibold text-slate-600 group-hover:text-orange-500 transition">{brand}</span>
+                      <span className="text-sm font-semibold text-slate-600 group-hover:text-brand-500 transition">{brand}</span>
                     </label>
                   ))}
                 </div>
@@ -501,12 +501,12 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                           type="checkbox" 
                           checked={selectedAttributes[attrName]?.includes(value) || false}
                           onChange={() => handleAttributeToggle(attrName, value)}
-                          className="w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-500 cursor-pointer"
+                          className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500 cursor-pointer"
                         />
                         {isColor && codes.length > 0 && (
                           <span className="w-4 h-4 rounded-full border border-slate-300 block shrink-0 shadow-inner" style={getColorStyle(codes)} />
                         )}
-                        <span className="text-sm font-semibold text-slate-600 group-hover:text-orange-500 transition">{colorName}</span>
+                        <span className="text-sm font-semibold text-slate-600 group-hover:text-brand-500 transition">{colorName}</span>
                       </label>
                     );
                   })}
@@ -525,7 +525,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                 <select 
                   value={sortOrder}
                   onChange={e => setSortOrder(e.target.value)}
-                  className="border border-slate-200 rounded px-1.5 py-1.5 text-xs sm:text-sm sm:px-2 bg-white focus:outline-none focus:border-orange-500 cursor-pointer"
+                  className="border border-slate-200 rounded px-1.5 py-1.5 text-xs sm:text-sm sm:px-2 bg-white focus:outline-none focus:border-brand-500 cursor-pointer"
                 >
                   <option value="default">Latest</option>
                   <option value="price_asc">Price: Low to High</option>
@@ -538,9 +538,9 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search products..." 
-                  className="w-full pl-2.5 pr-8 py-1.5 sm:pl-3 sm:pr-10 sm:py-2 border border-slate-200 rounded text-xs sm:text-sm focus:outline-none focus:border-orange-500"
+                  className="w-full pl-2.5 pr-8 py-1.5 sm:pl-3 sm:pr-10 sm:py-2 border border-slate-200 rounded text-xs sm:text-sm focus:outline-none focus:border-brand-500"
                 />
-                <button className="absolute right-0 top-0 h-full px-2 sm:px-3 bg-orange-500 text-white rounded-r hover:bg-orange-600 transition flex items-center justify-center">
+                <button className="absolute right-0 top-0 h-full px-2 sm:px-3 bg-brand-500 text-white rounded-r hover:bg-brand-600 transition flex items-center justify-center">
                   <Search className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
                 </button>
               </div>
@@ -557,11 +557,11 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                     key={p.id} 
                     to={`/product/${p.slug}`}
                     onClick={() => onSelectProduct(p)}
-                    className="group bg-white border border-slate-100/80 rounded-lg p-3 flex flex-col hover:border-orange-500/30 hover:shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] transition duration-200"
+                    className="group bg-white border border-slate-100/80 rounded-lg p-3 flex flex-col hover:border-brand-500/30 hover:shadow-[0_2px_10px_-4px_rgba(0,0,0,0.1)] transition duration-200"
                   >
                     <div className="w-full flex justify-start mb-1.5 min-h-[20px]">
                       {p.oldPrice > p.price && (
-                        <span className="bg-[#ff6a00] text-white text-[9px] font-bold px-2 py-0.5 rounded-sm tracking-wide">
+                        <span className="bg-brand-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-sm tracking-wide">
                           +{(p.oldPrice - p.price).toLocaleString()}.00 Off
                         </span>
                       )}
@@ -577,7 +577,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                             e.stopPropagation();
                             onQuickView?.(p);
                           }}
-                          className="p-1.5 bg-white/90 rounded-full text-slate-800 hover:bg-[#ff6a00] hover:text-white transition shadow cursor-pointer"
+                          className="p-1.5 bg-white/90 rounded-full text-slate-800 hover:bg-brand-500 hover:text-white transition shadow cursor-pointer"
                         >
                           <Eye className="w-3.5 h-3.5" />
                         </button>
@@ -589,7 +589,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                       </h4>
                       <div className="flex items-center justify-center gap-1.5 pb-1">
                         <span className="text-[11px] text-slate-400 line-through">৳{p.oldPrice.toLocaleString()}.00</span>
-                        <span className="text-[14px] font-bold text-[#ff6a00]">৳{p.price.toLocaleString()}.00</span>
+                        <span className="text-[14px] font-bold text-brand-500">৳{p.price.toLocaleString()}.00</span>
                       </div>
                     </div>
                   </Link>
@@ -678,9 +678,9 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                         prev.includes(cat) ? prev.filter(c => c !== cat) : [...prev, cat]
                       );
                     }}
-                    className="w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-500 cursor-pointer"
+                    className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500 cursor-pointer"
                   />
-                  <span className="text-xs font-semibold text-slate-600 group-hover:text-orange-500 transition">{cat}</span>
+                  <span className="text-xs font-semibold text-slate-600 group-hover:text-brand-500 transition">{cat}</span>
                   <span className="text-xs text-slate-400 ml-auto font-medium">({storeProducts.filter(p => p.category === cat).length})</span>
                 </label>
               ))}
@@ -699,7 +699,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                   type="number" 
                   value={tempMinPrice} 
                   onChange={e => setTempMinPrice(e.target.value === "" ? "" : Number(e.target.value))}
-                  className="w-full px-2 py-1 bg-white border border-slate-300 rounded text-xs outline-none focus:border-orange-500 text-slate-800"
+                  className="w-full px-2 py-1 bg-white border border-slate-300 rounded text-xs outline-none focus:border-brand-500 text-slate-800"
                   placeholder="Min"
                 />
                 <span className="text-slate-400 text-xs">-</span>
@@ -707,7 +707,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                   type="number" 
                   value={tempMaxPrice} 
                   onChange={e => setTempMaxPrice(e.target.value === "" ? "" : Number(e.target.value))}
-                  className="w-full px-2 py-1 bg-white border border-slate-300 rounded text-xs outline-none focus:border-orange-500 text-slate-800"
+                  className="w-full px-2 py-1 bg-white border border-slate-300 rounded text-xs outline-none focus:border-brand-500 text-slate-800"
                   placeholder="Max"
                 />
               </div>
@@ -718,7 +718,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                 step="1000"
                 value={tempMaxPrice === "" ? 500000 : tempMaxPrice}
                 onChange={e => setTempMaxPrice(Number(e.target.value))}
-                className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-500"
               />
             </div>
           </div>
@@ -738,9 +738,9 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                           prev.includes(brand) ? prev.filter(b => b !== brand) : [...prev, brand]
                         );
                       }}
-                      className="w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-500 cursor-pointer"
+                      className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500 cursor-pointer"
                     />
-                    <span className="text-xs font-semibold text-slate-600 group-hover:text-orange-500 transition">{brand}</span>
+                    <span className="text-xs font-semibold text-slate-600 group-hover:text-brand-500 transition">{brand}</span>
                   </label>
                 ))}
               </div>
@@ -770,12 +770,12 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
                         type="checkbox" 
                         checked={tempSelectedAttributes[attrName]?.includes(value) || false}
                         onChange={() => handleAttributeToggle(attrName, value, true)}
-                        className="w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-500 cursor-pointer"
+                        className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500 cursor-pointer"
                       />
                       {isColor && codes.length > 0 && (
                         <span className="w-4 h-4 rounded-full border border-slate-300 block shrink-0 shadow-inner" style={getColorStyle(codes)} />
                       )}
-                      <span className="text-xs font-semibold text-slate-600 group-hover:text-orange-500 transition">{colorName}</span>
+                      <span className="text-xs font-semibold text-slate-600 group-hover:text-brand-500 transition">{colorName}</span>
                     </label>
                   );
                 })}
@@ -800,7 +800,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
           </button>
           <button 
             onClick={applyMobileFilters}
-            className="flex-1 bg-orange-500 hover:bg-orange-600 text-white font-bold py-2 rounded-lg text-xs transition cursor-pointer"
+            className="flex-1 bg-brand-500 hover:bg-brand-600 text-white font-bold py-2 rounded-lg text-xs transition cursor-pointer"
           >
             Apply Filters
           </button>

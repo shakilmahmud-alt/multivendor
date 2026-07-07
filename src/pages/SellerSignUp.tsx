@@ -127,7 +127,7 @@ export default function SellerSignUp() {
               </div>
               <h2 className="text-xl font-bold text-slate-800 mb-2">Your seller account request is submitted successfully.</h2>
               <p className="text-slate-500 mb-6">Our administration team will review your details and activate your account shortly. You will be redirected to the homepage.</p>
-              <button onClick={() => navigate('/')} className="bg-orange-500 text-white px-6 py-2 rounded font-bold hover:bg-orange-600">Return to Home</button>
+              <button onClick={() => navigate('/')} className="bg-brand-500 text-white px-6 py-2 rounded font-bold hover:bg-brand-600">Return to Home</button>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="p-6 md:p-8 space-y-8">
@@ -135,16 +135,16 @@ export default function SellerSignUp() {
               {/* SECTION 1: Seller Information */}
               <div className="space-y-4">
                 <h3 className="text-sm font-bold text-slate-800 uppercase tracking-wider flex items-center gap-2 border-b border-slate-100 pb-2">
-                  <User className="w-4 h-4 text-orange-500" /> Seller Information
+                  <User className="w-4 h-4 text-brand-500" /> Seller Information
                 </h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-600 mb-1">Full Name</label>
-                    <input type="text" name="name" required value={formData.name} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-orange-500" placeholder="e.g. John Doe" />
+                    <input type="text" name="name" required value={formData.name} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500" placeholder="e.g. John Doe" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-600 mb-1">Phone Number</label>
-                    <input type="text" name="phone" required value={formData.phone} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-orange-500" placeholder="e.g. +880 1712 345678" />
+                    <input type="text" name="phone" required value={formData.phone} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500" placeholder="e.g. +880 1712 345678" />
                   </div>
                   <div className="md:col-span-2">
                     <label className="block text-xs font-bold text-slate-600 mb-1">Seller Profile Image</label>
@@ -158,7 +158,7 @@ export default function SellerSignUp() {
                           <User className="w-5 h-5" />
                         </div>
                       )}
-                      <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, setSellerImage)} className="text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-orange-50 file:text-orange-700 hover:file:bg-orange-100 cursor-pointer" />
+                      <input type="file" accept="image/*" onChange={(e) => handleFileChange(e, setSellerImage)} className="text-xs text-slate-500 file:mr-4 file:py-1.5 file:px-3 file:rounded file:border-0 file:text-xs file:font-semibold file:bg-brand-50 file:text-brand-700 hover:file:bg-brand-100 cursor-pointer" />
                     </div>
                   </div>
                 </div>
@@ -172,15 +172,15 @@ export default function SellerSignUp() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="md:col-span-2">
                     <label className="block text-xs font-bold text-slate-600 mb-1">Email Address</label>
-                    <input type="email" name="email" required value={formData.email} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-orange-500" placeholder="e.g. seller@example.com" />
+                    <input type="email" name="email" required value={formData.email} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500" placeholder="e.g. seller@example.com" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-600 mb-1">Password</label>
-                    <input type="password" name="password" required value={formData.password} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-orange-500" placeholder="••••••••" />
+                    <input type="password" name="password" required value={formData.password} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500" placeholder="••••••••" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-600 mb-1">Confirm Password</label>
-                    <input type="password" name="confirmPassword" required value={formData.confirmPassword} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-orange-500" placeholder="••••••••" />
+                    <input type="password" name="confirmPassword" required value={formData.confirmPassword} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500" placeholder="••••••••" />
                   </div>
                 </div>
               </div>
@@ -193,11 +193,11 @@ export default function SellerSignUp() {
                 <div className="grid grid-cols-1 gap-4">
                   <div>
                     <label className="block text-xs font-bold text-slate-600 mb-1">Shop Name</label>
-                    <input type="text" name="shop_name" required value={formData.shop_name} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-orange-500" placeholder="e.g. Dhaka Express Logistics" />
+                    <input type="text" name="shop_name" required value={formData.shop_name} onChange={handleChange} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500" placeholder="e.g. Dhaka Express Logistics" />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-600 mb-1">Shop Address</label>
-                    <textarea name="shop_address" required value={formData.shop_address} onChange={handleChange} rows={2} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-orange-500 resize-none" placeholder="Enter full shop address"></textarea>
+                    <textarea name="shop_address" required value={formData.shop_address} onChange={handleChange} rows={2} className="w-full border border-slate-300 rounded px-3 py-2 text-sm focus:outline-none focus:border-brand-500 resize-none" placeholder="Enter full shop address"></textarea>
                   </div>
                   
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
@@ -242,7 +242,7 @@ export default function SellerSignUp() {
                 <button 
                   type="submit" 
                   disabled={loading}
-                  className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-4 rounded transition flex justify-center items-center gap-2"
+                  className="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 px-4 rounded transition flex justify-center items-center gap-2"
                 >
                   {loading ? (
                     <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"></div>

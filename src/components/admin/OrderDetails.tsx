@@ -302,7 +302,7 @@ export default function OrderDetails() {
 
       {/* Page Title */}
       <div className="flex items-center gap-2 mb-4 text-slate-700">
-        <FileText className="w-5 h-5 text-orange-500" />
+        <FileText className="w-5 h-5 text-brand-500" />
         <h1 className="text-xl font-bold">Order Details</h1>
       </div>
 
@@ -345,7 +345,7 @@ export default function OrderDetails() {
             </div>
             <div className="flex items-center gap-2">
               <span className="text-slate-600 font-medium">Payment Status:</span>
-              <span className={`font-bold ${paymentStatus === 'paid' ? 'text-emerald-500' : 'text-orange-500'}`}>
+              <span className={`font-bold ${paymentStatus === 'paid' ? 'text-emerald-500' : 'text-brand-500'}`}>
                 {paymentStatus === 'paid' ? 'Paid' : 'Unpaid'}
               </span>
             </div>
@@ -369,7 +369,7 @@ export default function OrderDetails() {
             <div className="bg-slate-50 border border-slate-200 rounded-lg p-4 mt-4">
               <h3 className="text-sm font-bold text-slate-800 mb-3 flex items-center gap-2">
                 Offline Payment Details
-                <span className="bg-orange-100 text-orange-700 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
+                <span className="bg-brand-100 text-brand-700 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">
                   {order.offline_payment_info.method}
                 </span>
               </h3>
@@ -680,7 +680,7 @@ export default function OrderDetails() {
                 {order.sellers?.shop_logo_url ? (
                   <img src={order.sellers.shop_logo_url} className="w-full h-full object-contain" alt="Shop" />
                 ) : (
-                  <span className="text-orange-500 font-bold text-[10px]">HolidayMart</span>
+                  <span className="text-brand-500 font-bold text-[10px]">HolidayMart</span>
                 )}
               </div>
               <div>

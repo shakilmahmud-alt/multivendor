@@ -165,7 +165,7 @@ export default function Messages() {
     <div className="max-w-6xl mx-auto py-6 h-[calc(100vh-100px)] flex flex-col">
       <div className="flex items-center justify-between mb-6 shrink-0">
         <h1 className="text-xl font-bold text-slate-800 flex items-center gap-2">
-          <MessageSquare className="w-6 h-6 text-orange-500" /> Customer Messages
+          <MessageSquare className="w-6 h-6 text-brand-500" /> Customer Messages
         </h1>
       </div>
 
@@ -184,7 +184,7 @@ export default function Messages() {
                   <input 
                     type="text" 
                     placeholder="Search customers..." 
-                    className="w-full pl-9 pr-3 py-2 bg-slate-100 border-none rounded-md text-sm outline-none focus:ring-2 focus:ring-orange-500/20"
+                    className="w-full pl-9 pr-3 py-2 bg-slate-100 border-none rounded-md text-sm outline-none focus:ring-2 focus:ring-brand-500/20"
                   />
                   <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
                 </div>
@@ -195,7 +195,7 @@ export default function Messages() {
                     key={customer.phone}
                     onClick={() => handleSelectCustomer(customer.phone)}
                     className={`p-4 border-b border-slate-200 cursor-pointer transition ${
-                      selectedCustomerPhone === customer.phone ? 'bg-orange-50' : 'bg-white hover:bg-slate-50'
+                      selectedCustomerPhone === customer.phone ? 'bg-brand-50' : 'bg-white hover:bg-slate-50'
                     }`}
                   >
                     <div className="flex items-center gap-3 mb-1">
@@ -261,7 +261,7 @@ export default function Messages() {
                         {msg.reply && (
                           <div className="flex justify-end">
                             <div className="max-w-[75%] flex flex-col items-end">
-                              <div className="bg-orange-500 text-white p-3 rounded-2xl rounded-tr-sm shadow-sm text-sm whitespace-pre-wrap">
+                              <div className="bg-brand-500 text-white p-3 rounded-2xl rounded-tr-sm shadow-sm text-sm whitespace-pre-wrap">
                                 {msg.reply}
                               </div>
                               <span className="text-[10px] text-slate-400 mt-1 flex items-center gap-1">
@@ -283,7 +283,7 @@ export default function Messages() {
                           value={replyText}
                           onChange={(e) => setReplyText(e.target.value)}
                           placeholder="Type your reply here..."
-                          className="w-full text-sm p-3 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-orange-500 focus:bg-white transition resize-none"
+                          className="w-full text-sm p-3 bg-slate-50 border border-slate-200 rounded-lg outline-none focus:border-brand-500 focus:bg-white transition resize-none"
                           rows={2}
                           onKeyDown={(e) => {
                             if (e.key === 'Enter' && !e.shiftKey) {
@@ -296,7 +296,7 @@ export default function Messages() {
                       <button 
                         type="submit"
                         disabled={!replyText.trim() || sendingReply}
-                        className="px-4 bg-orange-500 hover:bg-orange-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg flex items-center justify-center transition shrink-0 self-end h-[50px]"
+                        className="px-4 bg-brand-500 hover:bg-brand-600 disabled:opacity-50 disabled:cursor-not-allowed text-white rounded-lg flex items-center justify-center transition shrink-0 self-end h-[50px]"
                       >
                         <Send className="w-5 h-5" />
                       </button>

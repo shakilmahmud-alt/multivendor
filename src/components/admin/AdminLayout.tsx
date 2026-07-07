@@ -477,7 +477,7 @@ export default function AdminLayout() {
                   <span className="bg-[#3b301a] text-[#fbbf24] px-2 py-0.5 rounded-md text-[10px] font-bold">{orderCounts.packaging || 0}</span>
                 </Link>
                 <Link to="/admin/orders/out_for_delivery" className="flex items-center justify-between px-10 py-2 text-[13px] text-slate-300 hover:text-white transition group">
-                  <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-slate-400 group-hover:bg-orange-400"></div> Out for delivery</div>
+                  <div className="flex items-center gap-2"><div className="w-1.5 h-1.5 rounded-full bg-slate-400 group-hover:bg-brand-400"></div> Out for delivery</div>
                   <span className="bg-[#3a2618] text-[#fb923c] px-2 py-0.5 rounded-md text-[10px] font-bold">{orderCounts.out_for_delivery || 0}</span>
                 </Link>
                 <Link to="/admin/orders/delivered" className="flex items-center justify-between px-10 py-2 text-[13px] text-slate-300 hover:text-white transition group">
@@ -977,7 +977,7 @@ export default function AdminLayout() {
                         <div className="p-4 text-center text-sm text-slate-500">No messages.</div>
                       ) : (
                         headerMessages.map((msg: any) => (
-                          <div key={msg.id} className={`p-3 border-b border-slate-50 flex gap-3 hover:bg-slate-50 transition ${!msg.is_read ? 'bg-orange-50/30' : ''}`}>
+                          <div key={msg.id} className={`p-3 border-b border-slate-50 flex gap-3 hover:bg-slate-50 transition ${!msg.is_read ? 'bg-brand-50/30' : ''}`}>
                             <div className="flex-1 min-w-0">
                               <p className={`text-sm ${!msg.is_read ? 'font-semibold text-slate-800' : 'text-slate-700'}`}>
                                 {msg.customer_name}
@@ -994,7 +994,7 @@ export default function AdminLayout() {
                                   toggleMessageReadStatus(msg.id, msg.is_read);
                                 }}
                                 title={msg.is_read ? "Mark as unread" : "Mark as read"}
-                                className={`${msg.is_read ? 'text-slate-300 hover:text-slate-500' : 'text-orange-500 hover:text-orange-700'}`}
+                                className={`${msg.is_read ? 'text-slate-300 hover:text-slate-500' : 'text-brand-500 hover:text-brand-700'}`}
                               >
                                 {msg.is_read ? <CheckCircle2 className="w-4 h-4" /> : <Circle className="w-4 h-4" fill="currentColor" />}
                               </button>

@@ -101,7 +101,7 @@ export default function ProductAttributes() {
   return (
     <div className="w-full space-y-6">
       <div className="flex items-center gap-2">
-        <Box className="w-5 h-5 text-orange-500" />
+        <Box className="w-5 h-5 text-brand-500" />
         <h1 className="text-lg font-bold text-slate-800">Attribute Setup</h1>
       </div>
 

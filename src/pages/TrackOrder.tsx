@@ -95,7 +95,7 @@ export default function TrackOrder() {
             placeholder="Order id"
             value={orderId}
             onChange={(e) => setOrderId(e.target.value)}
-            className="w-full sm:w-1/3 border border-slate-200 rounded-md p-3 text-sm focus:ring-1 focus:ring-orange-500 outline-none text-slate-600"
+            className="w-full sm:w-1/3 border border-slate-200 rounded-md p-3 text-sm focus:ring-1 focus:ring-brand-500 outline-none text-slate-600"
             required
           />
           <input 
@@ -103,12 +103,12 @@ export default function TrackOrder() {
             placeholder="Your phone number"
             value={phone}
             onChange={(e) => setPhone(e.target.value)}
-            className="w-full sm:w-1/3 border border-slate-200 rounded-md p-3 text-sm focus:ring-1 focus:ring-orange-500 outline-none text-slate-600"
+            className="w-full sm:w-1/3 border border-slate-200 rounded-md p-3 text-sm focus:ring-1 focus:ring-brand-500 outline-none text-slate-600"
             required
           />
           <button 
             type="submit" 
-            className="w-full sm:w-1/3 bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-6 rounded-md transition text-sm shadow-sm"
+            className="w-full sm:w-1/3 bg-brand-500 hover:bg-brand-600 text-white font-bold py-3 px-6 rounded-md transition text-sm shadow-sm"
           >
             Track Order
           </button>
@@ -122,7 +122,7 @@ export default function TrackOrder() {
         ) : (
           <div className="animate-fadeIn">
             <h3 className="text-center text-lg font-bold text-slate-800 mb-12">
-              Your Order : <span className="text-orange-500">{orderId}</span>
+              Your Order : <span className="text-brand-500">{orderId}</span>
             </h3>
 
             {/* Stepper Timeline */}
@@ -157,7 +157,7 @@ export default function TrackOrder() {
             <div className="text-center">
               <button 
                 onClick={() => setIsModalOpen(true)}
-                className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-2.5 px-6 rounded transition text-sm shadow-sm"
+                className="bg-brand-500 hover:bg-brand-600 text-white font-bold py-2.5 px-6 rounded transition text-sm shadow-sm"
               >
                 View Order Details
               </button>

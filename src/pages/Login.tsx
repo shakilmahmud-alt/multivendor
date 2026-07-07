@@ -162,13 +162,13 @@ export default function Login() {
         <div className="flex border-b border-slate-200">
           <button 
             onClick={() => handleTabSwitch('customer')}
-            className={`flex-1 py-4 text-sm font-bold transition ${activeTab === 'customer' ? 'text-orange-500 border-b-2 border-orange-500' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'}`}
+            className={`flex-1 py-4 text-sm font-bold transition ${activeTab === 'customer' ? 'text-brand-500 border-b-2 border-brand-500' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'}`}
           >
             Customer Login
           </button>
           <button 
             onClick={() => handleTabSwitch('seller')}
-            className={`flex-1 py-4 text-sm font-bold transition ${activeTab === 'seller' ? 'text-orange-500 border-b-2 border-orange-500' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'}`}
+            className={`flex-1 py-4 text-sm font-bold transition ${activeTab === 'seller' ? 'text-brand-500 border-b-2 border-brand-500' : 'text-slate-500 hover:text-slate-700 hover:bg-slate-50'}`}
           >
             Seller Login
           </button>
@@ -189,7 +189,7 @@ export default function Login() {
                 value={formData.identifier}
                 onChange={handleChange}
                 placeholder="Enter email address or phone number" 
-                className="w-full px-4 py-3 rounded border border-slate-300 focus:outline-none focus:border-orange-500 text-sm"
+                className="w-full px-4 py-3 rounded border border-slate-300 focus:outline-none focus:border-brand-500 text-sm"
               />
             </div>
             
@@ -204,7 +204,7 @@ export default function Login() {
                   value={formData.password}
                   onChange={handleChange}
                   placeholder="Password must be 7+ Character" 
-                  className="w-full px-4 py-3 rounded border border-slate-300 focus:outline-none focus:border-orange-500 text-sm pr-10"
+                  className="w-full px-4 py-3 rounded border border-slate-300 focus:outline-none focus:border-brand-500 text-sm pr-10"
                 />
                 <button 
                   type="button"
@@ -225,13 +225,13 @@ export default function Login() {
                   name="rememberMe"
                   checked={formData.rememberMe}
                   onChange={handleChange}
-                  className="w-4 h-4 text-orange-500 rounded border-slate-300 focus:ring-orange-500 cursor-pointer"
+                  className="w-4 h-4 text-brand-500 rounded border-slate-300 focus:ring-brand-500 cursor-pointer"
                 />
                 <label htmlFor="rememberMe" className="text-sm text-slate-600 cursor-pointer">
                   Remember me
                 </label>
               </div>
-              <a href="#" className="text-sm font-medium text-orange-500 hover:text-orange-600 transition">
+              <a href="#" className="text-sm font-medium text-brand-500 hover:text-brand-600 transition">
                 Forgot password?
               </a>
             </div>
@@ -241,7 +241,7 @@ export default function Login() {
               <button 
                 type="submit" 
                 disabled={loading}
-                className="w-full bg-orange-500 hover:bg-orange-600 text-white font-bold py-3.5 px-4 rounded transition shadow-sm"
+                className="w-full bg-brand-500 hover:bg-brand-600 text-white font-bold py-3.5 px-4 rounded transition shadow-sm"
               >
                 {loading ? "Logging in..." : "Log in"}
               </button>

@@ -160,7 +160,7 @@ export default function RefundRequests() {
                     <td className="p-4 text-center font-bold text-slate-800">৳{(refund.amount - (refund.amount * 0.015)).toFixed(2)}</td>
                     <td className="p-4 text-center">
                       <span className={`text-xs font-bold px-2 py-1 rounded inline-block ${
-                        refund.status === 'pending' ? 'bg-orange-50 text-orange-600' :
+                        refund.status === 'pending' ? 'bg-brand-50 text-brand-600' :
                         refund.status === 'approved' ? 'bg-blue-50 text-blue-600' :
                         refund.status === 'refunded' ? 'bg-emerald-50 text-emerald-600' :
                         'bg-red-50 text-red-600'

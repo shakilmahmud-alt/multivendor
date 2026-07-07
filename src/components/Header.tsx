@@ -154,7 +154,7 @@ export default function Header({
                   e.stopPropagation();
                   setIsCategoryMenuOpen(!isCategoryMenuOpen);
                 }}
-                className="md:hidden p-1 text-slate-700 hover:text-orange-500 transition cursor-pointer category-dropdown-container"
+                className="md:hidden p-1 text-slate-700 hover:text-secondary-500 transition cursor-pointer category-dropdown-container"
                 aria-label="Open menu"
               >
                 <Menu className="w-5.5 h-5.5" />
@@ -174,7 +174,7 @@ export default function Header({
                 onClick={() => navigate('/my-account?tab=wishlist')}
                 className="relative cursor-pointer p-1"
               >
-                <Heart className="w-5 h-5 text-slate-700 hover:text-orange-500 transition" />
+                <Heart className="w-5 h-5 text-slate-700 hover:text-secondary-500 transition" />
                 {wishlist.length > 0 && (
                   <span className="absolute -top-0.5 -right-1.5 bg-rose-500 text-white text-[8px] font-bold rounded-full h-3.5 min-w-[14px] px-0.5 flex items-center justify-center shadow-xs">
                     {wishlist.length}
@@ -188,7 +188,7 @@ export default function Header({
                   onClick={() => setIsAccountOpen(!isAccountOpen)}
                   className="cursor-pointer p-1"
                 >
-                  <User className="w-5 h-5 text-slate-700 hover:text-orange-500 transition" />
+                  <User className="w-5 h-5 text-slate-700 hover:text-secondary-500 transition" />
                 </div>
                 {isAccountOpen && (
                   <div className="absolute right-0 mt-2 w-60 bg-white rounded-md shadow-lg border border-slate-200 py-2.5 text-slate-800 animate-fadeIn z-50 text-left">
@@ -203,7 +203,7 @@ export default function Header({
                             onClick={() => { setIsAccountOpen(false); navigate(user.role === 'customer' ? '/my-account' : (user.role === 'seller' ? '/seller/settings' : '/admin/settings')); }}
                             className="w-full text-left px-3 py-1.5 text-xs hover:bg-slate-50 rounded flex items-center gap-2 font-medium text-slate-700"
                           >
-                            <Settings className="w-3.5 h-3.5 text-orange-500" /> {user.role === 'customer' ? 'My Account' : 'Settings'}
+                            <Settings className="w-3.5 h-3.5 text-brand-500" /> {user.role === 'customer' ? 'My Account' : 'Settings'}
                           </button>
                           <button 
                             onClick={handleLogout}
@@ -229,7 +229,7 @@ export default function Header({
                         <div className="px-4 py-2">
                           <p className="text-xs font-bold text-slate-800 mb-1">Login</p>
                           <div className="space-y-0.5">
-                            <Link to="/login" onClick={() => setIsAccountOpen(false)} className="w-full text-left px-2 py-1.5 text-xs hover:bg-slate-50 rounded flex items-center gap-2 font-medium text-slate-600 block"><LogIn className="w-3.5 h-3.5 text-orange-500" /> Customer Login</Link>
+                            <Link to="/login" onClick={() => setIsAccountOpen(false)} className="w-full text-left px-2 py-1.5 text-xs hover:bg-slate-50 rounded flex items-center gap-2 font-medium text-slate-600 block"><LogIn className="w-3.5 h-3.5 text-brand-500" /> Customer Login</Link>
                             <Link to="/login?tab=seller" onClick={() => setIsAccountOpen(false)} className="w-full text-left px-2 py-1.5 text-xs hover:bg-slate-50 rounded flex items-center gap-2 font-medium text-slate-600 block"><LogIn className="w-3.5 h-3.5 text-purple-500" /> Seller Login</Link>
                           </div>
                         </div>
@@ -245,9 +245,9 @@ export default function Header({
                   onClick={() => setIsCartOpen(!isCartOpen)}
                   className="cursor-pointer p-1"
                 >
-                  <ShoppingCart className="w-5 h-5 text-slate-700 hover:text-orange-500 transition" />
+                  <ShoppingCart className="w-5 h-5 text-slate-700 hover:text-secondary-500 transition" />
                   {cartQuantity > 0 && (
-                    <span className="absolute -top-0.5 -right-1.5 bg-orange-500 text-white text-[8px] font-bold rounded-full h-3.5 min-w-[14px] px-0.5 flex items-center justify-center shadow-xs">
+                    <span className="absolute -top-0.5 -right-1.5 bg-brand-500 text-white text-[8px] font-bold rounded-full h-3.5 min-w-[14px] px-0.5 flex items-center justify-center shadow-xs">
                       {cartQuantity}
                     </span>
                   )}
@@ -261,7 +261,7 @@ export default function Header({
                     {cart.length === 0 ? (
                       <div className="text-center py-5">
                         <p className="text-xs text-slate-450 mb-2">Your Shopping Cart is empty</p>
-                        <button onClick={() => setIsCartOpen(false)} className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-3 py-1 rounded text-[11px] transition">Start Shopping</button>
+                        <button onClick={() => setIsCartOpen(false)} className="bg-brand-500 hover:bg-brand-600 text-white font-bold px-3 py-1 rounded text-[11px] transition">Start Shopping</button>
                       </div>
                     ) : (
                       <div>
@@ -301,12 +301,12 @@ export default function Header({
                           </div>
                           <div className="flex justify-between items-center font-bold text-slate-800 text-[13px]">
                             <span>Est. Total</span>
-                            <span className="text-orange-500">৳{cartTotal.toLocaleString()}</span>
+                            <span className="text-brand-500">৳{cartTotal.toLocaleString()}</span>
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-2 text-[11px]">
                           <button onClick={onClearCart} className="bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-1.5 rounded transition text-center">Clear</button>
-                          <Link to="/checkout" onClick={() => setIsCartOpen(false)} className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1.5 rounded transition text-center select-none block">Checkout</Link>
+                          <Link to="/checkout" onClick={() => setIsCartOpen(false)} className="bg-brand-500 hover:bg-brand-600 text-white font-bold py-1.5 rounded transition text-center select-none block">Checkout</Link>
                         </div>
                       </div>
                     )}
@@ -319,7 +319,7 @@ export default function Header({
           {/* Massive Search Block */}
           <form 
             onSubmit={handleSearchSubmit}
-            className="relative w-full md:max-w-xl flex items-center bg-white border border-slate-200 rounded-md overflow-visible focus-within:border-orange-500 focus-within:ring-1 focus-within:ring-orange-500/10 shadow-xs transition-all text-slate-900 h-[38px]"
+            className="relative w-full md:max-w-xl flex items-center bg-white border border-slate-200 rounded-md overflow-visible focus-within:border-brand-500 focus-within:ring-1 focus-within:ring-brand-500/10 shadow-xs transition-all text-slate-900 h-[38px]"
           >
             {/* Preset Category Dropdown Selector inside Search */}
             <div className="relative hidden sm:block h-full border-r border-slate-200">
@@ -350,7 +350,7 @@ export default function Header({
             {/* Clickable Search trigger */}
             <button 
               type="submit"
-              className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 h-full transition-colors flex items-center justify-center gap-1.5 cursor-pointer uppercase tracking-wider text-[11px]"
+              className="bg-brand-500 hover:bg-brand-600 text-white font-bold px-4 h-full transition-colors flex items-center justify-center gap-1.5 cursor-pointer uppercase tracking-wider text-[11px]"
             >
               <Search className="w-3.5 h-3.5 text-white" />
               <span className="hidden sm:inline">Search</span>
@@ -369,7 +369,7 @@ export default function Header({
                     <img src={p.thumbnail} alt="" className="w-10 h-10 object-cover rounded border border-slate-200" />
                     <div>
                       <p className="text-xs font-bold text-slate-800 line-clamp-1">{p.title}</p>
-                      <p className="text-[10px] text-orange-500 font-bold mt-0.5">৳{p.price.toLocaleString()}</p>
+                      <p className="text-[10px] text-brand-500 font-bold mt-0.5">৳{p.price.toLocaleString()}</p>
                     </div>
                   </Link>
                 ))}
@@ -385,8 +385,8 @@ export default function Header({
               onClick={() => navigate('/my-account?tab=wishlist')}
               className="flex items-center gap-1.5 cursor-pointer group relative"
             >
-              <div className="p-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-md transition group-hover:border-orange-400">
-                <Heart className="w-4 h-4 text-slate-600 group-hover:text-orange-500 transition" />
+              <div className="p-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-md transition group-hover:border-brand-400">
+                <Heart className="w-4 h-4 text-slate-600 group-hover:text-secondary-500 transition" />
                 {wishlist.length > 0 && (
                   <span className="absolute -top-1 -right-1 bg-rose-500 text-white text-[9px] font-bold rounded-full h-4 min-w-[16px] px-1 flex items-center justify-center shadow-xs">
                     {wishlist.length}
@@ -405,8 +405,8 @@ export default function Header({
                 onClick={() => setIsAccountOpen(!isAccountOpen)}
                 className="flex items-center gap-1.5 cursor-pointer group"
               >
-                <div className="p-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-md transition group-hover:border-orange-400">
-                  <User className="w-4 h-4 text-slate-600 group-hover:text-orange-500 transition" />
+                <div className="p-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-md transition group-hover:border-brand-400">
+                  <User className="w-4 h-4 text-slate-600 group-hover:text-secondary-500 transition" />
                 </div>
                 <div className="text-left hidden lg:block select-none">
                   <span className="text-[9px] text-slate-400 block font-medium leading-none">Account</span>
@@ -430,7 +430,7 @@ export default function Header({
                           onClick={() => { setIsAccountOpen(false); navigate(user.role === 'customer' ? '/my-account' : (user.role === 'seller' ? '/seller/settings' : '/admin/settings')); }}
                           className="w-full text-left px-3 py-1.5 text-xs hover:bg-slate-50 rounded flex items-center gap-2 font-medium text-slate-700"
                         >
-                          <Settings className="w-3.5 h-3.5 text-orange-500" /> {user.role === 'customer' ? 'My Account' : 'Settings'}
+                          <Settings className="w-3.5 h-3.5 text-brand-500" /> {user.role === 'customer' ? 'My Account' : 'Settings'}
                         </button>
                         <button 
                           onClick={handleLogout}
@@ -477,7 +477,7 @@ export default function Header({
                             onClick={() => setIsAccountOpen(false)}
                             className="w-full text-left px-2 py-1.5 text-xs hover:bg-slate-50 rounded flex items-center gap-2 font-medium text-slate-600 block"
                           >
-                            <LogIn className="w-3.5 h-3.5 text-orange-500" /> Customer Login
+                            <LogIn className="w-3.5 h-3.5 text-brand-500" /> Customer Login
                           </Link>
                           <Link 
                             to="/login?tab=seller"
@@ -500,17 +500,17 @@ export default function Header({
                 onClick={() => setIsCartOpen(!isCartOpen)}
                 className="flex items-center gap-1.5 cursor-pointer group"
               >
-                <div className="relative p-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-md transition group-hover:border-orange-400">
-                  <ShoppingCart className="w-4 h-4 text-slate-600 group-hover:text-orange-500 transition" />
+                <div className="relative p-1.5 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-md transition group-hover:border-brand-400">
+                  <ShoppingCart className="w-4 h-4 text-slate-600 group-hover:text-secondary-500 transition" />
                   {cartQuantity > 0 && (
-                    <span className="absolute -top-1 -right-1 bg-orange-550 bg-orange-500 text-white text-[9px] font-bold rounded-full h-4 min-w-[16px] px-1 flex items-center justify-center shadow-xs">
+                    <span className="absolute -top-1 -right-1 bg-brand-550 bg-brand-500 text-white text-[9px] font-bold rounded-full h-4 min-w-[16px] px-1 flex items-center justify-center shadow-xs">
                       {cartQuantity}
                     </span>
                   )}
                 </div>
                 <div className="text-left hidden lg:block select-none">
                   <span className="text-[9px] text-slate-400 block font-medium leading-none">My Cart</span>
-                  <span className="text-[11px] font-bold text-orange-500 leading-none mt-1 block">৳{cartTotal.toLocaleString()}</span>
+                  <span className="text-[11px] font-bold text-brand-500 leading-none mt-1 block">৳{cartTotal.toLocaleString()}</span>
                 </div>
               </div>
 
@@ -532,7 +532,7 @@ export default function Header({
                       <p className="text-xs text-slate-405 text-slate-450 mb-2">Your Shopping Cart is empty</p>
                       <button 
                         onClick={() => setIsCartOpen(false)}
-                        className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-3 py-1 rounded text-[11px] transition"
+                        className="bg-brand-500 hover:bg-brand-600 text-white font-bold px-3 py-1 rounded text-[11px] transition"
                       >
                         Start Shopping
                       </button>
@@ -583,7 +583,7 @@ export default function Header({
                         </div>
                         <div className="flex justify-between items-center font-bold text-slate-800 text-[13px]">
                           <span>Est. Total</span>
-                          <span className="text-orange-500">৳{cartTotal.toLocaleString()}</span>
+                          <span className="text-brand-500">৳{cartTotal.toLocaleString()}</span>
                         </div>
                       </div>
 
@@ -597,7 +597,7 @@ export default function Header({
                         <Link 
                           to="/checkout"
                           onClick={() => setIsCartOpen(false)}
-                          className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-1.5 rounded transition text-center select-none block"
+                          className="bg-brand-500 hover:bg-brand-600 text-white font-bold py-1.5 rounded transition text-center select-none block"
                         >
                           Checkout
                         </Link>
@@ -639,7 +639,7 @@ export default function Header({
                     onSelectCategory(cat.name);
                   }}
                   className={`w-full py-3 px-1 text-[11px] xl:text-[13px] font-bold transition cursor-pointer truncate ${
-                    isActive ? "bg-orange-500 text-white" : "hover:bg-orange-500/80"
+                    isActive ? "bg-brand-500 text-white" : "hover:bg-white/10 hover:text-white"
                   }`}
                 >
                   {cat.name}
@@ -666,8 +666,8 @@ export default function Header({
                               }}
                               className={`w-full text-left px-4 py-2 text-[12px] flex items-center justify-between transition cursor-pointer ${
                                 hoveredSubCategory === sub.id
-                                  ? "bg-orange-50 text-orange-600 font-bold" 
-                                  : "text-slate-700 hover:bg-slate-50 hover:text-orange-600 font-medium"
+                                  ? "bg-brand-50 text-brand-600 font-bold" 
+                                  : "text-slate-700 hover:bg-slate-50 hover:text-brand-600 font-medium"
                               }`}
                             >
                               <div className="flex items-center gap-2.5 truncate">
@@ -679,7 +679,7 @@ export default function Header({
                                 <span className="truncate">{sub.name}</span>
                               </div>
                               {hasSubSubCats && (
-                                <ChevronRight className={`w-3.5 h-3.5 ${hoveredSubCategory === sub.id ? "text-orange-500" : "text-slate-300"}`} />
+                                <ChevronRight className={`w-3.5 h-3.5 ${hoveredSubCategory === sub.id ? "text-brand-500" : "text-slate-300"}`} />
                               )}
                             </button>
 
@@ -695,7 +695,7 @@ export default function Header({
                                         navigate(url);
                                         onSelectCategory(cat.name, true);
                                       }}
-                                      className="w-full text-left px-4 py-2 text-[12px] flex items-center gap-2.5 transition cursor-pointer text-slate-700 hover:bg-slate-50 hover:text-orange-600 font-medium"
+                                      className="w-full text-left px-4 py-2 text-[12px] flex items-center gap-2.5 transition cursor-pointer text-slate-700 hover:bg-slate-50 hover:text-brand-600 font-medium"
                                     >
                                       {subSub.image_url ? (
                                         <img src={subSub.image_url} alt="" className="w-4 h-4 object-contain" />
@@ -752,23 +752,23 @@ export default function Header({
                       setIsCategoryMenuOpen(false);
                       navigate(`/${cat.slug || generateSlug(cat.name)}`);
                     }}
-                    className="flex-1 text-left py-2.5 px-3 text-[13px] font-bold text-slate-700 hover:text-orange-500 transition-colors capitalize"
+                    className="flex-1 text-left py-2.5 px-3 text-[13px] font-bold text-slate-700 hover:text-secondary-500 transition-colors capitalize"
                   >
                     {cat.name}
                   </button>
                   {hasSub && (
                     <button 
                       onClick={() => setExpandedMobileCat(expandedMobileCat === cat.id ? null : cat.id)}
-                      className="p-2.5 text-slate-450 hover:text-orange-500 transition-colors"
+                      className="p-2.5 text-slate-450 hover:text-secondary-500 transition-colors"
                     >
-                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${expandedMobileCat === cat.id ? 'rotate-180 text-orange-500' : ''}`} />
+                      <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-200 ${expandedMobileCat === cat.id ? 'rotate-180 text-brand-500' : ''}`} />
                     </button>
                   )}
                 </div>
 
                 {/* Mobile Subcategories Accordion */}
                 {expandedMobileCat === cat.id && hasSub && (
-                  <div className="pl-6 bg-slate-50 rounded-lg py-1.5 space-y-1 mt-0.5 border-l-2 border-orange-500/20">
+                  <div className="pl-6 bg-slate-50 rounded-lg py-1.5 space-y-1 mt-0.5 border-l-2 border-brand-500/20">
                     {subCats.map(sub => {
                       const subSubCats = dbSubSubCategories.filter(ss => ss.sub_category_id === sub.id);
                       const hasSubSub = subSubCats.length > 0;
@@ -782,15 +782,15 @@ export default function Header({
                                   setIsCategoryMenuOpen(false);
                                   navigate(`/${cat.slug || generateSlug(cat.name)}/${sub.slug || generateSlug(sub.name)}`);
                                 }}
-                                className="flex-1 text-left py-2 px-3 text-[12px] text-slate-650 hover:text-orange-500 font-medium block truncate capitalize"
+                                className="flex-1 text-left py-2 px-3 text-[12px] text-slate-650 hover:text-secondary-500 font-medium block truncate capitalize"
                               >
                                 {sub.name}
                               </button>
                               <button 
                                 onClick={() => setExpandedMobileSubCat(expandedMobileSubCat === sub.id ? null : sub.id)}
-                                className="p-2 text-slate-450 hover:text-orange-500 transition-colors"
+                                className="p-2 text-slate-450 hover:text-secondary-500 transition-colors"
                               >
-                                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${expandedMobileSubCat === sub.id ? 'rotate-180 text-orange-500' : ''}`} />
+                                <ChevronDown className={`w-3 h-3 transition-transform duration-200 ${expandedMobileSubCat === sub.id ? 'rotate-180 text-brand-500' : ''}`} />
                               </button>
                             </div>
 
@@ -806,7 +806,7 @@ export default function Header({
                                         setIsCategoryMenuOpen(false);
                                         navigate(url);
                                       }}
-                                      className="w-full text-left py-1.5 px-3 text-[11px] text-slate-500 hover:text-orange-500 font-normal block truncate capitalize"
+                                      className="w-full text-left py-1.5 px-3 text-[11px] text-slate-500 hover:text-secondary-500 font-normal block truncate capitalize"
                                     >
                                       {subSub.name}
                                     </button>
@@ -825,7 +825,7 @@ export default function Header({
                             setIsCategoryMenuOpen(false);
                             navigate(`/${cat.slug || generateSlug(cat.name)}/${sub.slug || generateSlug(sub.name)}`);
                           }}
-                          className="w-full text-left py-2 px-3 text-[12px] text-slate-650 hover:text-orange-500 font-medium block truncate capitalize"
+                          className="w-full text-left py-2 px-3 text-[12px] text-slate-650 hover:text-secondary-500 font-medium block truncate capitalize"
                         >
                           {sub.name}
                         </button>

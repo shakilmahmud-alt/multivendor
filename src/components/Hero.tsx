@@ -121,7 +121,7 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
   const badgeItems = [
     {
       icon: <Truck className="w-4 h-4" />,
-      bgClass: "bg-orange-50 text-orange-500",
+      bgClass: "bg-brand-50 text-brand-500",
       title: "Fast Delivery",
       desc: "Across country"
     },
@@ -191,7 +191,7 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
             {/* Slide detail tags */}
             <div className="relative z-10 p-6 md:p-8 flex flex-col justify-end h-full text-white pointer-events-none">
               {CAROUSEL_SLIDES[currentSlide].badge && (
-                <span className="bg-orange-500 text-white text-[10px] md:text-xs font-extrabold uppercase tracking-wider px-2 md:px-3 py-1 rounded self-start mb-2 shadow-xs animate-pulse">
+                <span className="bg-brand-500 text-white text-[10px] md:text-xs font-extrabold uppercase tracking-wider px-2 md:px-3 py-1 rounded self-start mb-2 shadow-xs animate-pulse">
                   {CAROUSEL_SLIDES[currentSlide].badge}
                 </span>
               )}
@@ -207,7 +207,7 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
               )}
               {CAROUSEL_SLIDES[currentSlide].price && (
                 <div className="mt-4 flex items-center gap-2">
-                  <span className="text-xl md:text-3xl font-black text-orange-400">{CAROUSEL_SLIDES[currentSlide].price}</span>
+                  <span className="text-xl md:text-3xl font-black text-brand-400">{CAROUSEL_SLIDES[currentSlide].price}</span>
                   <span className="text-[10px] md:text-xs uppercase font-bold text-slate-300 tracking-wider">Estimated price</span>
                 </div>
               )}
@@ -217,13 +217,13 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
             <div className="absolute inset-x-0 top-1/2 -translate-y-1/2 flex justify-between px-4 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <button 
                 onClick={(e) => { e.stopPropagation(); handlePrev(); }}
-                className="p-2 md:p-3 bg-slate-900/60 text-white rounded-full hover:bg-orange-500 transition cursor-pointer"
+                className="p-2 md:p-3 bg-slate-900/60 text-white rounded-full hover:bg-brand-500 transition cursor-pointer"
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
               <button 
                 onClick={(e) => { e.stopPropagation(); handleNext(); }}
-                className="p-2 md:p-3 bg-slate-900/60 text-white rounded-full hover:bg-orange-500 transition cursor-pointer"
+                className="p-2 md:p-3 bg-slate-900/60 text-white rounded-full hover:bg-brand-500 transition cursor-pointer"
               >
                 <ArrowRight className="w-5 h-5" />
               </button>
@@ -235,7 +235,7 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
                 <button
                   key={idx}
                   onClick={(e) => { e.stopPropagation(); setCurrentSlide(idx); }}
-                  className={`transition-all duration-300 cursor-pointer rounded-full ${currentSlide === idx ? "w-8 h-2 bg-orange-500" : "w-2 h-2 bg-white/40 hover:bg-white/70"}`}
+                  className={`transition-all duration-300 cursor-pointer rounded-full ${currentSlide === idx ? "w-8 h-2 bg-brand-500" : "w-2 h-2 bg-white/40 hover:bg-white/70"}`}
                 />
               ))}
             </div>
@@ -247,7 +247,7 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
         {/* TRUST BADGES ROW (Identical to HolidayMart) - Desktop only */}
         <div className="hidden md:grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2 mt-4 bg-white border border-slate-200 p-3 rounded justify-items-center">
           <div className="flex items-center gap-2 text-left w-full px-1">
-            <div className="p-1.5 bg-orange-50 text-orange-500 rounded">
+            <div className="p-1.5 bg-brand-50 text-brand-500 rounded">
               <Truck className="w-4 h-4" />
             </div>
             <div>

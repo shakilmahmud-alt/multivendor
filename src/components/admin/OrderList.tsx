@@ -89,7 +89,7 @@ export default function OrderList() {
     if (s.includes('delivered') || s.includes('confirmed')) return 'text-emerald-500 bg-emerald-50';
     if (s.includes('pending') || s.includes('unturned')) return 'text-blue-500 bg-blue-50';
     if (s.includes('canceled') || s.includes('failed') || s.includes('returned')) return 'text-red-500 bg-red-50';
-    if (s.includes('delivery')) return 'text-orange-500 bg-orange-50';
+    if (s.includes('delivery')) return 'text-brand-500 bg-brand-50';
     if (s.includes('packaging')) return 'text-yellow-500 bg-yellow-50';
     return 'text-slate-500 bg-slate-50';
   };
@@ -99,7 +99,7 @@ export default function OrderList() {
     if (s.includes('delivered') || s.includes('confirmed')) return 'text-emerald-500';
     if (s.includes('pending') || s.includes('unturned')) return 'text-blue-500';
     if (s.includes('canceled') || s.includes('failed') || s.includes('returned')) return 'text-red-500';
-    if (s.includes('delivery')) return 'text-orange-500';
+    if (s.includes('delivery')) return 'text-brand-500';
     if (s.includes('packaging')) return 'text-yellow-500';
     return 'text-slate-500';
   };

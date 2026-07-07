@@ -1,6 +1,21 @@
 @import "tailwindcss";
 
 @theme {
+  --color-brand-50: #edf2fa;
+  --color-brand-100: #dbe6f5;
+  --color-brand-200: #b7cde8;
+  --color-brand-300: #93b4dc;
+  --color-brand-400: #6f9bcf;
+  --color-brand-500: #011F55;
+  --color-brand-600: #011438;
+  --color-brand-700: #010a1c;
+  --color-brand-800: #00050e;
+  --color-brand-900: #000309;
+  --color-brand-950: #000105;
+
+  --color-secondary-500: #0A7D22;
+  --color-secondary-600: #075f19;
+
   --font-sans: Tahoma, Verdana, sans-serif;
   --animate-marquee: marquee 30s linear infinite;
   --animate-marquee-slow: marquee 45s linear infinite;

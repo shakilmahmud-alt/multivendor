@@ -702,7 +702,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                   onClick={() => navigate(`/my-account?tab=${item.id}`)}
                   className={`w-full text-left px-5 py-3 text-sm font-medium flex items-center gap-3 transition border-l-4 ${
                     isActive
-                      ? "border-[#ff8c00] bg-orange-50/50 text-[#ff8c00]"
+                      ? "border-[#ff8c00] bg-brand-50/50 text-[#ff8c00]"
                       : "border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-700"
                   }`}
                 >
@@ -748,7 +748,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                       <User className="w-12 h-12" />
                     )}
                   </div>
-                  <label className="absolute bottom-0 right-0 w-8 h-8 bg-[#ff8c00] text-white rounded-full flex items-center justify-center border-2 border-white hover:bg-orange-600 transition shadow-sm cursor-pointer">
+                  <label className="absolute bottom-0 right-0 w-8 h-8 bg-[#ff8c00] text-white rounded-full flex items-center justify-center border-2 border-white hover:bg-brand-600 transition shadow-sm cursor-pointer">
                     <span className="text-xs font-bold leading-none mb-0.5">
                       📷
                     </span>
@@ -777,7 +777,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                       type="text"
                       value={firstName}
                       onChange={(e) => setFirstName(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition"
+                      className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"
                     />
                   </div>
                   <div>
@@ -788,13 +788,13 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                       type="text"
                       value={lastName}
                       onChange={(e) => setLastName(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition"
+                      className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"
                     />
                   </div>
                   <div>
                     <label className="block text-xs font-bold text-slate-600 mb-1.5">
                       Phone Number{" "}
-                      <span className="text-[10px] text-orange-500 font-normal">
+                      <span className="text-[10px] text-brand-500 font-normal">
                         (* Country Code Is Must Like For BD 880)
                       </span>
                     </label>
@@ -802,7 +802,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                       type="text"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition"
+                      className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"
                     />
                   </div>
                   <div>
@@ -842,7 +842,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                         type="password"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
-                        className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm focus:outline-none focus:border-orange-500 focus:ring-1 focus:ring-orange-500 transition"
+                        className="w-full px-4 py-2.5 bg-white border border-slate-200 rounded-full text-sm focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 transition"
                         placeholder="Minimum 8 characters long"
                       />
                       <button className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400">
@@ -957,7 +957,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                             </div>
                             <div className="text-xs text-slate-600 flex items-center gap-2">
                               <span className="w-24">Payment Method</span>{" "}
-                              <span className="font-bold text-orange-500">
+                              <span className="font-bold text-brand-500">
                                 :{" "}
                                 {selectedOrder.payment_method === "cash"
                                   ? "Cash On Delivery"
@@ -1144,7 +1144,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                                 className="w-full h-full object-contain"
                               />
                             ) : (
-                              <div className="text-center font-bold text-orange-500 text-xl leading-none">
+                              <div className="text-center font-bold text-brand-500 text-xl leading-none">
                                 =com
                                 <br />
                                 Matrix
@@ -1330,7 +1330,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                                         className="w-full h-full object-contain"
                                       />
                                     ) : (
-                                      <div className="text-center font-bold text-orange-500 text-xs leading-none">
+                                      <div className="text-center font-bold text-brand-500 text-xs leading-none">
                                         =com
                                         <br />
                                         Matrix
@@ -1384,7 +1384,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                                       setSelectedOrder(order);
                                       setOrderTab("summary");
                                     }}
-                                    className="w-8 h-8 rounded-full border border-orange-200 text-orange-500 hover:bg-orange-50 flex items-center justify-center transition"
+                                    className="w-8 h-8 rounded-full border border-brand-200 text-brand-500 hover:bg-brand-50 flex items-center justify-center transition"
                                   >
                                     <Eye className="w-4 h-4" />
                                   </button>
@@ -1583,7 +1583,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                       <div
                         key={chat.vendor.id}
                         onClick={() => setSelectedVendor(chat.vendor)}
-                        className={`flex items-center gap-3 p-4 border-b border-slate-50 cursor-pointer transition ${selectedVendor?.id === chat.vendor.id ? "bg-orange-50/30" : "hover:bg-slate-50"}`}
+                        className={`flex items-center gap-3 p-4 border-b border-slate-50 cursor-pointer transition ${selectedVendor?.id === chat.vendor.id ? "bg-brand-50/30" : "hover:bg-slate-50"}`}
                       >
                         <div className="w-10 h-10 rounded-full bg-slate-100 border border-slate-200 overflow-hidden shrink-0">
                           {chat.vendor.shop_logo_url ? (
@@ -1752,8 +1752,8 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                           {ticket.description}
                         </div>
                         {ticket.reply && (
-                          <div className="text-[13px] bg-orange-50/50 p-3 border border-orange-100 rounded mt-2 text-slate-800 whitespace-pre-wrap">
-                            <span className="font-bold text-orange-600 block mb-1">
+                          <div className="text-[13px] bg-brand-50/50 p-3 border border-brand-100 rounded mt-2 text-slate-800 whitespace-pre-wrap">
+                            <span className="font-bold text-brand-600 block mb-1">
                               Reply:
                             </span>
                             {ticket.reply}
@@ -1765,7 +1765,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                               value={customerReplyText}
                               onChange={(e) => setCustomerReplyText(e.target.value)}
                               placeholder="Type your reply here..."
-                              className="w-full text-xs p-2 border border-slate-200 rounded outline-none focus:border-orange-500 mb-2"
+                              className="w-full text-xs p-2 border border-slate-200 rounded outline-none focus:border-brand-500 mb-2"
                               rows={3}
                             />
                             <div className="flex justify-end gap-2">
@@ -1780,7 +1780,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                               </button>
                               <button
                                 onClick={() => handleCustomerReply(ticket)}
-                                className="px-3 py-1 bg-orange-500 hover:bg-orange-600 text-white rounded text-xs font-semibold transition"
+                                className="px-3 py-1 bg-brand-500 hover:bg-brand-600 text-white rounded text-xs font-semibold transition"
                               >
                                 Send Reply
                               </button>
@@ -1795,7 +1795,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                                   setReplyingTicketId(ticket.id);
                                   setCustomerReplyText("");
                                 }}
-                                className="px-3 py-1 bg-orange-50 hover:bg-orange-100 text-orange-600 border border-orange-200 rounded text-xs font-semibold transition shadow-sm"
+                                className="px-3 py-1 bg-brand-50 hover:bg-brand-100 text-brand-600 border border-brand-200 rounded text-xs font-semibold transition shadow-sm"
                               >
                                 Reply
                               </button>
@@ -1847,7 +1847,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                         <div className="flex items-center gap-4">
                           <div className="relative">
                             {item.discountBadge && (
-                              <span className="absolute -top-2 -left-2 bg-orange-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded z-10">
+                              <span className="absolute -top-2 -left-2 bg-brand-500 text-white text-[10px] font-bold px-1.5 py-0.5 rounded z-10">
                                 {item.discountBadge}
                               </span>
                             )}
@@ -1859,7 +1859,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                           </div>
                           <div>
                             <h4
-                              className="font-bold text-sm text-slate-800 hover:text-orange-500 cursor-pointer"
+                              className="font-bold text-sm text-slate-800 hover:text-brand-500 cursor-pointer"
                               onClick={() =>
                                 navigate(`/product/${item.slug || item.id}`)
                               }
@@ -1869,7 +1869,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                             {item.brand && (
                               <p className="text-xs text-slate-500 mt-1">
                                 Brand :{" "}
-                                <span className="text-orange-500 font-medium">
+                                <span className="text-brand-500 font-medium">
                                   {item.brand}
                                 </span>
                               </p>
@@ -1912,7 +1912,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                     <MoreVertical className="w-5 h-5" />
                   </button>
                 </div>
-                <div className="bg-orange-50 text-orange-600 px-4 py-2 rounded-full font-black text-lg shadow-sm border border-orange-100">
+                <div className="bg-brand-50 text-brand-600 px-4 py-2 rounded-full font-black text-lg shadow-sm border border-brand-100">
                   {loyaltyBalance} Points
                 </div>
               </div>
@@ -1935,7 +1935,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                           </div>
                         </div>
                         <div className="text-right">
-                          <div className="font-black text-lg text-orange-500">+{pt.points_earned}</div>
+                          <div className="font-black text-lg text-brand-500">+{pt.points_earned}</div>
                           {pt.remaining_points !== pt.points_earned && !isExpired && (
                             <div className="text-xs font-semibold text-slate-500">Remaining: {pt.remaining_points}</div>
                           )}
@@ -2039,7 +2039,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                 </div>
                 <button
                   onClick={() => setShowAddressModal(true)}
-                  className="bg-orange-500 hover:bg-orange-600 text-white font-bold px-4 py-2 rounded shadow-sm text-sm transition flex items-center gap-2"
+                  className="bg-brand-500 hover:bg-brand-600 text-white font-bold px-4 py-2 rounded shadow-sm text-sm transition flex items-center gap-2"
                 >
                   <MapPin className="w-4 h-4" /> Add Address
                 </button>
@@ -2055,13 +2055,13 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
               ) : (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   {addresses.map((addr) => (
-                    <div key={addr.id} className="border border-slate-200 rounded-lg p-4 bg-slate-50 relative group hover:border-orange-300 transition">
+                    <div key={addr.id} className="border border-slate-200 rounded-lg p-4 bg-slate-50 relative group hover:border-brand-300 transition">
                       <div className="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition">
                         <button className="text-red-500 hover:text-red-700 p-1">
                           <Trash2 className="w-4 h-4" />
                         </button>
                       </div>
-                      <span className="inline-block px-2.5 py-1 bg-orange-100 text-orange-700 text-xs font-bold rounded mb-2">
+                      <span className="inline-block px-2.5 py-1 bg-brand-100 text-brand-700 text-xs font-bold rounded mb-2">
                         {addr.address_type}
                       </span>
                       <h4 className="font-bold text-slate-800 text-sm">{addr.contact_person_name}</h4>
@@ -2459,7 +2459,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                     onClick={() => setAddressFormData({ ...addressFormData, address_type: type })}
                     className={`px-4 py-2 border rounded font-bold text-sm transition ${
                       addressFormData.address_type === type
-                        ? 'bg-orange-500 text-white border-orange-500'
+                        ? 'bg-brand-500 text-white border-brand-500'
                         : 'bg-white text-slate-600 border-slate-300 hover:border-slate-400'
                     }`}
                   >
@@ -2476,7 +2476,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                     required
                     value={addressFormData.contact_person_name}
                     onChange={(e) => setAddressFormData({ ...addressFormData, contact_person_name: e.target.value })}
-                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-orange-500"
+                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-brand-500"
                   />
                 </div>
                 <div>
@@ -2486,7 +2486,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                     required
                     value={addressFormData.phone}
                     onChange={(e) => setAddressFormData({ ...addressFormData, phone: e.target.value })}
-                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-orange-500"
+                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-brand-500"
                   />
                 </div>
                 <div>
@@ -2496,7 +2496,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                     required
                     value={addressFormData.city}
                     onChange={(e) => setAddressFormData({ ...addressFormData, city: e.target.value })}
-                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-orange-500"
+                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-brand-500"
                   />
                 </div>
                 <div>
@@ -2506,7 +2506,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                     required
                     value={addressFormData.state}
                     onChange={(e) => setAddressFormData({ ...addressFormData, state: e.target.value })}
-                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-orange-500"
+                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-brand-500"
                   />
                 </div>
                 <div>
@@ -2516,7 +2516,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                     required
                     value={addressFormData.zip_code}
                     onChange={(e) => setAddressFormData({ ...addressFormData, zip_code: e.target.value })}
-                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-orange-500"
+                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-brand-500"
                   />
                 </div>
                 <div>
@@ -2526,7 +2526,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                     required
                     value={addressFormData.country}
                     onChange={(e) => setAddressFormData({ ...addressFormData, country: e.target.value })}
-                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-orange-500"
+                    className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-brand-500"
                   />
                 </div>
               </div>
@@ -2538,7 +2538,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                   rows={3}
                   value={addressFormData.address}
                   onChange={(e) => setAddressFormData({ ...addressFormData, address: e.target.value })}
-                  className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-orange-500 resize-none"
+                  className="w-full border border-slate-300 rounded p-2 focus:outline-none focus:border-brand-500 resize-none"
                 ></textarea>
               </div>
 
@@ -2553,13 +2553,13 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                 <button
                   type="button"
                   onClick={() => setShowAddressModal(false)}
-                  className="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded transition shadow-sm"
+                  className="px-6 py-2 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded transition shadow-sm"
                 >
                   Close
                 </button>
                 <button
                   type="submit"
-                  className="px-6 py-2 bg-orange-500 hover:bg-orange-600 text-white font-bold rounded transition shadow-sm"
+                  className="px-6 py-2 bg-brand-500 hover:bg-brand-600 text-white font-bold rounded transition shadow-sm"
                 >
                   Add informations
                 </button>
@@ -2605,7 +2605,7 @@ export default function MyAccount({ wishlist: propsWishlist, setWishlist: propsS
                     }}
                     className={`w-full text-left px-6 py-4 text-sm font-semibold flex items-center gap-3 transition border-l-4 ${
                       isActive
-                        ? "border-[#ff8c00] bg-orange-50/50 text-[#ff8c00]"
+                        ? "border-[#ff8c00] bg-brand-50/50 text-[#ff8c00]"
                         : "border-transparent text-slate-500 hover:bg-slate-50 hover:text-slate-700"
                     }`}
                   >

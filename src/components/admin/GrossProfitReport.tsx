@@ -180,7 +180,7 @@ export default function GrossProfitReport() {
         <td className="px-4 py-3">{new Date(p.date).toLocaleString()}</td>
         <td className="px-4 py-3 font-medium text-blue-600">{p.orderId.slice(0,8)}</td>
         <td className="px-4 py-3">
-            <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase ${p.source === 'In-House' ? 'bg-indigo-50 text-indigo-600' : 'bg-orange-50 text-orange-600'}`}>
+            <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wide uppercase ${p.source === 'In-House' ? 'bg-indigo-50 text-indigo-600' : 'bg-brand-50 text-brand-600'}`}>
                 {p.source}
             </span>
         </td>

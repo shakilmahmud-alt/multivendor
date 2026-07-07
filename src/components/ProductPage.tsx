@@ -521,7 +521,7 @@ export default function ProductPage({
                       onClick={() => setActiveImage(imgUrl)}
                       className={`w-14 h-14 bg-white border flex items-center justify-center p-1 transition-all cursor-pointer ${
                         activeImage === imgUrl
-                          ? "border-[#ff6a00]"
+                          ? "border-brand-500"
                           : "border-slate-200"
                       }`}
                     >
@@ -610,7 +610,7 @@ export default function ProductPage({
                             <button
                               key={val}
                               onClick={() => setSelectedVariantOptions(prev => ({ ...prev, [attr]: val }))}
-                              className={`border text-xs font-medium rounded transition flex items-center justify-center cursor-pointer overflow-hidden ${isSelected ? 'border-[#ff6a00] text-[#ff6a00] bg-orange-50 ring-1 ring-[#ff6a00]' : 'border-slate-200 text-slate-600 hover:border-slate-300 bg-white'} ${imgUrl ? 'p-0.5' : 'px-3 py-1.5 gap-2'}`}
+                              className={`border text-xs font-medium rounded transition flex items-center justify-center cursor-pointer overflow-hidden ${isSelected ? 'border-brand-500 text-brand-500 bg-brand-50 ring-1 ring-brand-500' : 'border-slate-200 text-slate-600 hover:border-slate-300 bg-white'} ${imgUrl ? 'p-0.5' : 'px-3 py-1.5 gap-2'}`}
                               title={displayVal}
                             >
                               {imgUrl ? (
@@ -651,7 +651,7 @@ export default function ProductPage({
 
             {/* Price Container */}
             <div className="flex items-baseline gap-2 mt-4">
-              <span className="text-2xl font-bold text-[#ff6a00]">
+              <span className="text-2xl font-bold text-secondary-500">
                 ৳{(selectedVariation ? selectedVariation.price : product.price).toLocaleString()}.00
               </span>
               {product.oldPrice && !selectedVariation && (
@@ -667,14 +667,14 @@ export default function ProductPage({
                 <span className="text-[12px] font-bold text-slate-700">
                   Quantity :
                 </span>
-                <div className="flex items-center border border-[#ff6a00]/30 rounded h-7 bg-white">
+                <div className="flex items-center border border-brand-500/30 rounded h-7 bg-white">
                   <button
                     onClick={handleDecrement}
                     className="px-2 h-full text-orange-500 font-bold hover:bg-slate-50 transition cursor-pointer"
                   >
                     -
                   </button>
-                  <span className="px-2 text-[12px] font-bold text-slate-700 text-center border-l border-r border-[#ff6a00]/30 h-full flex items-center">
+                  <span className="px-2 text-[12px] font-bold text-slate-700 text-center border-l border-r border-brand-500/30 h-full flex items-center">
                     {quantity}
                   </span>
                   <button
@@ -740,7 +740,7 @@ export default function ProductPage({
               <button
                 type="button"
                 onClick={handleBuyNow}
-                className="bg-[#ff6a00] hover:bg-orange-600 text-white font-bold h-10 px-6 rounded shadow-sm cursor-pointer min-w-[120px] transition flex items-center justify-center text-[13px]"
+                className="bg-brand-500 text-white border border-transparent hover:bg-white hover:text-brand-500 hover:border-brand-500 font-bold h-10 px-6 rounded shadow-sm cursor-pointer min-w-[120px] transition flex items-center justify-center text-[13px]"
               >
                 Buy now
               </button>
@@ -752,7 +752,7 @@ export default function ProductPage({
                     "success",
                   );
                 }}
-                className="bg-[#ff6a00] hover:bg-orange-600 text-white font-bold h-10 px-6 rounded shadow-sm cursor-pointer min-w-[120px] transition flex items-center justify-center text-[13px]"
+                className="bg-brand-500 text-white border border-transparent hover:bg-white hover:text-brand-500 hover:border-brand-500 font-bold h-10 px-6 rounded shadow-sm cursor-pointer min-w-[120px] transition flex items-center justify-center text-[13px]"
               >
                 Add to cart
               </button>
@@ -760,13 +760,13 @@ export default function ProductPage({
                 onClick={handleWishlistClick}
                 className={`h-10 px-4 border rounded transition cursor-pointer flex items-center justify-center gap-1.5 shadow-sm ${
                   isWishlisted 
-                    ? "bg-orange-50 border-[#ff6a00] text-[#ff6a00]" 
-                    : "bg-white border-slate-200 hover:border-[#ff6a00] text-slate-700"
+                    ? "bg-brand-50 border-brand-500 text-brand-500" 
+                    : "bg-white border-slate-200 hover:border-brand-500 text-slate-700"
                 }`}
                 title={isWishlisted ? "Remove from Wishlist" : "Add to Wishlist"}
               >
                 <Heart 
-                  className={`w-4 h-4 transition ${isWishlisted ? "text-[#ff6a00] fill-[#ff6a00]" : "text-[#ff6a00]"}`} 
+                  className={`w-4 h-4 transition ${isWishlisted ? "text-brand-500 fill-brand-500" : "text-secondary-500 group-hover:text-brand-500"}`} 
                   strokeWidth={2.5} 
                 />{" "}
                 <span className="text-[13px] font-bold">{wishlistCount}</span>
@@ -783,8 +783,8 @@ export default function ProductPage({
               onClick={() => setActiveTab("overview")}
               className={`px-6 py-2 text-[12px] font-bold rounded-full transition cursor-pointer ${
                 activeTab === "overview"
-                  ? "bg-[#ff6a00] text-white"
-                  : "bg-white text-slate-700 border border-slate-200 hover:border-[#ff6a00] hover:text-[#ff6a00]"
+                  ? "bg-brand-500 text-white"
+                  : "bg-white text-slate-700 border border-slate-200 hover:border-brand-500 hover:text-brand-500"
               }`}
             >
               Overview
@@ -794,8 +794,8 @@ export default function ProductPage({
                 onClick={() => setActiveTab("video")}
                 className={`px-6 py-2 text-[12px] font-bold rounded-full transition cursor-pointer ${
                   activeTab === "video"
-                    ? "bg-[#ff6a00] text-white"
-                    : "bg-white text-slate-700 border border-slate-200 hover:border-[#ff6a00] hover:text-[#ff6a00]"
+                    ? "bg-brand-500 text-white"
+                    : "bg-white text-slate-700 border border-slate-200 hover:border-brand-500 hover:text-brand-500"
                 }`}
               >
                 Product Video
@@ -805,8 +805,8 @@ export default function ProductPage({
               onClick={() => setActiveTab("reviews")}
               className={`px-6 py-2 text-[12px] font-bold rounded-full transition cursor-pointer ${
                 activeTab === "reviews"
-                  ? "bg-[#ff6a00] text-white"
-                  : "bg-white text-slate-700 border border-slate-200 hover:border-[#ff6a00] hover:text-[#ff6a00]"
+                  ? "bg-brand-500 text-white"
+                  : "bg-white text-slate-700 border border-slate-200 hover:border-brand-500 hover:text-brand-500"
               }`}
             >
               Reviews
@@ -866,7 +866,7 @@ export default function ProductPage({
                         href={product.video_link.startsWith('http') ? product.video_link : `https://${product.video_link}`} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="inline-flex items-center gap-2 bg-[#ff6a00] hover:bg-orange-600 text-white font-bold py-3 px-8 rounded shadow-sm transition-colors text-sm"
+                        className="inline-flex items-center gap-2 bg-secondary-500 hover:bg-brand-500 text-white font-bold py-3 px-8 rounded shadow-sm transition-colors text-sm"
                       >
                         Watch Video
                       </a>
@@ -918,7 +918,7 @@ export default function ProductPage({
                   <button
                     type="submit"
                     disabled={isSubmittingReview}
-                    className="bg-[#ff6a00] hover:bg-orange-600 text-white px-6 py-2.5 rounded-lg text-[13px] font-bold transition disabled:opacity-50"
+                    className="bg-brand-500 text-white border border-transparent hover:bg-white hover:text-brand-500 hover:border-brand-500 px-6 py-2.5 rounded-lg text-[13px] font-bold transition disabled:opacity-50"
                   >
                     {isSubmittingReview ? "Submitting..." : "Submit Review"}
                   </button>
@@ -980,7 +980,7 @@ export default function ProductPage({
                           {review.review_replies && review.review_replies.length > 0 && (
                             <div className="mt-4 space-y-3 pl-4 border-l-2 border-slate-100">
                               {review.review_replies.map((rep: any) => (
-                                <div key={rep.id} className={`text-xs p-3 rounded ${rep.seller_id ? 'bg-orange-50/50' : 'bg-slate-50'}`}>
+                                <div key={rep.id} className={`text-xs p-3 rounded ${rep.seller_id ? 'bg-brand-50/50' : 'bg-slate-50'}`}>
                                   <div className="flex items-center gap-2 mb-2">
                                     <img
                                       src={
@@ -1098,7 +1098,7 @@ export default function ProductPage({
         {/* Guarantees Box */}
         <div className="bg-white rounded border border-slate-200/80 shadow-xs p-4 flex flex-col gap-4 text-[12px] text-slate-500 font-medium">
           <div className="flex items-center gap-3">
-            <Truck className="w-5 h-5 text-[#ff6a00] shrink-0" />
+            <Truck className="w-5 h-5 text-brand-500 shrink-0" />
             <span>Fast Delivery all across the country</span>
           </div>
           <div className="flex items-center gap-3">
@@ -1129,16 +1129,16 @@ export default function ProductPage({
 
             <div className="grid grid-cols-2 w-full text-center divide-x divide-slate-100 mb-4">
               <div className="flex flex-col items-center gap-1">
-                <div className="bg-[#ff6a00]/10 p-1.5 rounded-full">
-                  <MessageSquare className="w-4 h-4 text-[#ff6a00]" />
+                <div className="bg-brand-500/10 p-1.5 rounded-full">
+                  <MessageSquare className="w-4 h-4 text-brand-500" />
                 </div>
                 <p className="text-[10px] font-bold text-orange-500">
                   {reviews.length} Reviews
                 </p>
               </div>
               <div className="flex flex-col items-center gap-1">
-                <div className="bg-[#ff6a00]/10 p-1.5 rounded-full">
-                  <Store className="w-4 h-4 text-[#ff6a00]" />
+                <div className="bg-brand-500/10 p-1.5 rounded-full">
+                  <Store className="w-4 h-4 text-brand-500" />
                 </div>
                 <p className="text-[10px] font-bold text-orange-500">
                   {
@@ -1155,7 +1155,7 @@ export default function ProductPage({
                 .toLowerCase()
                 .replace(/[^a-z0-9]+/g, "-")
                 .replace(/(^-|-$)+/g, "")}`}
-              className="w-full bg-[#ff6a00] hover:bg-orange-600 text-white py-2 rounded text-[12px] font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
+              className="w-full bg-secondary-500 hover:bg-brand-500 text-white py-2 rounded text-[12px] font-bold transition flex items-center justify-center gap-1.5 cursor-pointer shadow-sm"
             >
               <Store className="w-3.5 h-3.5" /> Visit Store
             </Link>
@@ -1186,7 +1186,7 @@ export default function ProductPage({
                       alt=""
                     />
                     {p.discountBadge && (
-                      <span className="absolute top-0 left-0 bg-[#ff6a00] text-white text-[8px] font-bold px-1 py-0.5 rounded-br">
+                      <span className="absolute top-0 left-0 bg-brand-500 text-white text-[8px] font-bold px-1 py-0.5 rounded-br">
                         {p.discountBadge}
                       </span>
                     )}
@@ -1237,7 +1237,7 @@ export default function ProductPage({
               </h3>
               <Link
                 to={`/${product.categorySlug || generateSlug(product.category || "Category")}`}
-                className="text-[13px] font-bold text-[#ff6a00] hover:text-orange-600 transition flex items-center gap-1"
+                className="text-[13px] font-bold text-brand-500 hover:text-orange-600 transition flex items-center gap-1"
               >
                 View All <ChevronRight className="w-3.5 h-3.5" />
               </Link>
@@ -1260,7 +1260,7 @@ export default function ProductPage({
                   >
                     <div className="w-full flex justify-start mb-1.5 min-h-[20px]">
                       {p.oldPrice > p.price && (
-                        <span className="bg-[#ff6a00] text-white text-[9px] font-bold px-2 py-0.5 rounded-sm tracking-wide">
+                        <span className="bg-brand-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-sm tracking-wide">
                           +{(p.oldPrice - p.price).toLocaleString()}.00 Off
                         </span>
                       )}

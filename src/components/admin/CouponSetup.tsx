@@ -352,7 +352,7 @@ export default function CouponSetup() {
                       {c.target_type === 'Seller' ? (c.sellers?.shop_name || 'Unknown Shop') : c.target_type}
                     </span>
                     {c.target_type === 'Seller' && (
-                      <div className={`mt-1 text-[10px] font-bold ${c.seller_approval === 'Approved' ? 'text-green-500' : c.seller_approval === 'Rejected' ? 'text-red-500' : 'text-orange-500'}`}>
+                      <div className={`mt-1 text-[10px] font-bold ${c.seller_approval === 'Approved' ? 'text-green-500' : c.seller_approval === 'Rejected' ? 'text-red-500' : 'text-brand-500'}`}>
                         {c.seller_approval}
                       </div>
                     )}

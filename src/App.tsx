@@ -597,7 +597,7 @@ function StoreFront() {
               <main className="max-w-7xl mx-auto px-4 py-8 flex-1 w-full space-y-12">
                 {/* Dynamic Category Filter Alert Bar */}
                 {activeCategory && (
-                  <div className="bg-orange-50 border border-orange-200 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 animate-fadeIn">
+                  <div className="bg-brand-50 border border-brand-200 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 animate-fadeIn">
                     <div>
                       <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest leading-none">
                         Filtering active products
@@ -610,7 +610,7 @@ function StoreFront() {
                       onClick={() => {
                         handleSelectCategory("");
                       }}
-                      className="bg-orange-500 hover:bg-orange-600 text-slate-950 font-bold px-4 py-1.5 rounded-lg text-xs transition"
+                      className="bg-brand-500 hover:bg-brand-600 text-slate-950 font-bold px-4 py-1.5 rounded-lg text-xs transition"
                     >
                       Reset Filters
                     </button>
@@ -728,7 +728,7 @@ function StoreFront() {
                             <div className="bg-white border border-slate-200 rounded p-4 shadow-xs text-center w-full mb-6">
                               <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-200">
                                 <h3 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400 flex items-center gap-1.5 font-sans">
-                                  <BadgeInfo className="w-3.5 h-3.5 text-orange-500" />
+                                  <BadgeInfo className="w-3.5 h-3.5 text-brand-500" />
                                   Top Brands
                                 </h3>
                                 <span className="text-[9px] text-slate-400 font-mono font-sans">{dbBrands.length} Brands</span>
@@ -741,7 +741,7 @@ function StoreFront() {
                                       onClick={() => {
                                         navigate(`/brand/${encodeURIComponent(brand.name)}`);
                                       }}
-                                      className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
+                                      className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-brand-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
                                     >
                                       {brand.logo_url ? (
                                         <img 
@@ -754,7 +754,7 @@ function StoreFront() {
                                           {brand.name?.slice(0, 2).toUpperCase()}
                                         </div>
                                       )}
-                                      <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-orange-500 transition-colors w-full font-sans">
+                                      <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-brand-500 transition-colors w-full font-sans">
                                         {brand.name}
                                       </div>
                                     </div>
@@ -768,7 +768,7 @@ function StoreFront() {
                             <div id="vendors-sec" className="bg-white border border-slate-200 rounded p-4 shadow-xs text-center w-full">
                               <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-200">
                                 <h3 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400 flex items-center gap-1.5 font-sans">
-                                  <Store className="w-3.5 h-3.5 text-orange-500" />
+                                  <Store className="w-3.5 h-3.5 text-brand-500" />
                                   Verified Shop Partners (Vendors)
                                 </h3>
                                 <span className="text-[9px] text-slate-400 font-mono font-sans">{dbSellers.length} Active Stores</span>
@@ -785,7 +785,7 @@ function StoreFront() {
                                           : seller.id;
                                         navigate(`/store/${slug}`);
                                       }}
-                                      className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
+                                      className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-brand-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
                                     >
                                       {seller.shop_logo_url ? (
                                         <img 
@@ -794,11 +794,11 @@ function StoreFront() {
                                           className="h-10 w-10 rounded-full object-cover mb-2 border border-slate-100 group-hover:scale-105 transition-transform" 
                                         />
                                       ) : (
-                                        <div className="h-10 w-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs mb-2">
+                                        <div className="h-10 w-10 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center font-bold text-xs mb-2">
                                           {seller.shop_name?.slice(0, 2).toUpperCase() || "SH"}
                                         </div>
                                       )}
-                                      <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-orange-500 transition-colors w-full font-sans">
+                                      <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-brand-500 transition-colors w-full font-sans">
                                         {seller.shop_name}
                                       </div>
                                     </div>
@@ -848,7 +848,7 @@ function StoreFront() {
                       <div className="bg-white border border-slate-200 rounded p-4 shadow-xs text-center w-full mb-6">
                         <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-200">
                           <h3 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400 flex items-center gap-1.5 font-sans">
-                            <BadgeInfo className="w-3.5 h-3.5 text-orange-500" />
+                            <BadgeInfo className="w-3.5 h-3.5 text-brand-500" />
                             Top Brands
                           </h3>
                           <span className="text-[9px] text-slate-400 font-mono font-sans">{dbBrands.length} Brands</span>
@@ -861,7 +861,7 @@ function StoreFront() {
                                 onClick={() => {
                                   navigate(`/brand/${encodeURIComponent(brand.name)}`);
                                 }}
-                                className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
+                                className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-brand-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
                               >
                                 {brand.logo_url ? (
                                   <img 
@@ -874,7 +874,7 @@ function StoreFront() {
                                     {brand.name?.slice(0, 2).toUpperCase()}
                                   </div>
                                 )}
-                                <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-orange-500 transition-colors w-full font-sans">
+                                <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-brand-500 transition-colors w-full font-sans">
                                   {brand.name}
                                 </div>
                               </div>
@@ -888,7 +888,7 @@ function StoreFront() {
                       <div id="vendors-sec" className="bg-white border border-slate-200 rounded p-4 shadow-xs text-center">
                         <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-200">
                           <h3 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400 flex items-center gap-1.5 font-sans">
-                            <Store className="w-3.5 h-3.5 text-orange-500" />
+                            <Store className="w-3.5 h-3.5 text-brand-500" />
                             Verified Shop Partners (Vendors)
                           </h3>
                           <span className="text-[9px] text-slate-400 font-mono font-sans">{dbSellers.length} Active Stores</span>
@@ -905,7 +905,7 @@ function StoreFront() {
                                     : seller.id;
                                   navigate(`/store/${slug}`);
                                 }}
-                                className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
+                                className="w-[120px] flex-shrink-0 p-3 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-brand-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[96px]"
                               >
                                 {seller.shop_logo_url ? (
                                   <img 
@@ -914,11 +914,11 @@ function StoreFront() {
                                     className="h-10 w-10 rounded-full object-cover mb-2 border border-slate-100 group-hover:scale-105 transition-transform" 
                                   />
                                 ) : (
-                                  <div className="h-10 w-10 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-xs mb-2">
+                                  <div className="h-10 w-10 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center font-bold text-xs mb-2">
                                     {seller.shop_name?.slice(0, 2).toUpperCase() || "SH"}
                                   </div>
                                 )}
-                                <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-orange-500 transition-colors w-full font-sans">
+                                <div className="text-[10px] font-black text-slate-700 tracking-tight line-clamp-1 group-hover:text-brand-500 transition-colors w-full font-sans">
                                   {seller.shop_name}
                                 </div>
                               </div>
@@ -988,77 +988,77 @@ function StoreFront() {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-8 pb-8">
             {/* Column 1: Logo and Contact/Address Info */}
             <div className="space-y-6">
-              <div className="bg-white inline-block px-4 py-2 rounded">
+              <div className="inline-block py-2">
                  <img src="https://ik.imagekit.io/eg7u6xcn0u/HolidayMart-logo-wide.png" alt="HolidayMart" className="h-[34px] w-auto object-contain" />
               </div>
               
               <div className="space-y-4 text-xs text-white">
                 <div>
-                  <h4 className="text-orange-500 font-bold text-[11px] uppercase tracking-wider mb-2">Start a conversation</h4>
+                  <h4 className="text-brand-500 font-bold text-[11px] uppercase tracking-wider mb-2">Start a conversation</h4>
                   <div className="space-y-2 font-medium text-white/90">
-                    <div className="flex items-center gap-2"><Phone className="w-3.5 h-3.5 text-orange-500 shrink-0" /> +8801700000000</div>
-                    <div className="flex items-center gap-2"><Mail className="w-3.5 h-3.5 text-orange-500 shrink-0" /> holidaymartbd@gmail.com</div>
-                    <div className="flex items-center gap-2"><Ticket className="w-3.5 h-3.5 text-orange-500 shrink-0" /> Support Ticket</div>
+                    <div className="flex items-center gap-2"><Phone className="w-3.5 h-3.5 text-brand-500 shrink-0" /> +8801700000000</div>
+                    <div className="flex items-center gap-2"><Mail className="w-3.5 h-3.5 text-brand-500 shrink-0" /> holidaymartbd@gmail.com</div>
+                    <div className="flex items-center gap-2"><Ticket className="w-3.5 h-3.5 text-brand-500 shrink-0" /> Support Ticket</div>
                   </div>
                 </div>
 
                 <div>
-                  <h4 className="text-orange-500 font-bold text-[11px] uppercase tracking-wider mb-2">Address</h4>
-                  <div className="flex items-center gap-2 font-medium text-white/90"><MapPin className="w-3.5 h-3.5 text-orange-500 shrink-0" /> House 11 Rd 3A, Dhaka 1230</div>
+                  <h4 className="text-brand-500 font-bold text-[11px] uppercase tracking-wider mb-2">Address</h4>
+                  <div className="flex items-center gap-2 font-medium text-white/90"><MapPin className="w-3.5 h-3.5 text-brand-500 shrink-0" /> House 11 Rd 3A, Dhaka 1230</div>
                 </div>
               </div>
             </div>
 
             {/* Column 2: SPECIAL */}
             <div>
-              <h4 className="text-orange-500 font-bold text-xs uppercase tracking-wider mb-4">SPECIAL</h4>
+              <h4 className="text-brand-500 font-bold text-xs uppercase tracking-wider mb-4">SPECIAL</h4>
               <ul className="space-y-2.5 text-[12px] text-white">
-                <li><a href="#" className="hover:text-orange-400 transition">Flash Deal</a></li>
-                <li><a href="#" className="hover:text-orange-400 transition">Featured Products</a></li>
-                <li><a href="#" className="hover:text-orange-400 transition">Latest Products</a></li>
-                <li><a href="#" className="hover:text-orange-400 transition">Best Selling Products</a></li>
-                <li><a href="#" className="hover:text-orange-400 transition">Top Rated Products</a></li>
-                <li><a href="#" className="hover:text-orange-400 transition">Terms & Conditions</a></li>
-                <li><a href="#" className="hover:text-orange-400 transition">Privacy Policy</a></li>
+                <li><a href="#" className="hover:text-brand-400 transition">Flash Deal</a></li>
+                <li><a href="#" className="hover:text-brand-400 transition">Featured Products</a></li>
+                <li><a href="#" className="hover:text-brand-400 transition">Latest Products</a></li>
+                <li><a href="#" className="hover:text-brand-400 transition">Best Selling Products</a></li>
+                <li><a href="#" className="hover:text-brand-400 transition">Top Rated Products</a></li>
+                <li><a href="#" className="hover:text-brand-400 transition">Terms & Conditions</a></li>
+                <li><a href="#" className="hover:text-brand-400 transition">Privacy Policy</a></li>
               </ul>
             </div>
 
             {/* Column 3: ACCOUNT & SHIPPING INFO */}
             <div>
-              <h4 className="text-orange-500 font-bold text-xs uppercase tracking-wider mb-4">ACCOUNT & SHIPPING INFO</h4>
+              <h4 className="text-brand-500 font-bold text-xs uppercase tracking-wider mb-4">ACCOUNT & SHIPPING INFO</h4>
               <ul className="space-y-2.5 text-[12px] text-white">
-                <li><Link to="/my-account" className="hover:text-orange-400 transition">Profile Info</Link></li>
-                <li><Link to="/my-account?tab=wishlist" className="hover:text-orange-400 transition">Wish List</Link></li>
-                <li><Link to="/track-order" className="hover:text-orange-400 transition">Track Order</Link></li>
-                <li><Link to="/refund-policy" className="hover:text-orange-400 transition">Refund Policy</Link></li>
-                <li><Link to="/return-policy" className="hover:text-orange-400 transition">Return Policy</Link></li>
-                <li><Link to="/cancellation-policy" className="hover:text-orange-400 transition">Cancellation Policy</Link></li>
-                <li className="md:hidden"><a href="#" className="hover:text-orange-400 transition">Terms & Conditions</a></li>
-                <li className="md:hidden"><a href="#" className="hover:text-orange-400 transition">Privacy Policy</a></li>
+                <li><Link to="/my-account" className="hover:text-brand-400 transition">Profile Info</Link></li>
+                <li><Link to="/my-account?tab=wishlist" className="hover:text-brand-400 transition">Wish List</Link></li>
+                <li><Link to="/track-order" className="hover:text-brand-400 transition">Track Order</Link></li>
+                <li><Link to="/refund-policy" className="hover:text-brand-400 transition">Refund Policy</Link></li>
+                <li><Link to="/return-policy" className="hover:text-brand-400 transition">Return Policy</Link></li>
+                <li><Link to="/cancellation-policy" className="hover:text-brand-400 transition">Cancellation Policy</Link></li>
+                <li className="md:hidden"><a href="#" className="hover:text-brand-400 transition">Terms & Conditions</a></li>
+                <li className="md:hidden"><a href="#" className="hover:text-brand-400 transition">Privacy Policy</a></li>
               </ul>
             </div>
 
             {/* Column 4: NEWSLETTER & FOLLOW US */}
             <div>
-              <h4 className="text-orange-500 font-bold text-xs uppercase tracking-wider mb-4">NEWSLETTER</h4>
+              <h4 className="text-brand-500 font-bold text-xs uppercase tracking-wider mb-4">NEWSLETTER</h4>
               <p className="text-[11px] text-white mb-3">Subscribe to our new channel to get latest updates</p>
               <form className="relative mb-6" onSubmit={handleSubscribeNewsletter}>
                  <input type="email" placeholder="Your Email Address" className="w-full bg-white rounded-full py-2.5 px-4 text-xs text-slate-800 outline-none pr-24" />
-                 <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 text-orange-500 text-xs font-bold hover:text-orange-600">Subscribe</button>
+                 <button type="submit" className="absolute right-4 top-1/2 -translate-y-1/2 text-brand-500 text-xs font-bold hover:text-brand-600">Subscribe</button>
               </form>
 
-              <h4 className="text-orange-500 font-bold text-xs uppercase tracking-wider mb-4">FOLLOW US</h4>
+              <h4 className="text-brand-500 font-bold text-xs uppercase tracking-wider mb-4">FOLLOW US</h4>
               <div className="flex gap-2">
-                 <a href="#" className="w-8 h-8 rounded-full bg-[#8c8c8c] flex items-center justify-center hover:bg-orange-500 transition">
+                 <a href="#" className="w-8 h-8 rounded-full bg-[#8c8c8c] flex items-center justify-center hover:bg-brand-500 transition">
                    <Twitter className="w-4 h-4 text-white" />
                  </a>
-                 <a href="#" className="w-8 h-8 rounded-full bg-[#8c8c8c] flex items-center justify-center hover:bg-orange-500 transition">
+                 <a href="#" className="w-8 h-8 rounded-full bg-[#8c8c8c] flex items-center justify-center hover:bg-brand-500 transition">
                    <Linkedin className="w-4 h-4 text-white" />
                  </a>
-                 <a href="#" className="w-8 h-8 rounded-full bg-[#8c8c8c] flex items-center justify-center hover:bg-orange-500 transition">
+                 <a href="#" className="w-8 h-8 rounded-full bg-[#8c8c8c] flex items-center justify-center hover:bg-brand-500 transition">
                    <Instagram className="w-4 h-4 text-white" />
                  </a>
-                 <a href="#" className="w-8 h-8 rounded-full bg-[#8c8c8c] flex items-center justify-center hover:bg-orange-500 transition">
+                 <a href="#" className="w-8 h-8 rounded-full bg-[#8c8c8c] flex items-center justify-center hover:bg-brand-500 transition">
                    <Facebook className="w-4 h-4 text-white" />
                  </a>
               </div>
@@ -1076,7 +1076,7 @@ function StoreFront() {
                 href="https://shakilmahmud.vercel.app" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="hover:text-orange-500 text-white font-semibold transition duration-200"
+                className="hover:text-brand-500 text-white font-semibold transition duration-200"
               >
                 Shakil Mahmud
               </a>
@@ -1112,7 +1112,7 @@ function StoreFront() {
             </button>
 
             <div className="text-center mb-6">
-              <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-2 text-orange-600">
+              <div className="w-12 h-12 bg-brand-100 rounded-full flex items-center justify-center mx-auto mb-2 text-brand-600">
                 <Sparkles className="w-6 h-6" />
               </div>
               <h3 className="text-base font-black text-slate-950">
@@ -1136,7 +1136,7 @@ function StoreFront() {
                   value={uploadedTitle}
                   onChange={(e) => setUploadedTitle(e.target.value)}
                   placeholder="e.g. Intel Core i9 Extreme LGA1851 Alder Lake"
-                  className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-orange-500"
+                  className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-brand-500"
                 />
               </div>
 
@@ -1149,7 +1149,7 @@ function StoreFront() {
                     value={uploadedPrice}
                     onChange={(e) => setUploadedPrice(e.target.value)}
                     placeholder="e.g. 52000"
-                    className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-orange-500"
+                    className="w-full p-2.5 bg-slate-50 border border-slate-200 rounded-xl outline-none focus:border-brand-500"
                   />
                 </div>
                 <div>
@@ -1182,7 +1182,7 @@ function StoreFront() {
 
               <button
                 type="submit"
-                className="w-full bg-orange-500 hover:bg-orange-600 text-slate-950 font-black py-2.5 rounded-xl transition mt-2"
+                className="w-full bg-brand-500 hover:bg-brand-600 text-slate-950 font-black py-2.5 rounded-xl transition mt-2"
               >
                 Upload & Pipeline Into Grid
               </button>
@@ -1233,7 +1233,7 @@ export function ProductCard({
     <div className="group bg-white flex flex-col justify-between h-full relative">
       {/* Top action details / discount ribbon */}
       {product.discountBadge && (
-        <span className="absolute top-2 left-2 bg-orange-600 text-white font-mono font-black text-[9px] px-2.5 py-0.5 rounded shadow-sm z-10 animate-pulse">
+        <span className="absolute top-2 left-2 bg-brand-600 text-white font-mono font-black text-[9px] px-2.5 py-0.5 rounded shadow-sm z-10 animate-pulse">
           {product.discountBadge}
         </span>
       )}
@@ -1268,8 +1268,8 @@ export function ProductCard({
             }}
             className={`p-1.5 rounded-full transition shadow cursor-pointer ${
               isWishlisted
-                ? "bg-[#ff6a00] text-white hover:bg-orange-600"
-                : "bg-white/90 text-slate-800 hover:bg-[#ff6a00] hover:text-white"
+                ? "bg-brand-500 text-white hover:bg-brand-600"
+                : "bg-white/90 text-slate-800 hover:bg-brand-500 hover:text-white"
             }`}
           >
             <Heart className={`w-3.5 h-3.5 ${isWishlisted ? "fill-white" : ""}`} />
@@ -1280,7 +1280,7 @@ export function ProductCard({
               e.stopPropagation();
               onQuickView(product);
             }}
-            className="p-1.5 bg-white/90 rounded-full text-slate-800 hover:bg-orange-500 hover:text-white transition shadow cursor-pointer"
+            className="p-1.5 bg-white/90 rounded-full text-slate-800 hover:bg-brand-500 hover:text-white transition shadow cursor-pointer"
           >
             <Eye className="w-3.5 h-3.5" />
           </button>
@@ -1295,7 +1295,7 @@ export function ProductCard({
             Store: {product.storeName}
           </span>
           <h4
-            className="text-[11px] font-black text-slate-850 line-clamp-2 hover:text-orange-600 transition min-h-[30px] leading-tight cursor-pointer"
+            className="text-[11px] font-black text-slate-850 line-clamp-2 hover:text-brand-600 transition min-h-[30px] leading-tight cursor-pointer"
             onClick={() => onSelectProduct?.(product)}
           >
             {product.title}
@@ -1342,7 +1342,7 @@ export function ProductCard({
             className={`p-1.5 rounded-lg transition-all transform active:scale-90 ${
               isOutOfStock
                 ? "bg-slate-100 text-slate-350 cursor-not-allowed"
-                : "bg-orange-50 hover:bg-orange-500 text-orange-500 hover:text-slate-950 hover:shadow-md cursor-pointer"
+                : "bg-brand-50 hover:bg-brand-500 text-brand-500 hover:text-slate-950 hover:shadow-md cursor-pointer"
             }`}
           >
             <ShoppingCart className="w-3.5 h-3.5" />
@@ -1402,7 +1402,7 @@ export function QuickViewModal({ product, onClose, onAddToCart, onAddWishlist, w
         <div className="w-full md:w-1/2 bg-slate-50 flex items-center justify-center p-6 relative border-r border-slate-100 min-h-[250px] md:min-h-[400px]">
           {/* Discount Badge */}
           {product.discountBadge && (
-            <span className="absolute top-4 left-4 bg-orange-600 text-white font-mono font-black text-[10px] px-2.5 py-1 rounded shadow-sm z-10 animate-pulse">
+            <span className="absolute top-4 left-4 bg-brand-600 text-white font-mono font-black text-[10px] px-2.5 py-1 rounded shadow-sm z-10 animate-pulse">
               {product.discountBadge}
             </span>
           )}
@@ -1418,7 +1418,7 @@ export function QuickViewModal({ product, onClose, onAddToCart, onAddWishlist, w
           <div>
             {/* Category & Store tags */}
             <div className="flex flex-wrap gap-2 items-center mb-3">
-              <span className="text-[9px] font-black tracking-widest text-[#ff6a00] uppercase bg-orange-50 px-2.5 py-1 rounded-sm">
+              <span className="text-[9px] font-black tracking-widest text-brand-500 uppercase bg-brand-50 px-2.5 py-1 rounded-sm">
                 {product.category}
               </span>
               <span className="text-[9px] font-extrabold tracking-wider text-slate-500 bg-slate-100 px-2 py-0.5 rounded-sm">
@@ -1432,7 +1432,7 @@ export function QuickViewModal({ product, onClose, onAddToCart, onAddWishlist, w
                 navigate(`/product/${product.slug}`);
                 onClose();
               }}
-              className="text-base sm:text-lg font-black text-slate-900 leading-snug hover:text-orange-500 transition cursor-pointer"
+              className="text-base sm:text-lg font-black text-slate-900 leading-snug hover:text-brand-500 transition cursor-pointer"
             >
               {product.title}
             </h3>
@@ -1479,7 +1479,7 @@ export function QuickViewModal({ product, onClose, onAddToCart, onAddWishlist, w
               <ul className="mt-3 space-y-1">
                 {product.keyFeatures.slice(0, 3).map((feat, i) => (
                   <li key={i} className="text-[11px] text-slate-600 flex items-center gap-1.5">
-                    <span className="w-1 h-1 bg-[#ff6a00] rounded-full"></span>
+                    <span className="w-1 h-1 bg-brand-500 rounded-full"></span>
                     {feat}
                   </li>
                 ))}
@@ -1491,7 +1491,7 @@ export function QuickViewModal({ product, onClose, onAddToCart, onAddWishlist, w
           <div className="mt-6 pt-4 border-t border-slate-100 space-y-4">
             {/* Pricing info */}
             <div className="flex items-baseline gap-2">
-              <span className="text-2xl font-black text-[#ff6a00]">
+              <span className="text-2xl font-black text-brand-500">
                 ৳{product.price.toLocaleString()}
               </span>
               {product.oldPrice && (
@@ -1536,7 +1536,7 @@ export function QuickViewModal({ product, onClose, onAddToCart, onAddWishlist, w
                 className={`flex-1 min-w-[140px] font-black px-6 py-2.5 rounded-lg text-xs flex items-center justify-center gap-2 transition ${
                   isOutOfStock
                     ? "bg-slate-100 text-slate-350 cursor-not-allowed border border-slate-200"
-                    : "bg-[#ff6a00] hover:bg-orange-650 text-white transition shadow-sm hover:shadow cursor-pointer"
+                    : "bg-brand-500 hover:bg-brand-600 text-white transition shadow-sm hover:shadow cursor-pointer"
                 }`}
               >
                 <ShoppingCart className="w-4 h-4" /> Add to Cart
@@ -1547,8 +1547,8 @@ export function QuickViewModal({ product, onClose, onAddToCart, onAddWishlist, w
                 onClick={() => onAddWishlist(product)}
                 className={`p-2.5 rounded-lg border transition shadow-xs cursor-pointer ${
                   isWishlisted
-                    ? "bg-[#ff6a00] border-[#ff6a00] text-white"
-                    : "bg-white border-slate-200 text-slate-500 hover:text-orange-500 hover:border-orange-500"
+                    ? "bg-brand-500 border-brand-500 text-white"
+                    : "bg-white border-slate-200 text-slate-500 hover:text-brand-500 hover:border-brand-500"
                 }`}
               >
                 <Heart className={`w-4 h-4 ${isWishlisted ? "fill-white" : ""}`} />
@@ -1562,7 +1562,7 @@ export function QuickViewModal({ product, onClose, onAddToCart, onAddWishlist, w
                   navigate(`/product/${product.slug}`);
                   onClose();
                 }}
-                className="text-xs text-orange-550 hover:text-[#ff6a00] font-bold hover:underline transition cursor-pointer"
+                className="text-xs text-brand-550 hover:text-brand-500 font-bold hover:underline transition cursor-pointer"
               >
                 View Full Product Details →
               </button>

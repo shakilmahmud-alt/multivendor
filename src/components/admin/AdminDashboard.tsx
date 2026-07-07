@@ -528,7 +528,7 @@ export default function AdminDashboard() {
           <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm animate-in fade-in slide-in-from-top-4 duration-300">
             <div className="flex justify-between items-center mb-6">
               <h2 className="text-base font-bold text-slate-800 flex items-center gap-2">
-                <Bell className="w-5 h-5 text-orange-500" /> Notifications
+                <Bell className="w-5 h-5 text-brand-500" /> Notifications
               </h2>
               <button 
                 onClick={markAllAsRead}
@@ -570,7 +570,7 @@ export default function AdminDashboard() {
       <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-base font-bold text-slate-800 flex items-center gap-2">
-            <Activity className="w-5 h-5 text-orange-500" /> Business Analytics
+            <Activity className="w-5 h-5 text-brand-500" /> Business Analytics
           </h2>
           <select 
             value={timeFilter}
@@ -588,7 +588,7 @@ export default function AdminDashboard() {
           {user?.role === 'admin' && (
             <StatCard title="Total Stores" value={stats.totalStores} icon={Store} gradient="from-emerald-400 to-teal-600" />
           )}
-          <StatCard title={user?.role === 'seller' ? "My Products" : "Total Products"} value={stats.totalProducts} icon={Package} gradient="from-amber-400 to-orange-500" />
+          <StatCard title={user?.role === 'seller' ? "My Products" : "Total Products"} value={stats.totalProducts} icon={Package} gradient="from-amber-400 to-brand-500" />
           {user?.role === 'admin' && (
             <StatCard title="Total Customers" value={stats.totalCustomers} icon={Users} gradient="from-pink-500 to-rose-600" />
           )}
@@ -597,7 +597,7 @@ export default function AdminDashboard() {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
           <SubStatCard title="Pending" value={stats.pending} icon={Clock} textColor="text-blue-600" bgColor="bg-blue-50/70" />
           <SubStatCard title="Confirmed" value={stats.confirmed} icon={CheckCircle} textColor="text-emerald-600" bgColor="bg-emerald-50/70" />
-          <SubStatCard title="Packaging" value={stats.packaging} icon={Package} textColor="text-orange-600" bgColor="bg-orange-50/70" />
+          <SubStatCard title="Packaging" value={stats.packaging} icon={Package} textColor="text-brand-600" bgColor="bg-brand-50/70" />
           <SubStatCard title="Out for delivery" value={stats.outForDelivery} icon={Truck} textColor="text-amber-600" bgColor="bg-amber-50/70" />
           <SubStatCard title="Delivered" value={stats.delivered} icon={CheckCircle} textColor="text-green-600" bgColor="bg-green-50/70" />
           <SubStatCard title="Canceled" value={stats.canceled} icon={XCircle} textColor="text-red-600" bgColor="bg-red-50/70" />
@@ -611,11 +611,11 @@ export default function AdminDashboard() {
           {/* Product Analytics */}
           <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
             <h2 className="text-base font-bold text-slate-800 flex items-center gap-2 mb-6">
-              <Package className="w-5 h-5 text-orange-500" /> Product Analytics
+              <Package className="w-5 h-5 text-brand-500" /> Product Analytics
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
               <SubStatCard title="In-House Products" value={stats.inHouseProducts} icon={Store} textColor="text-blue-600" bgColor="bg-blue-50/70" />
-              <SubStatCard title="New Requests" value={stats.sellerNewRequests} icon={Clock} textColor="text-orange-600" bgColor="bg-orange-50/70" />
+              <SubStatCard title="New Requests" value={stats.sellerNewRequests} icon={Clock} textColor="text-brand-600" bgColor="bg-brand-50/70" />
               <SubStatCard title="Approved" value={stats.sellerApproved} icon={CheckCircle} textColor="text-emerald-600" bgColor="bg-emerald-50/70" />
               <SubStatCard title="Update Requests" value={stats.sellerUpdateRequests} icon={History} textColor="text-purple-600" bgColor="bg-purple-50/70" />
               <SubStatCard title="Denied" value={stats.sellerDenied} icon={XCircle} textColor="text-red-600" bgColor="bg-red-50/70" />
@@ -628,7 +628,7 @@ export default function AdminDashboard() {
       {/* Wallet Section */}
       <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
         <h2 className="text-base font-bold text-slate-800 flex items-center gap-2 mb-6">
-          <TrendingUp className="w-5 h-5 text-orange-500" /> {user?.role === 'seller' ? 'Seller Wallet' : 'Admin Wallet'}
+          <TrendingUp className="w-5 h-5 text-brand-500" /> {user?.role === 'seller' ? 'Seller Wallet' : 'Admin Wallet'}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           
@@ -755,7 +755,7 @@ export default function AdminDashboard() {
         {/* Top Customer */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
           <h2 className="text-sm font-bold text-slate-800 mb-5 flex items-center gap-2">
-             <Users className="w-4 h-4 text-orange-500" /> Top Customer
+             <Users className="w-4 h-4 text-brand-500" /> Top Customer
           </h2>
           <div className="grid grid-cols-3 gap-4 text-center">
             {topCustomers.length > 0 ? topCustomers.map((c, i) => {
@@ -763,7 +763,7 @@ export default function AdminDashboard() {
               const gradients = [
                 'from-blue-500 to-indigo-600',
                 'from-pink-500 to-rose-600',
-                'from-amber-400 to-orange-500',
+                'from-amber-400 to-brand-500',
                 'from-emerald-400 to-teal-600',
                 'from-violet-500 to-purple-600',
                 'from-cyan-400 to-blue-500'
@@ -785,7 +785,7 @@ export default function AdminDashboard() {
         {/* Most Popular Stores */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
           <h2 className="text-sm font-bold text-slate-800 mb-5 flex items-center gap-2">
-             <Store className="w-4 h-4 text-orange-500" /> Most Popular Stores
+             <Store className="w-4 h-4 text-brand-500" /> Most Popular Stores
           </h2>
           <div className="space-y-4">
             {topStores.length > 0 ? topStores.map((s, i) => (
@@ -794,7 +794,7 @@ export default function AdminDashboard() {
                   <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-slate-100 to-slate-200 flex items-center justify-center shadow-sm group-hover:scale-105 transition-transform">
                     <Store className="w-4 h-4 text-slate-600" />
                   </div>
-                  <span className="text-xs font-bold text-slate-700 group-hover:text-orange-500 transition-colors">{s.name}</span>
+                  <span className="text-xs font-bold text-slate-700 group-hover:text-brand-500 transition-colors">{s.name}</span>
                 </div>
                 <span className="text-xs font-bold text-slate-400 flex items-center gap-1">
                   {s.count} <span className="text-red-500 text-sm group-hover:scale-125 transition-transform">♥</span>
@@ -807,7 +807,7 @@ export default function AdminDashboard() {
         {/* Top Selling Store */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
           <h2 className="text-sm font-bold text-slate-800 mb-5 flex items-center gap-2">
-             <Store className="w-4 h-4 text-orange-500" /> Top Selling Store
+             <Store className="w-4 h-4 text-brand-500" /> Top Selling Store
           </h2>
           <div className="space-y-4">
             {topSellingStores.length > 0 ? topSellingStores.map((s, i) => (
@@ -849,7 +849,7 @@ export default function AdminDashboard() {
         {/* Top Selling Products */}
         <div className="bg-white rounded-2xl border border-slate-200 p-6 shadow-sm">
           <h2 className="text-sm font-bold text-slate-800 mb-5 flex items-center gap-2">
-             <Package className="w-4 h-4 text-orange-500" /> Top Selling Products
+             <Package className="w-4 h-4 text-brand-500" /> Top Selling Products
           </h2>
           <div className="space-y-3.5">
             {topSellingProducts.length > 0 ? topSellingProducts.map((p, i) => (
@@ -858,7 +858,7 @@ export default function AdminDashboard() {
                   <div className="w-9 h-9 rounded bg-slate-50 border border-slate-100 flex-shrink-0 flex items-center justify-center overflow-hidden">
                     {p.thumbnail_url ? <img src={p.thumbnail_url} alt={p.name_en} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300" /> : <Package className="w-4 h-4 text-slate-400" />}
                   </div>
-                  <span className="text-[11px] font-bold text-slate-700 truncate group-hover:text-orange-500 transition-colors">{p.name_en || 'Unknown Product'}</span>
+                  <span className="text-[11px] font-bold text-slate-700 truncate group-hover:text-brand-500 transition-colors">{p.name_en || 'Unknown Product'}</span>
                 </div>
                 <span className="text-[10px] font-black bg-gradient-to-r from-blue-500 to-indigo-600 text-white px-2.5 py-1 rounded-full shadow-sm">
                   Sold: {p.sold_count || 0}

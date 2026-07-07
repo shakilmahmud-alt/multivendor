@@ -1067,7 +1067,7 @@ export default function POS() {
                 <button onClick={() => setOfflineMethod('Bkash')} className={`px-4 py-3 border rounded-md text-sm font-bold transition flex justify-center items-center ${offlineMethod === 'Bkash' ? 'border-pink-500 text-pink-600 bg-pink-50' : 'border-slate-200 text-slate-700 hover:border-pink-500 hover:text-pink-600'}`}>
                   Bkash
                 </button>
-                <button onClick={() => setOfflineMethod('Nagad')} className={`px-4 py-3 border rounded-md text-sm font-bold transition flex justify-center items-center ${offlineMethod === 'Nagad' ? 'border-orange-500 text-orange-600 bg-orange-50' : 'border-slate-200 text-slate-700 hover:border-orange-500 hover:text-orange-600'}`}>
+                <button onClick={() => setOfflineMethod('Nagad')} className={`px-4 py-3 border rounded-md text-sm font-bold transition flex justify-center items-center ${offlineMethod === 'Nagad' ? 'border-brand-500 text-brand-600 bg-brand-50' : 'border-slate-200 text-slate-700 hover:border-brand-500 hover:text-brand-600'}`}>
                   Nagad
                 </button>
                 <button onClick={() => setOfflineMethod('Upay')} className={`px-4 py-3 border rounded-md text-sm font-bold transition flex justify-center items-center ${offlineMethod === 'Upay' ? 'border-blue-500 text-blue-600 bg-blue-50' : 'border-slate-200 text-slate-700 hover:border-blue-500 hover:text-blue-600'}`}>

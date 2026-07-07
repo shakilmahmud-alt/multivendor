@@ -89,7 +89,7 @@ export default function ProductLanding() {
                   </div>
                   {/* Thumbnails */}
                   <div className="flex gap-2">
-                     <div className="w-16 h-16 border-2 border-orange-500 rounded-lg p-1 cursor-pointer">
+                     <div className="w-16 h-16 border-2 border-brand-500 rounded-lg p-1 cursor-pointer">
                         {product.thumbnail_url ? (
                           <img src={product.thumbnail_url} alt="thumb" className="w-full h-full object-contain mix-blend-multiply" />
                         ) : (
@@ -132,7 +132,7 @@ export default function ProductLanding() {
                     <div className="flex items-center gap-1">
                       <button 
                         onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                        className="w-8 h-8 flex items-center justify-center border border-slate-200 rounded text-orange-500 font-bold hover:bg-slate-50"
+                        className="w-8 h-8 flex items-center justify-center border border-slate-200 rounded text-brand-500 font-bold hover:bg-slate-50"
                       >-</button>
                       <input 
                         type="text" 
@@ -142,20 +142,20 @@ export default function ProductLanding() {
                       />
                       <button 
                         onClick={() => setQuantity(quantity + 1)}
-                        className="w-8 h-8 flex items-center justify-center border border-slate-200 rounded text-orange-500 font-bold hover:bg-slate-50"
+                        className="w-8 h-8 flex items-center justify-center border border-slate-200 rounded text-brand-500 font-bold hover:bg-slate-50"
                       >+</button>
                     </div>
                   </div>
 
                   <div className="text-sm font-semibold text-slate-700 mb-6">
-                    Total Price : <span className="text-orange-500">{formatCurrency(subtotal)}</span> <span className="text-xs text-slate-500 font-normal">(Tax: ৳0)</span>
+                    Total Price : <span className="text-brand-500">{formatCurrency(subtotal)}</span> <span className="text-xs text-slate-500 font-normal">(Tax: ৳0)</span>
                   </div>
 
                   <div className="flex gap-4">
                     <button className="flex-1 bg-red-500 hover:bg-red-600 text-white font-semibold py-3 rounded-full transition shadow-sm">
                       Buy Now
                     </button>
-                    <button className="flex-1 border-2 border-orange-500 text-orange-500 hover:bg-orange-50 font-semibold py-3 rounded-full transition shadow-sm">
+                    <button className="flex-1 border-2 border-brand-500 text-brand-500 hover:bg-brand-50 font-semibold py-3 rounded-full transition shadow-sm">
                       Add to Cart
                     </button>
                   </div>
@@ -167,7 +167,7 @@ export default function ProductLanding() {
             {/* Overview / Reviews */}
             <div className="bg-white rounded-xl shadow-sm p-6">
               <div className="flex justify-center gap-2 mb-6">
-                <button className="bg-orange-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-sm">Overview</button>
+                <button className="bg-brand-500 text-white px-6 py-2 rounded-full text-sm font-medium shadow-sm">Overview</button>
                 <button className="text-slate-600 hover:text-slate-900 px-6 py-2 rounded-full text-sm font-medium transition">Reviews</button>
               </div>
               <div className="text-sm text-slate-600 leading-relaxed max-w-3xl mx-auto text-justify" dangerouslySetInnerHTML={{ __html: product.desc_en || 'No detailed overview available.' }}>

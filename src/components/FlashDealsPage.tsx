@@ -136,9 +136,9 @@ export default function FlashDealsPage({ allProducts, onAddToCart, onAddWishlist
       {/* Breadcrumbs */}
       <div className="bg-white border-b border-slate-200 py-3 px-6 shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs font-semibold text-slate-500">
-          <Link to="/" className="hover:text-orange-500 transition cursor-pointer">Home</Link>
+          <Link to="/" className="hover:text-brand-500 transition cursor-pointer">Home</Link>
           <ChevronRight className="w-3.5 h-3.5" />
-          <span className="text-orange-500">Flash Deals</span>
+          <span className="text-brand-500">Flash Deals</span>
         </div>
       </div>
 
@@ -152,7 +152,7 @@ export default function FlashDealsPage({ allProducts, onAddToCart, onAddWishlist
               onClick={() => setShowMobileFilters(!showMobileFilters)}
               className="w-full lg:hidden bg-white border border-slate-200 text-slate-700 py-2.5 px-4 rounded flex items-center justify-center gap-2 font-bold text-xs shadow-xs hover:bg-slate-50 transition"
             >
-              <Filter className="w-4 h-4 text-orange-500" />
+              <Filter className="w-4 h-4 text-brand-500" />
               {showMobileFilters ? "Hide Filters" : "Show Filters"}
             </button>
 
@@ -167,7 +167,7 @@ export default function FlashDealsPage({ allProducts, onAddToCart, onAddWishlist
                       type="number" 
                       value={minPrice} 
                       onChange={e => setMinPrice(Number(e.target.value))}
-                      className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-orange-500"
+                      className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-brand-500"
                       placeholder="Min"
                     />
                     <span className="text-slate-400">-</span>
@@ -175,7 +175,7 @@ export default function FlashDealsPage({ allProducts, onAddToCart, onAddWishlist
                       type="number" 
                       value={maxPrice} 
                       onChange={e => setMaxPrice(Number(e.target.value))}
-                      className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-orange-500"
+                      className="w-full px-2 py-1 border border-slate-300 rounded text-sm outline-none focus:border-brand-500"
                       placeholder="Max"
                     />
                   </div>
@@ -187,7 +187,7 @@ export default function FlashDealsPage({ allProducts, onAddToCart, onAddWishlist
                     step="1000"
                     value={maxPrice}
                     onChange={e => setMaxPrice(Number(e.target.value))}
-                    className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-orange-500"
+                    className="w-full h-1.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-500"
                   />
                 </div>
               </div>
@@ -203,9 +203,9 @@ export default function FlashDealsPage({ allProducts, onAddToCart, onAddWishlist
                           type="checkbox" 
                           checked={selectedBrands.includes(brand)}
                           onChange={() => handleBrandToggle(brand)}
-                          className="w-4 h-4 rounded border-slate-300 text-orange-500 focus:ring-orange-500 cursor-pointer"
+                          className="w-4 h-4 rounded border-slate-300 text-brand-500 focus:ring-brand-500 cursor-pointer"
                         />
-                        <span className="text-sm font-semibold text-slate-600 group-hover:text-orange-500 transition">{brand}</span>
+                        <span className="text-sm font-semibold text-slate-600 group-hover:text-brand-500 transition">{brand}</span>
                       </label>
                     ))}
                   </div>
@@ -228,7 +228,7 @@ export default function FlashDealsPage({ allProducts, onAddToCart, onAddWishlist
                 <select 
                   value={sortOrder} 
                   onChange={e => setSortOrder(e.target.value)}
-                  className="px-3 py-1.5 border border-slate-300 rounded text-sm font-semibold text-slate-700 outline-none focus:border-orange-500 bg-white"
+                  className="px-3 py-1.5 border border-slate-300 rounded text-sm font-semibold text-slate-700 outline-none focus:border-brand-500 bg-white"
                 >
                   <option value="default">Default</option>
                   <option value="price_asc">Price (Low {'>'} High)</option>

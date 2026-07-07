@@ -22,9 +22,9 @@ export default function TopNavigation() {
       <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center border-b border-slate-800">
         <div className="flex items-center gap-4 text-slate-300">
           <span className="flex items-center gap-1">
-            <Phone className="w-3.5 h-3.5 text-orange-500" /> +8801784905075
+            <Phone className="w-3.5 h-3.5 text-brand-500" /> +8801784905075
           </span>
-          <span className="hidden md:inline bg-orange-600/20 text-orange-400 px-2 py-0.5 rounded text-[10px] font-semibold animate-pulse">
+          <span className="hidden md:inline bg-brand-600/20 text-brand-400 px-2 py-0.5 rounded text-[10px] font-semibold animate-pulse">
             EID OFFER DISCOUNT PRICE COMING SOON
           </span>
         </div>
@@ -35,7 +35,7 @@ export default function TopNavigation() {
           <div className="flex items-center gap-1 cursor-pointer hover:text-white">
             <span>English</span> <ChevronDown className="w-3 h-3" />
           </div>
-          <a href="#seller-zone" className="hover:text-orange-400 font-medium text-orange-500 transition">Seller Zone</a>
+          <a href="#seller-zone" className="hover:text-brand-400 font-medium text-brand-500 transition">Seller Zone</a>
         </div>
       </div>
 
@@ -44,14 +44,14 @@ export default function TopNavigation() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Logo */}
           <div className="flex items-center gap-2">
-            <div className="bg-orange-500 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-lg tracking-wider font-mono">
+            <div className="bg-brand-500 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-lg tracking-wider font-mono">
               HOLIDAYMART
             </div>
             <span className="text-slate-400 text-[10px] uppercase font-bold tracking-widest hidden lg:block">Multi-Vendor</span>
           </div>
 
           {/* Search Bar with category prefix dropdown */}
-          <div className="w-full md:max-w-xl flex items-center bg-slate-800 border border-slate-700 rounded-lg overflow-hidden focus-within:border-orange-500 transition">
+          <div className="w-full md:max-w-xl flex items-center bg-slate-800 border border-slate-700 rounded-lg overflow-hidden focus-within:border-brand-500 transition">
             <select className="bg-slate-700 text-white text-xs px-3 py-2.5 outline-none font-medium border-r border-slate-600 cursor-pointer text-ellipsis max-w-[120px]">
               <option>All Categories</option>
               <option>T-Shirt</option>
@@ -63,7 +63,7 @@ export default function TopNavigation() {
               placeholder="Search products, brands, or multi-vendor shops..." 
               className="flex-1 bg-transparent px-4 py-2 text-sm text-white placeholder-slate-400 outline-none"
             />
-            <button className="bg-orange-500 hover:bg-orange-600 text-slate-950 px-6 py-2.5 font-bold transition flex items-center gap-2">
+            <button className="bg-brand-500 hover:bg-brand-600 text-slate-950 px-6 py-2.5 font-bold transition flex items-center gap-2">
               <Search className="w-4 h-4" />
               <span className="hidden sm:inline">Search</span>
             </button>
@@ -73,8 +73,8 @@ export default function TopNavigation() {
           <div className="flex items-center gap-5">
             <div className="flex items-center gap-2 cursor-pointer group">
               <div className="relative p-2 bg-slate-850 rounded-full border border-slate-800 hover:border-slate-700">
-                <Heart className="w-5 h-5 text-slate-300 group-hover:text-orange-400 transition" />
-                <span className="absolute -top-1 -right-1 bg-orange-500 text-slate-950 text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                <Heart className="w-5 h-5 text-slate-300 group-hover:text-brand-400 transition" />
+                <span className="absolute -top-1 -right-1 bg-brand-500 text-slate-950 text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">0</span>
               </div>
               <div className="text-left hidden lg:block">
                 <p className="text-[10px] text-slate-400">Wishlist</p>
@@ -84,7 +84,7 @@ export default function TopNavigation() {
 
             <div className="flex items-center gap-2 cursor-pointer group">
               <div className="p-2 bg-slate-850 rounded-full border border-slate-800 hover:border-slate-700">
-                <User className="w-5 h-5 text-slate-300 group-hover:text-orange-400 transition" />
+                <User className="w-5 h-5 text-slate-300 group-hover:text-brand-400 transition" />
               </div>
               <div className="text-left hidden lg:block text-slate-200">
                 <p className="text-[10px] text-slate-400">Account</p>
@@ -94,12 +94,12 @@ export default function TopNavigation() {
 
             <div className="flex items-center gap-2 cursor-pointer group">
               <div className="relative p-2 bg-slate-850 rounded-full border border-slate-800 hover:border-slate-700">
-                <ShoppingCart className="w-5 h-5 text-slate-300 group-hover:text-orange-400 transition" />
-                <span className="absolute -top-1 -right-1 bg-orange-500 text-slate-950 text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">0</span>
+                <ShoppingCart className="w-5 h-5 text-slate-300 group-hover:text-brand-400 transition" />
+                <span className="absolute -top-1 -right-1 bg-brand-500 text-slate-950 text-[10px] font-black rounded-full w-4 h-4 flex items-center justify-center">0</span>
               </div>
               <div className="text-left hidden lg:block">
                 <p className="text-[10px] text-slate-400">My Cart</p>
-                <p className="text-xs font-semibold text-orange-400">৳0.00</p>
+                <p className="text-xs font-semibold text-brand-400">৳0.00</p>
               </div>
             </div>
           </div>
@@ -137,17 +137,17 @@ export function ProductCard({ product }: { product: Product }) {
         
         {/* Promos / Sale Badges */}
         {product.discountBadge && (
-          <div className="absolute top-2 left-2 bg-orange-500 text-white font-bold text-[10px] px-2 py-1 rounded shadow-sm">
+          <div className="absolute top-2 left-2 bg-brand-500 text-white font-bold text-[10px] px-2 py-1 rounded shadow-sm">
             {product.discountBadge}
           </div>
         )}
 
         {/* Quick hover widgets */}
         <div className="absolute top-2 right-2 flex flex-col gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-          <button className="p-1.5 bg-white/90 rounded-full text-slate-700 hover:bg-orange-500 hover:text-white transition shadow">
+          <button className="p-1.5 bg-white/90 rounded-full text-slate-700 hover:bg-brand-500 hover:text-white transition shadow">
             <Heart className="w-3.5 h-3.5" />
           </button>
-          <button className="p-1.5 bg-white/90 rounded-full text-slate-700 hover:bg-orange-500 hover:text-white transition shadow">
+          <button className="p-1.5 bg-white/90 rounded-full text-slate-700 hover:bg-brand-500 hover:text-white transition shadow">
             <Eye className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -156,7 +156,7 @@ export function ProductCard({ product }: { product: Product }) {
       {/* Details Box */}
       <div className="p-3 flex flex-col flex-1">
         {/* Product Title */}
-        <h3 className="text-xs font-medium text-slate-800 line-clamp-2 min-h-[32px] group-hover:text-orange-600 transition">
+        <h3 className="text-xs font-medium text-slate-800 line-clamp-2 min-h-[32px] group-hover:text-brand-600 transition">
           {product.title}
         </h3>
 
@@ -181,7 +181,7 @@ export function ProductCard({ product }: { product: Product }) {
               <p className="text-[10px] text-slate-400 line-through">৳{product.oldPrice.toLocaleString()}</p>
             )}
           </div>
-          <button className="p-2 bg-orange-50 hover:bg-orange-500 rounded-lg text-orange-500 hover:text-white transition shadow-sm">
+          <button className="p-2 bg-brand-50 hover:bg-brand-500 rounded-lg text-brand-500 hover:text-white transition shadow-sm">
             <ShoppingCart className="w-3.5 h-3.5" />
           </button>
         </div>
@@ -232,12 +232,12 @@ CREATE TABLE public.products (
     <div id="developer-docs-panel" className="bg-slate-900 border border-slate-800 rounded-2xl overflow-hidden shadow-2xl mb-8 font-sans">
       <div className="bg-gradient-to-r from-slate-950 to-slate-900 px-6 py-4 border-b border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="bg-orange-500/15 p-2 rounded-xl border border-orange-500/30">
-            <Terminal className="w-5 h-5 text-orange-500" />
+          <div className="bg-brand-500/15 p-2 rounded-xl border border-brand-500/30">
+            <Terminal className="w-5 h-5 text-brand-500" />
           </div>
           <div>
             <h2 className="text-base font-bold text-white flex items-center gap-2">
-              HOLIDAYMART CLONE SOURCE SPECS <span className="bg-orange-500/20 text-orange-400 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">DEV CONSOLE</span>
+              HOLIDAYMART CLONE SOURCE SPECS <span className="bg-brand-500/20 text-brand-400 text-[10px] font-black px-2 py-0.5 rounded-full uppercase tracking-wider">DEV CONSOLE</span>
             </h2>
             <p className="text-xs text-slate-400">Part 1, 2, and 3 specs matching the JPEG capturing</p>
           </div>
@@ -248,7 +248,7 @@ CREATE TABLE public.products (
           <button
             onClick={() => setActiveTab("design")}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold transition ${
-              activeTab === "design" ? "bg-orange-500 text-slate-950" : "text-slate-350 hover:text-white"
+              activeTab === "design" ? "bg-brand-500 text-slate-950" : "text-slate-350 hover:text-white"
             }`}
           >
             <Palette className="w-3.5 h-3.5" /> Design Tokens (Part 1)
@@ -256,7 +256,7 @@ CREATE TABLE public.products (
           <button
             onClick={() => setActiveTab("nextjs")}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold transition ${
-              activeTab === "nextjs" ? "bg-orange-500 text-slate-950" : "text-slate-350 hover:text-white"
+              activeTab === "nextjs" ? "bg-brand-500 text-slate-950" : "text-slate-350 hover:text-white"
             }`}
           >
             <Code className="w-3.5 h-3.5" /> Next.js 14 Code (Part 2)
@@ -264,7 +264,7 @@ CREATE TABLE public.products (
           <button
             onClick={() => setActiveTab("supabase")}
             className={`flex items-center gap-2 px-3 py-1.5 rounded-md text-xs font-semibold transition ${
-              activeTab === "supabase" ? "bg-orange-500 text-slate-950" : "text-slate-350 hover:text-white"
+              activeTab === "supabase" ? "bg-brand-500 text-slate-950" : "text-slate-350 hover:text-white"
             }`}
           >
             <Database className="w-3.5 h-3.5" /> Supabase Schema (Part 3)
@@ -279,15 +279,15 @@ CREATE TABLE public.products (
             {/* Color Palette Card */}
             <div className="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
               <div className="flex items-center gap-2 pb-3 mb-3 border-b border-slate-800">
-                <span className="text-orange-500 font-bold">1.</span>
+                <span className="text-brand-500 font-bold">1.</span>
                 <h4 className="text-white font-bold text-sm">Design Color Tokens</h4>
               </div>
               <ul className="space-y-3.5 text-xs">
                 <li className="flex items-center justify-between">
                   <span>Primary Brand Color</span>
                   <div className="flex items-center gap-2">
-                    <span className="font-mono text-slate-200">#FF6A00 (Amber)</span>
-                    <span className="w-4 h-4 rounded bg-orange-500 block border border-white/20"></span>
+                    <span className="font-mono text-slate-200">brand-500 (Amber)</span>
+                    <span className="w-4 h-4 rounded bg-brand-500 block border border-white/20"></span>
                   </div>
                 </li>
                 <li className="flex items-center justify-between">
@@ -301,7 +301,7 @@ CREATE TABLE public.products (
                   <span>Primary Nav Buttons</span>
                   <div className="flex items-center gap-2">
                     <span className="font-mono text-slate-200">#EA580C (Orange-600)</span>
-                    <span className="w-4 h-4 rounded bg-orange-600 block border border-white/20"></span>
+                    <span className="w-4 h-4 rounded bg-brand-600 block border border-white/20"></span>
                   </div>
                 </li>
                 <li className="flex items-center justify-between">
@@ -324,7 +324,7 @@ CREATE TABLE public.products (
             {/* Layout Grid Specifications */}
             <div className="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
               <div className="flex items-center gap-2 pb-3 mb-3 border-b border-slate-800">
-                <span className="text-orange-500 font-bold">2.</span>
+                <span className="text-brand-500 font-bold">2.</span>
                 <h4 className="text-white font-bold text-sm">Visual Layout Grid</h4>
               </div>
               <ul className="space-y-3.5 text-xs text-slate-300">
@@ -354,7 +354,7 @@ CREATE TABLE public.products (
             {/* Typography Strategy */}
             <div className="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
               <div className="flex items-center gap-2 pb-3 mb-3 border-b border-slate-800">
-                <span className="text-orange-500 font-bold">3.</span>
+                <span className="text-brand-500 font-bold">3.</span>
                 <h4 className="text-white font-bold text-sm">Typography Framework</h4>
               </div>
               <ul className="space-y-3.5 text-xs text-slate-300">
@@ -368,7 +368,7 @@ CREATE TABLE public.products (
                 </li>
                 <li className="flex justify-between">
                   <span className="text-slate-400 font-semibold text-[11px]">Display Headings</span>
-                  <span className="text-slate-250 uppercase text-[10px] tracking-widest text-orange-500">Medium Bold Tracking-tight</span>
+                  <span className="text-slate-250 uppercase text-[10px] tracking-widest text-brand-500">Medium Bold Tracking-tight</span>
                 </li>
                 <li className="flex justify-between">
                   <span className="text-slate-400 font-semibold text-[11px]">Section Headers</span>
@@ -387,7 +387,7 @@ CREATE TABLE public.products (
                 <span className="text-white text-xs font-semibold uppercase bg-slate-800 px-3 py-1 rounded">TopNavigation.tsx</span>
                 <button
                   onClick={() => handleCopy(nextJsCodeTopNav, "topnav")}
-                  className="flex items-center gap-2 text-xs bg-slate-800 hover:bg-slate-700 text-orange-400 hover:text-orange-300 px-3 py-1.5 rounded transition"
+                  className="flex items-center gap-2 text-xs bg-slate-800 hover:bg-slate-700 text-brand-400 hover:text-brand-300 px-3 py-1.5 rounded transition"
                 >
                   {copied === "topnav" ? <BadgeCheck className="w-4 h-4 text-emerald-450" /> : <Copy className="w-3.5 h-3.5" />}
                   {copied === "topnav" ? "Copied!" : "Copy TopNav Code"}
@@ -403,7 +403,7 @@ CREATE TABLE public.products (
                 <span className="text-white text-xs font-semibold uppercase bg-slate-800 px-3 py-1 rounded">ProductGridSection.tsx</span>
                 <button
                   onClick={() => handleCopy(nextJsCodeProductGrid, "prodgrid")}
-                  className="flex items-center gap-2 text-xs bg-slate-800 hover:bg-slate-700 text-orange-400 hover:text-orange-300 px-3 py-1.5 rounded transition"
+                  className="flex items-center gap-2 text-xs bg-slate-800 hover:bg-slate-700 text-brand-400 hover:text-brand-300 px-3 py-1.5 rounded transition"
                 >
                   {copied === "prodgrid" ? <BadgeCheck className="w-4 h-4 text-emerald-450" /> : <Copy className="w-3.5 h-3.5" />}
                   {copied === "prodgrid" ? "Copied!" : "Copy Product Specs"}
@@ -425,7 +425,7 @@ CREATE TABLE public.products (
               </p>
               <button
                 onClick={() => handleCopy(supabaseCode, "supabasesql")}
-                className="flex items-center gap-2 text-xs bg-slate-800 hover:bg-slate-700 text-orange-400 hover:text-orange-300 px-3 py-1.5 rounded transition"
+                className="flex items-center gap-2 text-xs bg-slate-800 hover:bg-slate-700 text-brand-400 hover:text-brand-300 px-3 py-1.5 rounded transition"
               >
                 {copied === "supabasesql" ? <BadgeCheck className="w-4 h-4 text-emerald-450" /> : <Copy className="w-3.5 h-3.5" />}
                 {copied === "supabasesql" ? "Copied SQL" : "Copy Schema SQL"}

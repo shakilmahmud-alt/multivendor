@@ -116,10 +116,10 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
         {/* Header Row */}
         <div className="flex justify-between items-center mb-4 px-1">
           <div className="flex items-center gap-2">
-            <span className="w-1.5 h-5 bg-orange-500 rounded-full"></span>
+            <span className="w-1.5 h-5 bg-brand-500 rounded-full"></span>
             <h3 className="text-sm font-black uppercase tracking-wider text-slate-800">{title}</h3>
           </div>
-          <Link to="/flash-deals" className="text-[11px] text-orange-600 hover:text-orange-700 font-bold flex items-center gap-0.5 transition cursor-pointer">
+          <Link to="/flash-deals" className="text-[11px] text-brand-600 hover:text-brand-700 font-bold flex items-center gap-0.5 transition cursor-pointer">
             View All <ChevronRight className="w-3.5 h-3.5" />
           </Link>
         </div>
@@ -149,7 +149,7 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
                       >
                         {/* Card Promo badges */}
                         <div className="absolute top-2.5 left-2.5 z-10">
-                          <span className="bg-orange-500 text-white font-mono font-black text-[9px] px-2 py-0.5 rounded shadow-sm">
+                          <span className="bg-brand-500 text-white font-mono font-black text-[9px] px-2 py-0.5 rounded shadow-sm">
                             {p.discountBadge || "Flash"}
                           </span>
                         </div>
@@ -173,8 +173,8 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
                               }}
                               className={`p-1.5 rounded-full border transition shadow-xs cursor-pointer ${
                                 wishlist?.some(item => item.id === p.id)
-                                  ? "bg-[#ff6a00] border-[#ff6a00] text-white"
-                                  : "bg-white/95 border-slate-200 text-slate-700 hover:text-orange-500 hover:border-orange-500"
+                                  ? "bg-brand-500 border-brand-500 text-white"
+                                  : "bg-white/95 border-slate-200 text-slate-700 hover:text-brand-500 hover:border-brand-500"
                               }`}
                             >
                               <Heart className={`w-3 h-3 ${wishlist?.some(item => item.id === p.id) ? "fill-white" : ""}`} />
@@ -184,7 +184,7 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
                                 e.stopPropagation();
                                 onQuickView?.(p);
                               }}
-                              className="p-1.5 bg-white/95 border border-slate-200 rounded-full text-slate-700 hover:text-orange-500 hover:border-orange-500 transition shadow-xs cursor-pointer"
+                              className="p-1.5 bg-white/95 border border-slate-200 rounded-full text-slate-700 hover:text-brand-500 hover:border-brand-500 transition shadow-xs cursor-pointer"
                             >
                               <Eye className="w-3 h-3" />
                             </button>
@@ -197,7 +197,7 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
                             <span className="text-[8px] text-slate-400 font-extrabold block uppercase font-mono tracking-wider">{p.category}</span>
                             <h4 
                               onClick={() => onSelectProduct?.(p)}
-                              className="text-[11px] font-black text-slate-800 line-clamp-2 mt-1 hover:text-orange-600 transition min-h-[30px] leading-tight cursor-pointer"
+                              className="text-[11px] font-black text-slate-800 line-clamp-2 mt-1 hover:text-brand-600 transition min-h-[30px] leading-tight cursor-pointer"
                             >
                               {p.title}
                             </h4>
@@ -226,7 +226,7 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
                             </div>
                             <button 
                               onClick={() => onAddToCart(p)}
-                              className="p-1.5 bg-orange-50 hover:bg-orange-500 border border-orange-200 hover:border-orange-500 rounded-lg text-orange-500 hover:text-white transition cursor-pointer shadow-xs"
+                              className="p-1.5 bg-brand-50 hover:bg-brand-500 border border-brand-200 hover:border-brand-500 rounded-lg text-brand-500 hover:text-white transition cursor-pointer shadow-xs"
                             >
                               <ShoppingCart className="w-3.5 h-3.5" />
                             </button>
@@ -249,7 +249,7 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
         <div id="brands-sec" className="mt-8 bg-white border border-slate-200 rounded p-4 shadow-xs text-center">
           <div className="flex items-center justify-between pb-2 mb-4 border-b border-slate-200">
             <h3 className="text-[10px] uppercase font-extrabold tracking-widest text-slate-400 flex items-center gap-1.5">
-              <ShieldCheck className="w-3.5 h-3.5 text-orange-500" />
+              <ShieldCheck className="w-3.5 h-3.5 text-brand-500" />
               Verified Multi-Vendor Power Hubs (Brands)
             </h3>
             <span className="text-[9px] text-slate-400 font-mono">10 Active Stores Map</span>
@@ -261,12 +261,12 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
                 <div 
                   key={`${brand.id || idx}-${idx}`} 
                   onClick={() => navigate(`/brand/${encodeURIComponent(brand.name)}`)}
-                  className="w-[120px] flex-shrink-0 p-2 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-orange-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[64px]"
+                  className="w-[120px] flex-shrink-0 p-2 bg-slate-50 hover:bg-white rounded border border-slate-200 hover:border-brand-500 transition text-center shadow-xs cursor-pointer group flex flex-col items-center justify-center min-h-[64px]"
                 >
                   {brand.logo_url ? (
                     <img src={brand.logo_url} alt={brand.name} className="h-6 object-contain mb-1 group-hover:scale-105 transition-transform" />
                   ) : (
-                    <div className="text-[11px] font-black text-slate-700 tracking-tighter group-hover:text-orange-500 transition-colors">
+                    <div className="text-[11px] font-black text-slate-700 tracking-tighter group-hover:text-brand-500 transition-colors">
                       {brand.name}
                     </div>
                   )}

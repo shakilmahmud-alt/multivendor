@@ -175,7 +175,7 @@ export default function HomeLayoutSetup() {
           <LayoutDashboard className="w-5 h-5 text-blue-600" /> Home Layout Configuration
         </h1>
         <div className="flex gap-2">
-          <button onClick={() => handleAddSection('flash_deals')} className="bg-orange-500 text-white px-3 py-1.5 rounded text-sm font-medium hover:bg-orange-600 flex items-center gap-1">
+          <button onClick={() => handleAddSection('flash_deals')} className="bg-brand-500 text-white px-3 py-1.5 rounded text-sm font-medium hover:bg-brand-600 flex items-center gap-1">
             <Plus className="w-4 h-4" /> Flash Deals
           </button>
           <button onClick={() => handleAddSection('category_slider')} className="bg-blue-600 text-white px-3 py-1.5 rounded text-sm font-medium hover:bg-blue-700 flex items-center gap-1">

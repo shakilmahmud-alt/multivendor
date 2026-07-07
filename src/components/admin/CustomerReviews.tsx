@@ -240,7 +240,7 @@ export default function CustomerReviews() {
                       <td className="p-4">
                         <button
                           onClick={() => setActiveReplyId(activeReplyId === review.id ? null : review.id)}
-                          className="bg-orange-500 hover:bg-orange-600 text-white text-xs px-4 py-2 rounded font-bold transition"
+                          className="bg-brand-500 hover:bg-brand-600 text-white text-xs px-4 py-2 rounded font-bold transition"
                         >
                           Reply
                         </button>
@@ -282,7 +282,7 @@ export default function CustomerReviews() {
                               value={replyText}
                               onChange={(e) => setReplyText(e.target.value)}
                               placeholder="Type your reply here..."
-                              className="w-full p-3 text-[13px] border border-slate-200 rounded-lg outline-none focus:border-orange-500 mb-3 min-h-[100px]"
+                              className="w-full p-3 text-[13px] border border-slate-200 rounded-lg outline-none focus:border-brand-500 mb-3 min-h-[100px]"
                             />
                             <div className="flex justify-end gap-3">
                               <button
