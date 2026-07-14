@@ -49,42 +49,16 @@ export default function CategorySlider({
   };
 
   const renderProductItem = (p: Product, idx: number) => {
-    const discountAmount = (p.oldPrice && p.oldPrice > p.price) ? p.oldPrice - p.price : 0;
     return (
-      <div 
-        key={`${p.id}-${idx}`} 
-        onClick={() => onSelectProduct?.(p)}
-        className="w-full flex-shrink-0 whitespace-normal bg-white cursor-pointer group"
-      >
-        <div className="relative rounded overflow-hidden aspect-square mb-3 bg-white flex items-center justify-center border border-slate-100 p-2">
-          {discountAmount > 0 && (
-            <span className="absolute top-0 left-0 bg-[#f97316] text-white font-medium text-[11px] px-2 py-0.5 z-10 shadow-sm rounded-br">
-              ৳{discountAmount.toLocaleString(undefined, { minimumFractionDigits: 2 })} Off
-            </span>
-          )}
-          <img 
-            src={p.thumbnail} 
-            alt={p.title} 
-            className="w-full h-full object-contain group-hover:scale-105 transition duration-300"
-          />
-        </div>
-        
-        <div className="text-left px-1">
-          <h4 className="text-[13px] font-bold text-slate-800 line-clamp-2 leading-snug group-hover:text-brand-500 transition-colors">
-            {p.title}
-          </h4>
-          
-          <div className="mt-2 flex items-center gap-2">
-            {p.oldPrice && p.oldPrice > p.price && (
-              <span className="text-[11px] text-slate-400 line-through">
-                ৳{p.oldPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-              </span>
-            )}
-            <span className="text-[14px] font-black text-slate-900">
-              ৳{p.price.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-            </span>
-          </div>
-        </div>
+      <div key={`${p.id}-${idx}`} className="w-full h-full flex">
+        <ProductCard
+          product={p}
+          onAddToCart={onAddToCart || (() => {})}
+          onAddWishlist={onAddWishlist || (() => {})}
+          onQuickView={onQuickView || (() => {})}
+          onSelectProduct={onSelectProduct}
+          wishlist={wishlist || []}
+        />
       </div>
     );
   };

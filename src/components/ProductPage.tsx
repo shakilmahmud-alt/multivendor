@@ -48,6 +48,7 @@ export default function ProductPage({
   const [activeTab, setActiveTab] = useState<"overview" | "reviews" | "video">(
     "overview",
   );
+  const [isAdding, setIsAdding] = useState(false);
 
   const spec = product.specifications || {};
   const hasVariations = spec.has_variations && spec.variations && spec.variations.length > 0;
@@ -746,15 +747,30 @@ export default function ProductPage({
               </button>
               <button
                 onClick={() => {
+                  if (isAdding) return;
+                  setIsAdding(true);
                   onAddToCart(product, quantity, selectedVariation);
                   addToast(
                     `Added ${quantity} units of "${product.title}" to your shopping cart.`,
                     "success",
                   );
+                  setTimeout(() => setIsAdding(false), 1000);
                 }}
-                className="bg-brand-500 text-white border border-transparent hover:bg-white hover:text-brand-500 hover:border-brand-500 font-bold h-10 px-6 rounded shadow-sm cursor-pointer min-w-[120px] transition flex items-center justify-center text-[13px]"
+                className={`font-bold h-10 px-6 rounded shadow-sm cursor-pointer min-w-[120px] transition-all duration-300 flex items-center justify-center gap-2 text-[13px] ${
+                  isAdding
+                    ? "bg-green-500 text-white scale-105"
+                    : "bg-brand-500 text-white border border-transparent hover:bg-white hover:text-brand-500 hover:border-brand-500"
+                }`}
               >
-                Add to cart
+                {isAdding ? (
+                  <>
+                    <CheckCircle className="w-4 h-4 animate-bounce" /> Added
+                  </>
+                ) : (
+                  <>
+                    <ShoppingCart className="w-4 h-4" /> Add to cart
+                  </>
+                )}
               </button>
               <button
                 onClick={handleWishlistClick}

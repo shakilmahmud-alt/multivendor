@@ -97,6 +97,19 @@ export default function CategoryPage({ allProducts, onAddToCart, onAddWishlist, 
   };
 
   const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false);
+  const [isInitialLoading, setIsInitialLoading] = useState(true);
+
+  useEffect(() => {
+    if (allProducts.length > 0) {
+      setIsInitialLoading(false);
+    }
+  }, [allProducts]);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsInitialLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   const currentPage = parseInt(searchParams.get('page') || '1', 10);
   
   const handlePageChange = (pageAction: number | ((prev: number) => number)) => {
@@ -501,6 +514,20 @@ export default function CategoryPage({ allProducts, onAddToCart, onAddWishlist, 
               </div>
             )}
             </>
+            ) : isInitialLoading ? (
+              <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
+                {[...Array(8)].map((_, i) => (
+                  <div key={i} className="bg-white p-3 rounded-xl border border-slate-100 shadow-sm animate-pulse flex flex-col">
+                    <div className="w-full aspect-[4/5] bg-slate-200 rounded-lg mb-3"></div>
+                    <div className="h-4 bg-slate-200 rounded w-3/4 mb-2"></div>
+                    <div className="h-3 bg-slate-200 rounded w-1/2 mb-4"></div>
+                    <div className="flex justify-between items-center mt-auto pt-4">
+                      <div className="h-5 bg-slate-200 rounded w-1/3"></div>
+                      <div className="w-8 h-8 bg-slate-200 rounded-full"></div>
+                    </div>
+                  </div>
+                ))}
+              </div>
             ) : (
               <div className="bg-white p-12 rounded border border-slate-200 text-center flex flex-col items-center justify-center">
                 <Filter className="w-12 h-12 text-slate-300 mb-4" />
