@@ -714,6 +714,10 @@ function StoreFront() {
                             indicatorColor="bg-blue-500"
                             products={catProducts}
                             onSelectProduct={(p: Product) => navigate(`/product/${p.slug}`)}
+                              onAddToCart={handleAddToCart}
+                              onAddWishlist={handleAddWishlist}
+                              onQuickView={setQuickViewProduct}
+                              wishlist={wishlist}
                             layoutConfig={layout.settings}
                           />
                           <RenderSectionBanners categoryName={targetCategoryName} />
@@ -822,6 +826,10 @@ function StoreFront() {
                       indicatorColor="bg-emerald-500"
                       products={activeProductList.filter((p) => p.category?.toLowerCase() === "desktop")}
                       onSelectProduct={(p: Product) => navigate(`/product/${p.slug}`)}
+                              onAddToCart={handleAddToCart}
+                              onAddWishlist={handleAddWishlist}
+                              onQuickView={setQuickViewProduct}
+                              wishlist={wishlist}
                     />
                     <RenderSectionBanners categoryName="Desktop" />
 
@@ -831,6 +839,10 @@ function StoreFront() {
                       indicatorColor="bg-indigo-600"
                       products={activeProductList.filter((p) => p.category?.toLowerCase() === "laptop")}
                       onSelectProduct={(p: Product) => navigate(`/product/${p.slug}`)}
+                              onAddToCart={handleAddToCart}
+                              onAddWishlist={handleAddWishlist}
+                              onQuickView={setQuickViewProduct}
+                              wishlist={wishlist}
                     />
                     <RenderSectionBanners categoryName="Laptop" />
 
@@ -840,6 +852,10 @@ function StoreFront() {
                       indicatorColor="bg-rose-500"
                       products={activeProductList.filter((p) => p.category?.toLowerCase() === "component")}
                       onSelectProduct={(p: Product) => navigate(`/product/${p.slug}`)}
+                              onAddToCart={handleAddToCart}
+                              onAddWishlist={handleAddWishlist}
+                              onQuickView={setQuickViewProduct}
+                              wishlist={wishlist}
                     />
                     <RenderSectionBanners categoryName="Component" />
 
@@ -1213,6 +1229,20 @@ export function ProductCard({
   onSelectProduct,
   wishlist,
 }: ProductCardProps) {
+  const [isAdding, setIsAdding] = useState(false);
+
+  const handleAddClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (product.stock === 0 || isAdding) return;
+    
+    setIsAdding(true);
+    onAddToCart(product);
+    
+    setTimeout(() => {
+      setIsAdding(false);
+    }, 1000);
+  };
+
   // Check if out of stock
   const isOutOfStock = product.stock === 0;
 
@@ -1335,17 +1365,20 @@ export function ProductCard({
           <button
             type="button"
             disabled={isOutOfStock}
-            onClick={(e) => {
-              e.stopPropagation();
-              onAddToCart(product);
-            }}
-            className={`p-1.5 rounded-lg transition-all transform active:scale-90 ${
+            onClick={handleAddClick}
+            className={`p-1.5 rounded-lg transition-all duration-300 transform active:scale-90 ${
               isOutOfStock
                 ? "bg-slate-100 text-slate-350 cursor-not-allowed"
-                : "bg-brand-50 hover:bg-brand-500 text-brand-500 hover:text-white hover:shadow-md cursor-pointer"
+                : isAdding
+                  ? "bg-green-500 text-white scale-110 shadow-lg"
+                  : "bg-brand-50 hover:bg-brand-500 text-brand-500 hover:text-white hover:shadow-md cursor-pointer"
             }`}
           >
-            <ShoppingCart className="w-3.5 h-3.5" />
+            {isAdding ? (
+              <CheckCircle className="w-3.5 h-3.5 animate-bounce" />
+            ) : (
+              <ShoppingCart className="w-3.5 h-3.5" />
+            )}
           </button>
         </div>
       </div>

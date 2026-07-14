@@ -131,8 +131,19 @@ export default function CategorySlider({
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
               {displayProducts.map((p, idx) => (
-                <div key={p.id} className="w-[180px] sm:w-[200px] flex-shrink-0">
-                  {renderProductItem(p, idx)}
+                <div key={p.id} className="w-[180px] sm:w-[200px] flex-shrink-0 h-full flex">
+                 {onAddToCart && onAddWishlist && onQuickView ? (
+                   <ProductCard
+                     product={p}
+                     onAddToCart={onAddToCart}
+                     onAddWishlist={onAddWishlist}
+                     onQuickView={onQuickView}
+                     onSelectProduct={onSelectProduct}
+                     wishlist={wishlist}
+                   />
+                 ) : (
+                   renderProductItem(p, idx)
+                 )}
                 </div>
               ))}
             </div>
