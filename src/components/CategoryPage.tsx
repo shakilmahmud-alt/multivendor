@@ -97,6 +97,19 @@ export default function CategoryPage({ allProducts, onAddToCart, onAddWishlist, 
   };
 
   const [showMobileFilters, setShowMobileFilters] = useState<boolean>(false);
+  const currentPage = parseInt(searchParams.get('page') || '1', 10);
+  
+  const handlePageChange = (pageAction: number | ((prev: number) => number)) => {
+    const newPage = typeof pageAction === 'function' ? pageAction(currentPage) : pageAction;
+    const newParams = new URLSearchParams(searchParams);
+    if (newPage > 1) {
+      newParams.set('page', newPage.toString());
+    } else {
+      newParams.delete('page');
+    }
+    setSearchParams(newParams);
+  };
+  const productsPerPage = 20;
 
   // Temporary mobile modal states
   const [tempMinPrice, setTempMinPrice] = useState<number | "">(minPrice);
@@ -285,6 +298,17 @@ export default function CategoryPage({ allProducts, onAddToCart, onAddWishlist, 
     setSearchParams(newParams);
   };
 
+  const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+  const currentProducts = filteredProducts.slice((currentPage - 1) * productsPerPage, currentPage * productsPerPage);
+  
+  useEffect(() => {
+    if (currentPage > totalPages && totalPages > 0) {
+      handlePageChange(1);
+    }
+  }, [totalPages, currentPage]);
+  
+  
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans pb-12">
       {/* Breadcrumbs */}
@@ -429,8 +453,9 @@ export default function CategoryPage({ allProducts, onAddToCart, onAddWishlist, 
 
             {/* Product Grid */}
             {filteredProducts.length > 0 ? (
+              <>
               <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4">
-                {filteredProducts.map(product => (
+                {currentProducts.map(product => (
                   <ProductCard 
                     key={product.id} 
                     product={product} 
@@ -442,6 +467,40 @@ export default function CategoryPage({ allProducts, onAddToCart, onAddWishlist, 
                   />
                 ))}
               </div>
+            {totalPages > 1 && (
+              <div className="flex items-center justify-center gap-2 mt-8">
+                <button 
+                  onClick={() => handlePageChange(p => Math.max(1, p - 1))}
+                  disabled={currentPage === 1}
+                  className="px-3 py-1.5 rounded-lg border border-slate-200 text-sm font-medium text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed enabled:hover:bg-brand-500 enabled:hover:text-white enabled:hover:border-brand-500 transition-colors"
+                >
+                  Previous
+                </button>
+                <div className="flex items-center gap-1">
+                  {[...Array(totalPages)].map((_, i) => (
+                    <button
+                      key={i}
+                      onClick={() => handlePageChange(i + 1)}
+                      className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-bold transition-colors ${
+                        currentPage === i + 1 
+                          ? 'bg-brand-500 text-white' 
+                          : 'text-slate-600 hover:bg-slate-100'
+                      }`}
+                    >
+                      {i + 1}
+                    </button>
+                  ))}
+                </div>
+                <button 
+                  onClick={() => handlePageChange(p => Math.min(totalPages, p + 1))}
+                  disabled={currentPage === totalPages}
+                  className="px-3 py-1.5 rounded-lg border border-slate-200 text-sm font-medium text-slate-600 disabled:opacity-50 disabled:cursor-not-allowed enabled:hover:bg-brand-500 enabled:hover:text-white enabled:hover:border-brand-500 transition-colors"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+            </>
             ) : (
               <div className="bg-white p-12 rounded border border-slate-200 text-center flex flex-col items-center justify-center">
                 <Filter className="w-12 h-12 text-slate-300 mb-4" />

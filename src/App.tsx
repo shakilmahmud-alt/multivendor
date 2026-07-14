@@ -1342,7 +1342,7 @@ export function ProductCard({
             className={`p-1.5 rounded-lg transition-all transform active:scale-90 ${
               isOutOfStock
                 ? "bg-slate-100 text-slate-350 cursor-not-allowed"
-                : "bg-brand-50 hover:bg-brand-500 text-brand-500 hover:text-slate-950 hover:shadow-md cursor-pointer"
+                : "bg-brand-50 hover:bg-brand-500 text-brand-500 hover:text-white hover:shadow-md cursor-pointer"
             }`}
           >
             <ShoppingCart className="w-3.5 h-3.5" />
