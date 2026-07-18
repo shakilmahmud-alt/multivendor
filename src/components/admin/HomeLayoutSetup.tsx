@@ -169,7 +169,7 @@ export default function HomeLayoutSetup() {
   if (loading) return <div className="p-4">Loading layouts...</div>;
 
   return (
-    <div className="max-w-7xl mx-auto py-2">
+    <div className="w-full mx-auto py-2">
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-xl font-bold text-slate-800 flex items-center gap-2">
           <LayoutDashboard className="w-5 h-5 text-blue-600" /> Home Layout Configuration

@@ -68,7 +68,7 @@ export default function ProductLanding() {
 
   return (
     <div className="bg-slate-50 min-h-screen pb-12">
-      <div className="w-full mx-auto px-4 pt-8">
+      <div className="w-full mx-auto px-0 pt-8">
         
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           

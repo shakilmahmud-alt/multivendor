@@ -433,8 +433,8 @@ export default function ProductPage({
   return (
     <div className="bg-white min-h-screen font-sans">
       {/* Breadcrumb section */}
-      <div className="w-full bg-white py-3 px-4 md:px-6">
-        <div className="w-full mx-auto flex flex-wrap items-center gap-1.5 text-[11px] text-slate-450 font-bold select-none">
+      <div className="w-full bg-white py-3 px-4 sm:px-6 lg:px-8 mx-auto">
+        <div className="w-full flex flex-wrap items-center gap-1.5 text-[11px] text-slate-450 font-bold select-none">
           <button
             onClick={onBackToHome}
             className="hover:text-[#007bff] transition cursor-pointer text-[#007bff]"
@@ -483,7 +483,7 @@ export default function ProductPage({
         </div>
       </div>
 
-      <div className="w-full mx-auto px-4 py-6 md:py-8 space-y-8">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 space-y-8">
         {/* Main top columns grid */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
           {/* Left Layout Container: gallery + details + tabs */}
@@ -644,7 +644,7 @@ export default function ProductPage({
                   Key Features
                 </h3>
                 <div
-                  className="text-[13px] text-slate-600 prose prose-sm max-w-none prose-p:my-1 prose-ul:list-none prose-ul:pl-0 prose-li:my-0.5"
+                  className="text-[15px] text-slate-700 prose max-w-none prose-p:my-1.5 prose-ul:list-none prose-ul:pl-0 prose-li:my-1"
                   dangerouslySetInnerHTML={{ __html: product.shortDescription }}
                 />
               </div>
@@ -841,7 +841,7 @@ export default function ProductPage({
                 <h4 className="font-bold text-slate-800 text-[15px] mb-2">
                   {product.title}
                 </h4>
-                <div className="text-slate-600 leading-relaxed space-y-3 text-[13px] prose prose-sm max-w-none overflow-x-auto w-full">
+                <div className="text-slate-700 leading-relaxed space-y-4 text-[15px] md:text-[15.5px] prose max-w-none overflow-x-auto w-full">
                   {product.description ? (
                     <div
                       dangerouslySetInnerHTML={{ __html: product.description }}
@@ -1268,42 +1268,14 @@ export default function ProductPage({
                 )
                 .slice(0, 12) // max 12
                 .map((p) => (
-                  <Link
+                  <ProductCard
                     key={p.id}
-                    to={`/product/${p.slug}`}
-                    onClick={() => onSelectProduct(p)}
-                    className="bg-white border border-slate-100/80 rounded-lg p-3 flex flex-col hover:border-orange-500/30 transition duration-200"
-                  >
-                    <div className="w-full flex justify-start mb-1.5 min-h-[20px]">
-                      {p.oldPrice > p.price && (
-                        <span className="bg-brand-500 text-white text-[9px] font-bold px-2 py-0.5 rounded-sm tracking-wide">
-                          +{(p.oldPrice - p.price).toLocaleString()}.00 Off
-                        </span>
-                      )}
-                    </div>
-                    <div className="w-full h-24 sm:h-28 mb-4 flex items-center justify-center">
-                      <img
-                        src={p.thumbnail}
-                        alt={p.title}
-                        className="max-w-full max-h-full object-contain mix-blend-multiply"
-                      />
-                    </div>
-                    <div className="flex flex-col items-center text-center mt-auto">
-                      <h4 className="text-[11px] font-bold text-slate-800 leading-snug line-clamp-2 min-h-[32px] mb-2 px-1">
-                        {p.title}
-                      </h4>
-                      <div className="flex items-center justify-center gap-1.5 pb-1">
-                        {p.oldPrice && (
-                          <span className="text-[10px] text-slate-400 line-through">
-                            ৳{p.oldPrice.toLocaleString()}.00
-                          </span>
-                        )}
-                        <span className="text-[12px] font-bold text-slate-800">
-                          ৳{p.price.toLocaleString()}.00
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
+                    product={p}
+                    onAddToCart={onAddToCart}
+                    onAddWishlist={onAddWishlist}
+                    onSelectProduct={onSelectProduct}
+                    wishlist={wishlist}
+                  />
                 ))}
             </div>
           </div>

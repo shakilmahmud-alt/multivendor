@@ -333,7 +333,7 @@ export default function CategoryPage({ allProducts, onAddToCart, onAddWishlist, 
         </div>
       </div>
 
-      <div className="w-full mx-auto px-4 sm:px-6 pt-6">
+      <div className="w-full mx-auto px-0 sm:px-6 pt-6">
         <div className="flex flex-col lg:flex-row gap-6">
           
           {/* Left Sidebar */}

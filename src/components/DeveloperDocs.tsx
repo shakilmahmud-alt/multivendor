@@ -19,7 +19,7 @@ export default function TopNavigation() {
   return (
     <div className="w-full bg-slate-900 text-white font-sans text-xs">
       {/* Upper Utility Bar */}
-      <div className="max-w-7xl mx-auto px-4 py-2 flex justify-between items-center border-b border-slate-800">
+      <div className="w-full mx-auto px-4 py-2 flex justify-between items-center border-b border-slate-800">
         <div className="flex items-center gap-4 text-slate-300">
           <span className="flex items-center gap-1">
             <Phone className="w-3.5 h-3.5 text-brand-500" /> +8801784905075
@@ -41,7 +41,7 @@ export default function TopNavigation() {
 
       {/* Main Header */}
       <div className="bg-slate-950 px-4 py-4 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           {/* Logo */}
           <div className="flex items-center gap-2">
             <div className="bg-brand-500 text-slate-950 font-bold px-3 py-1.5 rounded-lg text-lg tracking-wider font-mono">
@@ -330,7 +330,7 @@ CREATE TABLE public.products (
               <ul className="space-y-3.5 text-xs text-slate-300">
                 <li className="flex justify-between">
                   <span className="text-slate-400 font-semibold text-[11px]">Desktop Layout</span>
-                  <span className="text-slate-250">Max Container <strong>1280px (w-full max-w-7xl)</strong></span>
+                  <span className="text-slate-250">Max Container <strong>1280px (w-full w-full)</strong></span>
                 </li>
                 <li className="flex justify-between">
                   <span className="text-slate-400 font-semibold text-[11px]">Product Grid</span>

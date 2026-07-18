@@ -318,7 +318,7 @@ export default function Checkout({ cart, setCart, onAddToCart, onRemoveFromCart,
   return (
     <div className="bg-slate-50 min-h-screen pb-20">
 
-      <div className="w-full mx-auto px-4 py-8">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <h1 className="text-2xl font-bold text-slate-800 mb-6">
           {currentStep === 1 ? 'Shopping cart' : currentStep === 2 ? 'Checkout' : 'PAYMENT METHOD'}
         </h1>
