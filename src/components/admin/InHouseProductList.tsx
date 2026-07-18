@@ -22,6 +22,10 @@ export default function InHouseProductList() {
   const [categoryFilter, setCategoryFilter] = useState('');
   const [subCategoryFilter, setSubCategoryFilter] = useState('');
   const [subSubCategoryFilter, setSubSubCategoryFilter] = useState('');
+  
+  // Pagination
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 40;
 
   // Dependency Data
   const [categoriesList, setCategoriesList] = useState<any[]>([]);
@@ -174,12 +178,23 @@ export default function InHouseProductList() {
     return matchesSearch && matchesBrand && matchesCategory && matchesSubCategory && matchesSubSubCategory;
   });
 
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchQuery, brandFilter, categoryFilter, subCategoryFilter, subSubCategoryFilter]);
+
+  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
+  const paginatedProducts = filteredProducts.slice(
+    (currentPage - 1) * itemsPerPage,
+    currentPage * itemsPerPage
+  );
+
   const handleResetFilters = () => {
     setSearchQuery('');
     setBrandFilter('');
     setCategoryFilter('');
     setSubCategoryFilter('');
     setSubSubCategoryFilter('');
+    setCurrentPage(1);
   };
 
   return (
@@ -297,14 +312,14 @@ export default function InHouseProductList() {
                 <tr>
                   <td colSpan={6} className="px-4 py-8 text-center text-slate-500">Loading...</td>
                 </tr>
-              ) : filteredProducts.length === 0 ? (
+              ) : paginatedProducts.length === 0 ? (
                 <tr>
                   <td colSpan={6} className="px-4 py-8 text-center text-slate-500">No products found.</td>
                 </tr>
               ) : (
-                filteredProducts.map((product, index) => (
+                paginatedProducts.map((product, index) => (
                   <tr key={product.id} className="hover:bg-slate-50 transition">
-                    <td className="px-4 py-3">{index + 1}</td>
+                    <td className="px-4 py-3">{(currentPage - 1) * itemsPerPage + index + 1}</td>
                     <td className="px-4 py-3">
                       <div className="flex items-center gap-3">
                         <div className="w-10 h-10 rounded border border-slate-200 bg-white overflow-hidden flex items-center justify-center shrink-0">
@@ -402,6 +417,61 @@ export default function InHouseProductList() {
             </tbody>
           </table>
         </div>
+        
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="p-4 border-t border-slate-200 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="text-sm text-slate-600">
+              Showing {((currentPage - 1) * itemsPerPage) + 1} to {Math.min(currentPage * itemsPerPage, filteredProducts.length)} of {filteredProducts.length} entries
+            </div>
+            <div className="flex items-center gap-1">
+              <button 
+                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                disabled={currentPage === 1}
+                className="px-3 py-1 border border-slate-200 rounded text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Previous
+              </button>
+              
+              {Array.from({ length: totalPages }).map((_, idx) => {
+                // Show max 5 pages around current page
+                if (
+                  idx === 0 || 
+                  idx === totalPages - 1 || 
+                  (idx >= currentPage - 2 && idx <= currentPage)
+                ) {
+                  return (
+                    <button
+                      key={idx}
+                      onClick={() => setCurrentPage(idx + 1)}
+                      className={`w-8 h-8 flex items-center justify-center rounded text-sm ${
+                        currentPage === idx + 1 
+                          ? 'bg-blue-600 text-white font-medium' 
+                          : 'border border-slate-200 text-slate-600 hover:bg-slate-50'
+                      }`}
+                    >
+                      {idx + 1}
+                    </button>
+                  );
+                } else if (
+                  idx === 1 && currentPage > 3 ||
+                  idx === totalPages - 2 && currentPage < totalPages - 2
+                ) {
+                  return <span key={idx} className="px-1 text-slate-400">...</span>;
+                }
+                return null;
+              })}
+
+              <button 
+                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                disabled={currentPage === totalPages}
+                className="px-3 py-1 border border-slate-200 rounded text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                Next
+              </button>
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Deny Reason Modal */}
