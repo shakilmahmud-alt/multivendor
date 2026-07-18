@@ -32,7 +32,7 @@ export default function ReviewSystem() {
 
   return (
     <div className="w-full bg-slate-100/60 py-6 px-6 font-sans border-t border-slate-200">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
           
           {/* REVIEW FORM PANEL */}

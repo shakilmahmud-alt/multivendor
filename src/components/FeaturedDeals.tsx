@@ -111,7 +111,7 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
   const formatNumber = (num: number) => String(num).padStart(2, "0");
 
   return (
-    <div id="quick-hurry" className="w-full max-w-7xl mx-auto px-4 py-4 font-sans">
+    <div id="quick-hurry" className="w-full w-full mx-auto px-4 py-4 font-sans">
       <div className="w-full">
         
         {/* Header Row */}

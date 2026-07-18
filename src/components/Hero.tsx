@@ -159,7 +159,7 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
 
   return (
     <section className="w-full bg-slate-100/60 py-3 px-6 font-sans">
-      <div className="max-w-7xl mx-auto">
+      <div className="w-full mx-auto">
 
 
         {/* CENTER PANEL: Main dynamic slides */}
@@ -347,3 +347,4 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
     </section>
   );
 }
+

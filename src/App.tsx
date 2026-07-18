@@ -594,7 +594,7 @@ function StoreFront() {
               />
 
               {/* MAIN SCREEN MULTI-GRID WRAPPER */}
-              <main className="max-w-7xl mx-auto px-4 py-8 flex-1 w-full space-y-12">
+              <main className="w-full mx-auto px-4 py-8 flex-1 w-full space-y-12">
                 {/* Dynamic Category Filter Alert Bar */}
                 {activeCategory && (
                   <div className="bg-brand-50 border border-brand-200 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 animate-fadeIn">
@@ -999,8 +999,8 @@ function StoreFront() {
       </Routes>
 
       {/* FOOTER STRUCTURE */}
-      <footer className="w-full bg-[#737373] text-white py-12 px-4 shadow-sm font-sans">
-        <div className="max-w-7xl mx-auto">
+      <footer className="w-full bg-[#737373] text-white py-12 px-4 md:px-12 lg:px-20 shadow-sm font-sans">
+        <div className="w-full mx-auto">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8 md:gap-8 pb-8">
             {/* Column 1: Logo and Contact/Address Info */}
             <div className="space-y-6">
@@ -1713,3 +1713,4 @@ export default function App() {
   );
 }
 // Force Vercel Deploy
+

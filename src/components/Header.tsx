@@ -142,8 +142,8 @@ export default function Header({
 
 
       {/* Main Header Row */}
-      <div className="w-full bg-white text-slate-900 py-3 px-6 border-b border-slate-200">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
+      <div className="w-full bg-white text-slate-900 py-3 px-4 md:px-12 lg:px-20 border-b border-slate-200">
+        <div className="w-full mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           
           {/* Branding & Logo and Mobile Actions */}
           <div className="flex items-center justify-between w-full md:w-auto">
@@ -614,7 +614,7 @@ export default function Header({
 
       {/* FULL WIDTH CATEGORY MENU (Desktop Only) */}
       <div className="hidden lg:block w-full bg-[#002d5b] border-t border-[#002d5b]">
-        <div className="max-w-7xl mx-auto flex w-full text-white relative z-40 flex-wrap justify-between px-2">
+        <div className="w-full mx-auto flex w-full text-white relative z-40 flex-wrap justify-between px-4 md:px-12 lg:px-20">
           {dbCategories.map((cat) => {
             const subCats = dbSubCategories.filter(s => s.category_id === cat.id);
             const hasSubCats = subCats.length > 0;
@@ -861,3 +861,4 @@ export default function Header({
     </header>
   );
 }
+

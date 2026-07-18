@@ -119,14 +119,14 @@ export default function SearchPage({ allProducts, onAddToCart, onAddWishlist, on
     <div className="min-h-screen bg-slate-50 font-sans pb-12">
       {/* Breadcrumbs */}
       <div className="bg-white border-b border-slate-200 py-3 px-6 shadow-sm">
-        <div className="max-w-7xl mx-auto flex items-center gap-2 text-xs font-semibold text-slate-500">
+        <div className="w-full mx-auto flex items-center gap-2 text-xs font-semibold text-slate-500">
           <Link to="/" className="hover:text-brand-500 transition cursor-pointer">Home</Link>
           <ChevronRight className="w-3.5 h-3.5" />
           <span className="text-brand-500">Search Results for "{query}"</span>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-6">
+      <div className="w-full mx-auto px-4 sm:px-6 pt-6">
         <div className="flex flex-col lg:flex-row gap-6">
           
           {/* Left Sidebar */}

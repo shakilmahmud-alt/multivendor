@@ -354,7 +354,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
             className="w-full h-full object-cover" 
           />
         </div>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative -mt-16">
+        <div className="w-full mx-auto px-4 sm:px-6 lg:px-8 relative -mt-16">
           <div className="bg-white rounded-lg shadow-sm border border-slate-100 p-4 sm:p-6 flex flex-col sm:flex-row items-center gap-4 sm:gap-6">
             <div className="shrink-0">
               <img 
@@ -385,7 +385,7 @@ export default function StorePage({ allProducts, onSelectProduct, onQuickView }:
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row gap-8">
           
           {/* Left Sidebar */}

@@ -434,7 +434,7 @@ export default function ProductPage({
     <div className="bg-white min-h-screen font-sans">
       {/* Breadcrumb section */}
       <div className="w-full bg-white py-3 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center gap-1.5 text-[11px] text-slate-450 font-bold select-none">
+        <div className="w-full mx-auto flex flex-wrap items-center gap-1.5 text-[11px] text-slate-450 font-bold select-none">
           <button
             onClick={onBackToHome}
             className="hover:text-[#007bff] transition cursor-pointer text-[#007bff]"
@@ -483,7 +483,7 @@ export default function ProductPage({
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 py-6 md:py-8 space-y-8">
+      <div className="w-full mx-auto px-4 py-6 md:py-8 space-y-8">
         {/* Main top columns grid */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 items-start">
           {/* Left Layout Container: gallery + details + tabs */}
