@@ -268,6 +268,7 @@ function StoreFront() {
             shortDescription: p.short_desc_en,
             slug: p.slug,
             brand: brandMap.get(p.brand_id),
+            galleryImages: p.additional_images || [],
             category_id: p.category_id,
             sub_category_id: p.sub_category_id,
             sub_sub_category_id: p.sub_sub_category_id,
@@ -1230,6 +1231,22 @@ export function ProductCard({
   wishlist,
 }: ProductCardProps) {
   const [isAdding, setIsAdding] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const images = [product.thumbnail, ...(product.galleryImages || [])].filter(Boolean);
+
+  useEffect(() => {
+    let interval: NodeJS.Timeout;
+    if (isHovered && images.length > 1) {
+      interval = setInterval(() => {
+        setCurrentImageIndex((prev) => (prev + 1) % images.length);
+      }, 1000);
+    } else {
+      setCurrentImageIndex(0);
+    }
+    return () => clearInterval(interval);
+  }, [isHovered, images.length]);
 
   const handleAddClick = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -1260,7 +1277,11 @@ export function ProductCard({
       })();
 
   return (
-    <div className="group bg-white flex flex-col justify-between h-full relative">
+    <div 
+      className="group bg-white flex flex-col justify-between h-full relative"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+    >
       {/* Top action details / discount ribbon */}
       {product.discountBadge && (
         <span className="absolute top-2 left-2 bg-brand-600 text-white font-mono font-black text-[9px] px-2.5 py-0.5 rounded shadow-sm z-10 animate-pulse">
@@ -1270,14 +1291,19 @@ export function ProductCard({
 
       {/* Dynamic image panel */}
       <div
-        className="relative aspect-square rounded overflow-hidden mb-3 bg-white flex items-center justify-center border border-slate-100 p-2 select-none cursor-pointer"
+        className="relative aspect-square rounded overflow-hidden mb-3 bg-white flex items-center justify-center border border-slate-100 select-none cursor-pointer"
         onClick={() => onSelectProduct?.(product)}
       >
-        <img
-          src={product.thumbnail}
-          alt={product.title}
-          className="w-full h-full object-contain group-hover:scale-105 transition duration-300"
-        />
+        {images.map((imgUrl, index) => (
+          <img
+            key={index}
+            src={imgUrl}
+            alt={product.title}
+            className={`absolute inset-0 p-2 w-full h-full object-contain group-hover:scale-105 transition-opacity duration-500 ease-in-out ${
+              index === currentImageIndex ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        ))}
 
         {/* Gray overlay on Out of Stock items */}
         {isOutOfStock && (
