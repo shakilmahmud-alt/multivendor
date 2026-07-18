@@ -1318,14 +1318,14 @@ export function ProductCard({
       </div>
 
       {/* Info Details container */}
-      <div className="px-1 pb-1 flex-1 flex flex-col justify-between">
+      <div className="px-2.5 pb-2 flex-1 flex flex-col justify-between">
         <div>
           {/* Vendor identification brand tag */}
-          <span className="bg-slate-100 text-slate-600 text-[8px] font-extrabold uppercase px-1.5 py-0.5 rounded tracking-wide inline-block mb-1">
+          <span className="bg-slate-100 text-slate-600 text-[9px] font-extrabold uppercase px-1.5 py-0.5 rounded tracking-wide inline-block mb-1">
             Store: {product.storeName}
           </span>
           <h4
-            className="text-[11px] font-black text-slate-850 line-clamp-2 hover:text-brand-600 transition min-h-[30px] leading-tight cursor-pointer"
+            className="text-[13px] font-black text-slate-850 line-clamp-2 hover:text-brand-600 transition min-h-[30px] leading-tight cursor-pointer"
             onClick={() => onSelectProduct?.(product)}
           >
             {product.title}
@@ -1352,11 +1352,11 @@ export function ProductCard({
         {/* Price & Cart CTA action row */}
         <div className="mt-3.5 pt-2 border-t border-slate-50 flex items-center justify-between">
           <div className="text-left">
-            <p className="text-sm font-black text-slate-900 leading-none">
+            <p className="text-[15px] font-black text-slate-900 leading-none">
               ৳{product.price.toLocaleString()}
             </p>
             {product.oldPrice && (
-              <p className="text-[10px] text-slate-400 line-through mt-0.5">
+              <p className="text-xs text-slate-400 line-through mt-0.5">
                 ৳{product.oldPrice.toLocaleString()}
               </p>
             )}
@@ -1366,7 +1366,7 @@ export function ProductCard({
             type="button"
             disabled={isOutOfStock}
             onClick={handleAddClick}
-            className={`p-1.5 rounded-lg transition-all duration-300 transform active:scale-90 ${
+            className={`p-1.5 mr-1 rounded-lg transition-all duration-300 transform active:scale-90 ${
               isOutOfStock
                 ? "bg-slate-100 text-slate-350 cursor-not-allowed"
                 : isAdding
