@@ -121,6 +121,7 @@ export default function CategoryPage({ allProducts, onAddToCart, onAddWishlist, 
       newParams.delete('page');
     }
     setSearchParams(newParams);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   const productsPerPage = 20;
 
