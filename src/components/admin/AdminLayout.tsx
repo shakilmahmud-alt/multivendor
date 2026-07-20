@@ -1051,7 +1051,7 @@ export default function AdminLayout() {
         </header>
 
         {/* Dashboard Content Outlet */}
-        <main className="flex-1 overflow-y-auto bg-slate-50 p-6">
+        <main id="admin-main-content" className="flex-1 overflow-y-auto bg-slate-50 p-6">
           <Outlet />
         </main>
       </div>

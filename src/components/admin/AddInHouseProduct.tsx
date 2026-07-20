@@ -139,10 +139,10 @@ export default function AddInHouseProduct() {
         supabase.from('product_attributes').select('*').order('created_at', { ascending: true })
       ]);
 
-      if (catRes.data) setCategoriesList(catRes.data);
-      if (subRes.data) setSubCategoriesList(subRes.data);
-      if (subSubRes.data) setSubSubCategoriesList(subSubRes.data);
-      if (brandRes.data) setBrandsList(brandRes.data);
+      if (catRes.data) setCategoriesList(catRes.data.sort((a: any, b: any) => a.name.localeCompare(b.name)));
+      if (subRes.data) setSubCategoriesList(subRes.data.sort((a: any, b: any) => a.name.localeCompare(b.name)));
+      if (subSubRes.data) setSubSubCategoriesList(subSubRes.data.sort((a: any, b: any) => a.name.localeCompare(b.name)));
+      if (brandRes.data) setBrandsList(brandRes.data.sort((a: any, b: any) => a.name.localeCompare(b.name)));
       if (attrRes.data) setDbAttributesList(attrRes.data);
     } catch (err) {
       console.error('Error fetching dependencies:', err);

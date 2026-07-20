@@ -197,6 +197,11 @@ export default function InHouseProductList() {
     setCurrentPage(1);
   };
 
+  const handlePageChange = (page: number | ((prev: number) => number)) => {
+    setCurrentPage(page);
+    document.getElementById('admin-main-content')?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="w-full">
       <div className="flex items-center gap-2 mb-6">
@@ -426,7 +431,7 @@ export default function InHouseProductList() {
             </div>
             <div className="flex items-center gap-1">
               <button 
-                onClick={() => setCurrentPage(prev => Math.max(1, prev - 1))}
+                onClick={() => handlePageChange(prev => Math.max(1, prev - 1))}
                 disabled={currentPage === 1}
                 className="px-3 py-1 border border-slate-200 rounded text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
               >
@@ -443,7 +448,7 @@ export default function InHouseProductList() {
                   return (
                     <button
                       key={idx}
-                      onClick={() => setCurrentPage(idx + 1)}
+                      onClick={() => handlePageChange(idx + 1)}
                       className={`w-8 h-8 flex items-center justify-center rounded text-sm ${
                         currentPage === idx + 1 
                           ? 'bg-blue-600 text-white font-medium' 
@@ -463,7 +468,7 @@ export default function InHouseProductList() {
               })}
 
               <button 
-                onClick={() => setCurrentPage(prev => Math.min(totalPages, prev + 1))}
+                onClick={() => handlePageChange(prev => Math.min(totalPages, prev + 1))}
                 disabled={currentPage === totalPages}
                 className="px-3 py-1 border border-slate-200 rounded text-sm text-slate-600 hover:bg-slate-50 disabled:opacity-50 disabled:cursor-not-allowed"
               >
