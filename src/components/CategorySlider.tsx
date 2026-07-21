@@ -65,7 +65,7 @@ export default function CategorySlider({
 
   return (
     <div className="w-full bg-white py-6 border-t border-slate-100">
-      <div className="w-full mx-auto px-0 sm:px-6">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="flex justify-between items-center mb-5">
           <div className="flex items-center gap-2">

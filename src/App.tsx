@@ -468,7 +468,7 @@ function StoreFront() {
     const isSingle = banners.length === 1;
 
     return (
-      <div className={`grid ${isSingle ? 'grid-cols-1' : 'grid-cols-2'} md:grid-cols-2 gap-4 mt-6 mb-2`}>
+      <div className={`grid ${isSingle ? 'grid-cols-1' : 'grid-cols-2'} md:grid-cols-2 gap-4 mt-6 mb-2 px-4 sm:px-6 lg:px-8`}>
         {banners.map(b => (
           <div 
             key={b.id} 
@@ -595,11 +595,12 @@ function StoreFront() {
               />
 
               {/* MAIN SCREEN MULTI-GRID WRAPPER */}
-              <main className="w-full mx-auto px-0 py-8 flex-1 w-full space-y-12">
+              <main className="w-full mx-auto px-0 py-8 flex-1 space-y-12">
                 {/* Dynamic Category Filter Alert Bar */}
                 {activeCategory && (
-                  <div className="bg-brand-50 border border-brand-200 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 animate-fadeIn">
-                    <div>
+                  <div className="px-4 sm:px-6 lg:px-8 w-full mx-auto">
+                    <div className="bg-brand-50 border border-brand-200 rounded-2xl p-4 flex flex-col sm:flex-row items-center justify-between gap-4 animate-fadeIn">
+                      <div>
                       <p className="text-xs font-semibold text-slate-500 uppercase tracking-widest leading-none">
                         Filtering active products
                       </p>
@@ -615,6 +616,7 @@ function StoreFront() {
                     >
                       Reset Filters
                     </button>
+                    </div>
                   </div>
                 )}
 

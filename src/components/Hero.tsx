@@ -158,8 +158,8 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
   ];
 
   return (
-    <section className="w-full bg-slate-100/60 py-3 px-6 font-sans">
-      <div className="w-full mx-auto">
+    <section className="w-full bg-slate-100/60 py-3 px-0 font-sans">
+      <div className="w-full mx-auto px-4 sm:px-6 lg:px-8">
 
 
         {/* CENTER PANEL: Main dynamic slides */}

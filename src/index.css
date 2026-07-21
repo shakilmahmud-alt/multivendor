@@ -29,6 +29,7 @@
 @layer base {
   html, body {
     font-family: Tahoma, Verdana, sans-serif !important;
+    overflow-x: hidden;
   }
 }
 
