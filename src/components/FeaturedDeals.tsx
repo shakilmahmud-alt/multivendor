@@ -129,11 +129,11 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
           <div className="flex flex-col md:flex-row gap-5">
             {/* Left side: Banner Image */}
             <div className="hidden md:block w-full md:w-[260px] shrink-0">
-              <div className="relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 h-full min-h-[160px] md:min-h-[340px] border border-slate-200 bg-white">
+              <div className="group relative rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition duration-300 h-full min-h-[160px] md:min-h-[340px] border border-slate-200 bg-white">
                 <img 
                   src={bannerImage} 
                   alt={title} 
-                  className="w-full h-full object-cover hover:scale-102 transition duration-500"
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
               </div>
             </div>

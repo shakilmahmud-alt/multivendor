@@ -184,7 +184,7 @@ export default function Hero({ onSelectCategory, activeCategory, products = [] }
               <img 
                 src={CAROUSEL_SLIDES[currentSlide].image} 
                 alt="Highlight Banner" 
-                className="w-full h-full object-cover transition-all duration-1000 scale-100 group-hover:scale-102"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
               />
             </div>
 

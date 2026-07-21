@@ -473,9 +473,9 @@ function StoreFront() {
           <div 
             key={b.id} 
             onClick={() => b.target_url && window.open(b.target_url, "_blank")}
-            className={`rounded-xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition ${b.banner_type === 'Section Banner (Full Width)' ? 'md:col-span-2' : 'col-span-1'}`}
+            className={`group rounded-xl overflow-hidden cursor-pointer shadow-sm hover:shadow-md transition ${b.banner_type === 'Section Banner (Full Width)' ? 'md:col-span-2' : 'col-span-1'}`}
           >
-            <img src={b.image_url} alt="Section Banner" className="w-full h-auto object-cover" />
+            <img src={b.image_url} alt="Section Banner" className="w-full h-auto object-cover transition-transform duration-500 group-hover:scale-105" />
           </div>
         ))}
       </div>
