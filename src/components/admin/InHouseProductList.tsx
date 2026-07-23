@@ -173,7 +173,7 @@ export default function InHouseProductList() {
     const matchesBrand = brandFilter ? p.brand_id === brandFilter : true;
     const matchesCategory = categoryFilter ? p.category_id === categoryFilter : true;
     const matchesSubCategory = subCategoryFilter ? p.sub_category_id === subCategoryFilter : true;
-    const matchesSubSubCategory = subSubCategoryFilter ? p.sub_sub_category_id === subSubCategoryFilter : true;
+    const matchesSubSubCategory = subSubCategoryFilter ? String(p.sub_sub_category_id || '').split(',').includes(subSubCategoryFilter) : true;
     
     return matchesSearch && matchesBrand && matchesCategory && matchesSubCategory && matchesSubSubCategory;
   });
@@ -343,7 +343,7 @@ export default function InHouseProductList() {
                       {[
                         categoriesList.find(c => c.id === product.category_id)?.name,
                         subCategoriesList.find(c => c.id === product.sub_category_id)?.name,
-                        subSubCategoriesList.find(c => c.id === product.sub_sub_category_id)?.name
+                        String(product.sub_sub_category_id || '').split(',').map(id => subSubCategoriesList.find(c => c.id === id)?.name).filter(Boolean).join(', ')
                       ].filter(Boolean).join(' => ') || 'Uncategorized'}
                     </td>
                     <td className="px-4 py-3 text-right font-medium text-slate-700">

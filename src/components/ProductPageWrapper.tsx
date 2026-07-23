@@ -38,8 +38,11 @@ export default function ProductPageWrapper({ onAddToCart, onAddWishlist, onSelec
           if (subData) subCatName = subData.name;
         }
         if (data.sub_sub_category_id) {
-          const { data: subSubData } = await supabase.from('sub_sub_categories').select('name').eq('id', data.sub_sub_category_id).single();
-          if (subSubData) subSubCatName = subSubData.name;
+          const ids = data.sub_sub_category_id.split(',');
+          const { data: subSubData } = await supabase.from('sub_sub_categories').select('name').in('id', ids);
+          if (subSubData && subSubData.length > 0) {
+            subSubCatName = subSubData.map(d => d.name).join(', ');
+          }
         }
         
         const unitPrice = parseFloat(data.unit_price) || 0;

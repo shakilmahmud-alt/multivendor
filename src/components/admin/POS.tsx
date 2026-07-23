@@ -118,8 +118,11 @@ export default function POS() {
           if (p.sub_category_id && subCatMap.has(p.sub_category_id)) {
             catName += ` / ${subCatMap.get(p.sub_category_id)}`;
           }
-          if (p.sub_sub_category_id && subSubCatMap.has(p.sub_sub_category_id)) {
-            catName += ` / ${subSubCatMap.get(p.sub_sub_category_id)}`;
+          if (p.sub_sub_category_id) {
+            const subSubNames = String(p.sub_sub_category_id).split(',').map(id => subSubCatMap.get(id)).filter(Boolean);
+            if (subSubNames.length > 0) {
+              catName += ` / ${subSubNames.join(', ')}`;
+            }
           }
 
           return {

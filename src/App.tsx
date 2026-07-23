@@ -245,8 +245,8 @@ function StoreFront() {
             categorySlug: catSlugMap.get(p.category_id) || (catMap.get(p.category_id) ? generateSlug(catMap.get(p.category_id)) : ""),
             subCategory: subCatMap.get(p.sub_category_id),
             subCategorySlug: subCatSlugMap.get(p.sub_category_id) || (subCatMap.get(p.sub_category_id) ? generateSlug(subCatMap.get(p.sub_category_id)) : ""),
-            subSubCategory: subSubCatMap.get(p.sub_sub_category_id),
-            subSubCategorySlug: subSubCatSlugMap.get(p.sub_sub_category_id) || (subSubCatMap.get(p.sub_sub_category_id) ? generateSlug(subSubCatMap.get(p.sub_sub_category_id)) : ""),
+            subSubCategory: String(p.sub_sub_category_id || '').split(',').map(id => subSubCatMap.get(id)).filter(Boolean).join(', '),
+            subSubCategorySlug: String(p.sub_sub_category_id || '').split(',').map(id => subSubCatSlugMap.get(id) || (subSubCatMap.get(id) ? generateSlug(subSubCatMap.get(id)!) : "")).filter(Boolean).join(', '),
             thumbnail:
               p.thumbnail_url ||
               "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?w=800&q=80",
@@ -643,7 +643,7 @@ function StoreFront() {
                       const catProducts = targetCatId
                         ? activeProductList.filter((p) => {
                             if (targetCatId.startsWith('subsub_')) {
-                              return String(p.sub_sub_category_id) === targetCatId.replace('subsub_', '');
+                              return String(p.sub_sub_category_id || '').split(',').includes(targetCatId.replace('subsub_', ''));
                             } else if (targetCatId.startsWith('sub_')) {
                               return String(p.sub_category_id) === targetCatId.replace('sub_', '');
                             } else if (targetCatId.startsWith('cat_')) {

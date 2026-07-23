@@ -93,7 +93,7 @@ export default function SellerProducts() {
       if (filterBrand) query = query.eq('brand_id', filterBrand);
       if (filterCategory) query = query.eq('category_id', filterCategory);
       if (filterSubCategory) query = query.eq('sub_category_id', filterSubCategory);
-      if (filterSubSubCategory) query = query.eq('sub_sub_category_id', filterSubSubCategory);
+      if (filterSubSubCategory) query = query.ilike('sub_sub_category_id', `%${filterSubSubCategory}%`);
       if (filterStore) query = query.contains('attributes', { seller_id: filterStore });
 
       const { data, error } = await query;
@@ -427,7 +427,7 @@ export default function SellerProducts() {
                       {[
                         categories.find((c: any) => c.id === product.category_id)?.name,
                         subCategories.find((c: any) => c.id === product.sub_category_id)?.name,
-                        subSubCategories.find((c: any) => c.id === product.sub_sub_category_id)?.name
+                        String(product.sub_sub_category_id || '').split(',').map(id => subSubCategories.find((c: any) => c.id === id)?.name).filter(Boolean).join(', ')
                       ].filter(Boolean).join(' => ') || 'Uncategorized'}
                     </td>
                     <td className="px-4 py-3 text-center">৳{parseFloat(product.unit_price || 0).toFixed(2)}</td>

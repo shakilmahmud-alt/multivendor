@@ -74,7 +74,7 @@ export default function FeaturedDeals({ products, onAddToCart, onAddWishlist, on
       const targetCatId = layoutConfig.target_category;
       displayProducts = products.filter(p => {
         if (targetCatId.startsWith('subsub_')) {
-          return String(p.sub_sub_category_id) === targetCatId.replace('subsub_', '');
+          return String(p.sub_sub_category_id || '').split(',').includes(targetCatId.replace('subsub_', ''));
         } else if (targetCatId.startsWith('sub_')) {
           return String(p.sub_category_id) === targetCatId.replace('sub_', '');
         } else if (targetCatId.startsWith('cat_')) {

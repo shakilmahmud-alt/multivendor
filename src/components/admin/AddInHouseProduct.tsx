@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
-import { Box, Settings, DollarSign, List, UploadCloud, Video, Globe, Save, Plus, X } from 'lucide-react';
+import { Box, Settings, DollarSign, List, UploadCloud, Video, Globe, Save, Plus, X, ChevronDown, Check } from 'lucide-react';
 import { useToast } from '../ToastContext';
 import { uploadToCpanel } from '../../utils/mediaUpload';
 import { getColorStyle } from '../../utils/color';
@@ -45,7 +45,8 @@ export default function AddInHouseProduct() {
   // General Setup
   const [categoryId, setCategoryId] = useState('');
   const [subCategoryId, setSubCategoryId] = useState('');
-  const [subSubCategoryId, setSubSubCategoryId] = useState('');
+  const [subSubCategoryIds, setSubSubCategoryIds] = useState<string[]>([]);
+  const [isSubSubOpen, setIsSubSubOpen] = useState(false);
   const [brandId, setBrandId] = useState('');
   const [productType, setProductType] = useState('Physical');
   const [sku, setSku] = useState('');
@@ -204,12 +205,12 @@ export default function AddInHouseProduct() {
   const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setCategoryId(e.target.value);
     setSubCategoryId('');
-    setSubSubCategoryId('');
+    setSubSubCategoryIds([]);
   };
 
   const handleSubCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSubCategoryId(e.target.value);
-    setSubSubCategoryId('');
+    setSubSubCategoryIds([]);
   };
 
   const [originalProduct, setOriginalProduct] = useState<any>(null);
@@ -230,7 +231,7 @@ export default function AddInHouseProduct() {
         setShortDescEn(data.short_desc_en || '');
         setCategoryId(data.category_id || '');
         setSubCategoryId(data.sub_category_id || '');
-        setSubSubCategoryId(data.sub_sub_category_id || '');
+        setSubSubCategoryIds(data.sub_sub_category_id ? data.sub_sub_category_id.split(',') : []);
         setBrandId(data.brand_id || '');
         setProductType(data.product_type || 'Physical');
         setSku(data.sku || '');
@@ -334,7 +335,7 @@ export default function AddInHouseProduct() {
       meta_keyword: metaKeyword,
       category_id: categoryId || null,
       sub_category_id: subCategoryId || null,
-      sub_sub_category_id: subSubCategoryId || null,
+      sub_sub_category_id: subSubCategoryIds.length > 0 ? subSubCategoryIds.join(',') : null,
       brand_id: brandId || null,
       attributes: user?.role === 'seller' ? { 
         ...(originalProduct?.attributes || {}),
@@ -532,14 +533,46 @@ export default function AddInHouseProduct() {
                 ))}
               </select>
             </div>
-            <div>
+            <div className="relative">
               <label className="block text-sm font-medium text-slate-700 mb-2">Sub Sub Category</label>
-              <select value={subSubCategoryId} onChange={(e) => setSubSubCategoryId(e.target.value)} disabled={!subCategoryId} className="w-full px-4 py-2 border border-slate-200 rounded-md text-sm bg-white disabled:bg-slate-50">
-                <option value="">Select Sub Sub Category</option>
-                {filteredSubSubCategories.map(subSub => (
-                  <option key={subSub.id} value={subSub.id}>{subSub.name}</option>
-                ))}
-              </select>
+              <div 
+                className={`w-full px-4 py-2 border border-slate-200 rounded-md text-sm bg-white flex justify-between items-center ${!subCategoryId ? 'bg-slate-50 cursor-not-allowed opacity-70' : 'cursor-pointer'}`}
+                onClick={() => subCategoryId && setIsSubSubOpen(!isSubSubOpen)}
+              >
+                <span className="truncate">
+                  {subSubCategoryIds.length > 0 
+                    ? filteredSubSubCategories.filter(s => subSubCategoryIds.includes(s.id)).map(s => s.name).join(', ') 
+                    : 'Select Sub Sub Categories'}
+                </span>
+                <ChevronDown className="w-4 h-4 text-slate-400" />
+              </div>
+              
+              {isSubSubOpen && subCategoryId && (
+                <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-white border border-slate-200 rounded-md shadow-lg max-h-60 overflow-y-auto">
+                  {filteredSubSubCategories.length === 0 ? (
+                    <div className="p-3 text-sm text-slate-500 text-center">No options available</div>
+                  ) : (
+                    filteredSubSubCategories.map(subSub => (
+                      <div 
+                        key={subSub.id}
+                        className="flex items-center px-4 py-2 hover:bg-slate-50 cursor-pointer text-sm"
+                        onClick={() => {
+                          if (subSubCategoryIds.includes(subSub.id)) {
+                            setSubSubCategoryIds(subSubCategoryIds.filter(id => id !== subSub.id));
+                          } else {
+                            setSubSubCategoryIds([...subSubCategoryIds, subSub.id]);
+                          }
+                        }}
+                      >
+                        <div className={`w-4 h-4 border rounded mr-3 flex items-center justify-center ${subSubCategoryIds.includes(subSub.id) ? 'bg-brand-500 border-brand-500' : 'border-slate-300'}`}>
+                          {subSubCategoryIds.includes(subSub.id) && <Check className="w-3 h-3 text-white" />}
+                        </div>
+                        <span className="text-slate-700">{subSub.name}</span>
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
             </div>
             <div>
               <label className="flex justify-between items-center text-sm text-slate-600 mb-2">
