@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { 
   Phone, Search, Heart, User, ShoppingCart, Menu, ChevronDown, 
@@ -50,6 +50,25 @@ export default function Header({
   const [expandedMobileSubCat, setExpandedMobileSubCat] = useState<string | null>(null);
   const navigate = useNavigate();
   const { showToast } = useToast();
+
+  const accountRef = useRef<HTMLDivElement>(null);
+  const cartRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as Node;
+      if (isAccountOpen && accountRef.current && !accountRef.current.contains(target)) {
+        setIsAccountOpen(false);
+      }
+      if (isCartOpen && cartRef.current && !cartRef.current.contains(target)) {
+        setIsCartOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isAccountOpen, isCartOpen]);
 
   useEffect(() => {
     const session = localStorage.getItem('user');
@@ -400,7 +419,7 @@ export default function Header({
             </div>
 
             {/* My Account Profile Dropdown */}
-            <div className="relative">
+            <div className="relative" ref={accountRef}>
               <div 
                 onClick={() => setIsAccountOpen(!isAccountOpen)}
                 className="flex items-center gap-1.5 cursor-pointer group"
@@ -495,7 +514,7 @@ export default function Header({
             </div>
 
             {/* Shopping Cart Trigger icon */}
-            <div className="relative">
+            <div className="relative" ref={cartRef}>
               <div 
                 onClick={() => setIsCartOpen(!isCartOpen)}
                 className="flex items-center gap-1.5 cursor-pointer group"

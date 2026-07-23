@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import { useNavigate, useParams, useLocation } from 'react-router-dom';
 import { supabase } from '../../supabaseClient';
 import { Box, Settings, DollarSign, List, UploadCloud, Video, Globe, Save, Plus, X, ChevronDown, Check } from 'lucide-react';
@@ -47,6 +47,19 @@ export default function AddInHouseProduct() {
   const [subCategoryId, setSubCategoryId] = useState('');
   const [subSubCategoryIds, setSubSubCategoryIds] = useState<string[]>([]);
   const [isSubSubOpen, setIsSubSubOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsSubSubOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [dropdownRef]);
   const [brandId, setBrandId] = useState('');
   const [productType, setProductType] = useState('Physical');
   const [sku, setSku] = useState('');
@@ -533,7 +546,7 @@ export default function AddInHouseProduct() {
                 ))}
               </select>
             </div>
-            <div className="relative">
+            <div className="relative" ref={dropdownRef}>
               <label className="block text-sm font-medium text-slate-700 mb-2">Sub Sub Category</label>
               <div 
                 className={`w-full px-4 py-2 border border-slate-200 rounded-md text-sm bg-white flex justify-between items-center ${!subCategoryId ? 'bg-slate-50 cursor-not-allowed opacity-70' : 'cursor-pointer'}`}
